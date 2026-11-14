@@ -1,0 +1,100 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2) format("woff2"),url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2) format("woff2")}
+@font-face{font-family:CairoL;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-latin-900-normal.woff2) format("woff2")}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2) format("woff2")}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0b0b;font-family:Cairo,CairoL,sans-serif;color:#fff}
+#top{position:absolute;inset:0 0 auto 0;height:1100px}
+#head{position:absolute;top:150px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center}
+#tag{background:#e5322d;color:#fff;font-weight:900;font-size:50px;padding:6px 36px 12px;border-radius:999px}
+#brand{font-family:Bebas;font-size:54px;letter-spacing:3px;color:#fff;direction:ltr}
+#brand b{font-family:Cairo;font-weight:700;font-size:38px;color:#9a9a9a;margin-left:18px;letter-spacing:0;display:inline-block}
+#hero{position:absolute;top:260px;left:50px;right:50px;height:390px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#hero .sub{font-size:46px;font-weight:700;color:#a6a6a6;margin-bottom:4px}
+.code{direction:ltr;font-family:Bebas;line-height:.95;white-space:nowrap}
+.code span{display:inline-block;color:#fff}
+.code span.hi{color:#e5322d}
+.quote{font-weight:900;line-height:1.25;padding:0 10px}
+.quote .who{display:block;font-size:50px;color:#a6a6a6;font-weight:700}
+.quote .q{display:inline;background:linear-gradient(transparent 62%,#e5322d 62%,#e5322d 92%,transparent 92%)}
+.lamp{direction:ltr;font-family:Bebas;font-size:120px;letter-spacing:6px;color:#e5322d;border:12px solid #e5322d;border-radius:36px;padding:18px 54px 6px;line-height:1}
+#stamp{position:absolute;top:232px;left:44px;z-index:5;font-size:80px !important;font-weight:900;font-size:96px;color:#e5322d;border:12px solid #e5322d;border-radius:22px;padding:0 34px 12px;background:#0b0b0bee;transform-origin:center}
+#card{position:absolute;top:668px;left:60px;right:60px;min-height:230px;border-radius:40px;background:#fff;color:#0b0b0b;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:68px;line-height:1.25;padding:22px 40px 30px}
+#card.strong{background:#e5322d;color:#fff}
+#card.cta{background:#fff;color:#0b0b0b;flex-direction:column;top:300px;min-height:600px;font-size:76px}
+#card.cta .p{font-family:Bebas;font-size:330px;line-height:.85;color:#e5322d;direction:ltr;margin-top:14px}
+#card.cta .p small{font-family:Cairo;font-weight:900;font-size:96px;margin-left:16px}
+#card.cta .l{font-size:58px;background:#0b0b0b;color:#fff;border-radius:999px;padding:2px 44px 12px;margin-top:6px}
+#cap{position:absolute;top:928px;left:20px;right:20px;height:150px;display:flex;align-items:center;justify-content:center;gap:22px;font-weight:900;font-size:92px;white-space:nowrap}
+#cap span{color:#fff;-webkit-text-stroke:16px #0b0b0b;paint-order:stroke fill;display:inline-block}
+#cap span.on{color:#e5322d}
+#bar{position:absolute;top:1096px;right:0;height:8px;background:#e5322d}
+#barbg{position:absolute;top:1096px;left:0;right:0;height:8px;background:#2a2a2a}
+.vs{display:flex;align-items:center;justify-content:center;gap:26px;width:100%}
+.vs .o,.opts .o{flex:1;background:#1d1d1d;border:8px solid #3a3a3a;border-radius:36px;font-weight:900;font-size:84px;line-height:1.15;padding:46px 14px 58px}
+.vs .x{font-family:Bebas;font-size:120px;color:#e5322d;direction:ltr}
+.o.on{background:#e5322d;border-color:#e5322d}.o.off{opacity:.3}
+.qt{font-weight:900;font-size:74px;line-height:1.2;margin-bottom:22px}
+.opts{display:flex;gap:22px;width:100%}.opts .o{font-size:50px;padding:18px 12px 28px}
+#count{position:absolute;top:640px;left:0;right:0;text-align:center;font-family:Bebas;font-size:330px;line-height:1;color:#e5322d;direction:ltr}
+canvas{position:absolute;left:0;top:1104px}
+</style></head><body>
+<div id="top"><div id="head"><div id="tag"></div><div id="brand">DE.AUTO<b>دي اوتو</b></div></div>
+<div id="hero"></div><div id="stamp" style="display:none"></div><div id="card" style="display:none"></div><div id="count" style="display:none"></div><div id="cap"></div></div>
+<div id="barbg"></div><div id="bar"></div><canvas id="cv" width="1080" height="816"></canvas>
+<script src="sim.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+let V, TM, T, sim, simT = 0, cx;
+const pop = x => { x = Math.max(0, Math.min(1, x)); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+window.__init = (v, tm, total, seed) => {
+  V = v; TM = tm; T = total; sim = new Sim(seed, 8); cx = $("#cv").getContext("2d");
+  $("#tag").textContent = v.tag; const h = v.hero, H = $("#hero");
+  if (h.kind === "code") { const n = h.parts.join("").length; const fs = h.small ? 104 : n <= 5 ? 330 : n <= 7 ? 270 : 210;
+    H.innerHTML = `<div class="sub">${h.sub || ""}</div><div class="code" style="font-size:${fs}px;${h.spaced ? "letter-spacing:26px" : ""}">` + h.parts.map((p, i) => `<span data-i="${i}">${p === " " ? "&nbsp;" : p}</span>`).join("") + "</div>"; }
+  else if (h.kind === "quote") { const fs = h.text.length > 30 ? 82 : h.text.length > 20 ? 100 : 124;
+    H.innerHTML = `<div class="quote" style="font-size:${fs}px"><span class="who">${v.tag}:</span><span class="q">«${h.text}»</span></div>`; }
+  else if (h.kind === "icon") H.innerHTML = `<div class="sub" style="margin-bottom:26px">${h.sub}</div><div class="lamp">CHECK ENGINE</div>`;
+  else if (h.kind === "versus") H.innerHTML = `<div class="vs"><div class="o" data-o="0">${h.a}</div><div class="x">VS</div><div class="o" data-o="1">${h.b}</div></div>`;
+  else if (h.kind === "text") H.innerHTML = `<div class="qt">${h.text}</div><div class="opts">${h.opts.map((o, i) => `<div class="o" data-o="${i}">${o}</div>`).join("")}</div>`;
+  return document.fonts.ready.then(() => true);
+};
+function drawSim(t) {
+  while (simT < t) { sim.step(1 / 120); simT += 1 / 120; }
+  const c = cx, W = 1080, Hh = 816; c.fillStyle = "#141414"; c.fillRect(0, 0, W, Hh);
+  c.save(); const sh = sim.shake > 0 ? sim.shake * 90 : 0; c.translate(W / 2 + Math.sin(t * 90) * sh, 400 + Math.cos(t * 70) * sh);
+  for (const g of sim.rings) { if (!g.alive) continue; const first = g === sim.rings.find(x => x.alive);
+    c.beginPath(); c.arc(0, 0, g.R, g.a + g.gap / 2, g.a - g.gap / 2 + Math.PI * 2); c.lineWidth = first ? 13 : 9; c.strokeStyle = first ? "#ffffff" : "#5c5c5c"; c.lineCap = "round"; c.stroke(); }
+  for (const p of sim.parts) { c.save(); c.translate(p.x, p.y); c.rotate(p.rot + p.life * 9); c.globalAlpha = Math.min(1, p.life * 2); c.fillStyle = "#fff"; c.fillRect(-9, -5, 18, 10); c.restore(); }
+  sim.trail.forEach((p, i) => { c.globalAlpha = (i / sim.trail.length) * 0.5; c.beginPath(); c.arc(p.x, p.y, sim.ball.r * (0.35 + 0.65 * i / sim.trail.length), 0, 7); c.fillStyle = "#e5322d"; c.fill(); });
+  c.globalAlpha = 1; c.shadowColor = "#e5322d"; c.shadowBlur = 40; c.beginPath(); c.arc(sim.ball.x, sim.ball.y, sim.ball.r, 0, 7); c.fillStyle = "#e5322d"; c.fill(); c.shadowBlur = 0;
+  c.beginPath(); c.arc(sim.ball.x - 7, sim.ball.y - 7, 6, 0, 7); c.fillStyle = "#ffffffcc"; c.fill(); c.restore();
+}
+window.__frame = t => {
+  drawSim(t);
+  $("#bar").style.width = Math.min(100, (t / T) * 100) + "%";
+  // current beat
+  let bi = 0; for (let i = 0; i < TM.beats.length; i++) if (t >= TM.beats[i]) bi = i;
+  const b = V.beats[bi], age = t - TM.beats[bi], card = $("#card"), hero = $("#hero");
+  document.querySelectorAll(".code span").forEach(s => s.classList.toggle("hi", !!(b.hi && b.hi.includes(+s.dataset.i))));
+  const lamp = $(".lamp"); if (lamp) lamp.style.opacity = b.blink ? (Math.floor(t * 5) % 2 ? 0.15 : 1) : 1;
+  const k = pop(age / 0.28);
+  if (b.cta) { card.style.display = "flex"; card.className = "cta"; card.innerHTML = `<div>بطاقات مصطلحات الورش</div><div class="p">10<small>ريال</small></div><div class="l">الرابط في البايو</div>`; hero.style.opacity = 0; $("#stamp").style.display = "none"; card.style.transform = `scale(${0.5 + 0.5 * k})`; }
+  else { hero.style.opacity = 1; card.className = b.strong ? "strong" : "";
+    if (b.show) { card.style.display = "flex"; card.textContent = b.show; card.style.transform = `scale(${0.55 + 0.45 * k}) rotate(${(1 - Math.min(1, age / 0.28)) * -3}deg)`; } else card.style.display = "none"; }
+  // stamp stays once shown
+  let st = null, stT = 0; for (let i = 0; i <= bi; i++) if (V.beats[i].stamp) { st = V.beats[i].stamp; stT = TM.beats[i]; }
+  const S = $("#stamp"); if (st && !b.cta) { S.style.display = "block"; S.textContent = st; const a = Math.min(1, (t - stT) / 0.22); S.style.transform = `rotate(-12deg) scale(${3 - 2 * pop(a) })`; S.style.opacity = a; } else S.style.display = "none";
+  let sel = null; for (let i = 0; i <= bi; i++) { if (V.beats[i].answer != null) sel = V.beats[i].answer; } if (b.side != null) sel = b.side; if (V.hero.kind === "versus" && b.side == null) sel = null;
+  document.querySelectorAll(".o").forEach(o => { o.classList.toggle("on", sel === +o.dataset.o); o.classList.toggle("off", sel != null && sel !== +o.dataset.o); });
+  const C = $("#count"); if (b.count) { const nb = TM.beats[bi + 1] ?? T, n = 3 - Math.min(2, Math.floor(age / ((nb - TM.beats[bi]) / 3))); const la = age % ((nb - TM.beats[bi]) / 3); C.style.display = "block"; C.textContent = n; C.style.transform = `scale(${0.7 + 0.3 * pop(la / 0.2)})`; } else C.style.display = "none";
+  // hero punch on beat change
+  hero.style.transform = `scale(${1 + 0.06 * Math.max(0, 1 - age / 0.2)})`;
+  // captions
+  const cap = $("#cap"); const ch = TM.chunks.find(c => t >= c.s && t < c.e);
+  if (!ch) cap.innerHTML = ""; else { cap.innerHTML = ch.w.map(w => `<span class="${t >= w.s ? "on" : ""}" style="transform:scale(${t >= w.s ? 1 + 0.12 * Math.max(0, 1 - (t - w.s) / 0.15) : 1})">${w.t}</span>`).join("");
+    const tot = cap.scrollWidth; if (tot > 1040) cap.style.fontSize = Math.floor(92 * 1040 / tot) + "px"; else cap.style.fontSize = "92px"; }
+};
+</script></body></html>
