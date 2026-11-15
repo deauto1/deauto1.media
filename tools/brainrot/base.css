@@ -1,0 +1,18 @@
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2) format("woff2"),url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2) format("woff2")}
+@font-face{font-family:CairoL;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-latin-900-normal.woff2) format("woff2")}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2) format("woff2")}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0b0b;font-family:Cairo,CairoL,sans-serif;color:#fff}
+#head{position:absolute;top:150px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center;z-index:9}
+#tag{background:#e5322d;color:#fff;font-weight:900;font-size:50px;padding:6px 36px 12px;border-radius:999px}
+#brand{font-family:Bebas;font-size:54px;letter-spacing:3px;direction:ltr}
+#brand b{font-family:Cairo;font-weight:700;font-size:38px;color:#9a9a9a;margin-left:18px;letter-spacing:0;display:inline-block}
+#cap{position:absolute;left:20px;right:20px;height:160px;display:flex;align-items:center;justify-content:center;gap:22px;font-weight:900;font-size:96px;white-space:nowrap;z-index:8}
+#cap span{color:#fff;-webkit-text-stroke:16px #0b0b0b;paint-order:stroke fill;display:inline-block}
+#cap span.on{color:#e5322d}
+.abs{position:absolute}
+.cta{position:absolute;left:60px;right:60px;border-radius:40px;background:#fff;color:#0b0b0b;text-align:center;font-weight:900;font-size:70px;padding:30px 30px 44px;z-index:7}
+.cta .p{font-family:Bebas;font-size:300px;line-height:.85;color:#e5322d;direction:ltr}
+.cta .p small{font-family:Cairo;font-weight:900;font-size:90px;margin-left:16px}
+.cta .l{display:inline-block;font-size:56px;background:#0b0b0b;color:#fff;border-radius:999px;padding:2px 44px 12px;margin-top:8px}

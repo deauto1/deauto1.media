@@ -1,12 +1,12 @@
 // node render.js <id> [--still t1,t2]  -> out/DEAUTO_br_<id>.mp4
 const { chromium } = require("playwright"); const { execFileSync, spawn } = require("child_process");
-const fs = require("fs"), path = require("path"); const V = require("./data.js").concat(require("./data2.js")); const { SIMS } = require("./sims2.js");
+const fs = require("fs"), path = require("path"); const V = require("./data.js").concat(require("./data2.js")).concat(require("./data3.js")); const { SIMS } = require("./sims2.js");
 const FPS = 30, TEMPO = 1.12, LEAD = 0.12, TAIL = 0.9;
 const id = process.argv[2]; const v = V.find(x => x.id === id); const stillArg = process.argv.indexOf("--still");
 const D = __dirname; fs.mkdirSync(D + "/out", { recursive: true }); fs.mkdirSync(D + "/tmp", { recursive: true });
 const fast = `${D}/tmp/${id}_fast.wav`;
 const HAS = fs.existsSync(`${D}/audio/${id}.mp3`);
-if (!HAS) { const n = v.beats.reduce((a, b) => a + b.vo.replace(/[\u064B-\u0652]/g, "").length * 0.062 + (b.vo.match(/[.،؟:…!?]/g) || []).length * 0.22, 0); execFileSync("ffmpeg", ["-y", "-v", "error", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", n.toFixed(2), fast]); }
+if (!HAS) { const n = v.beats.reduce((a, b) => a + b.vo.replace(/[\u064B-\u0652]/g, "").length * 0.062 + (b.vo.match(/[.،؟:…!?]/g) || []).length * 0.22, 0); execFileSync("ffmpeg", ["-y", "-v", "error", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", (v.silentDur || n).toFixed(2), fast]); }
 else execFileSync("ffmpeg", ["-y", "-v", "error", "-i", `${D}/audio/${id}.mp3`, "-af", `atempo=${TEMPO},highpass=f=70,volume=1.25`, "-ar", "44100", "-ac", "1", fast]);
 const dur = +execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", fast]).toString();
 // silences -> voiced intervals
@@ -67,7 +67,8 @@ const sfx = `${D}/tmp/${id}_sfx.wav`; fs.writeFileSync(sfx, buf);
 console.log(id, "T", T.toFixed(2), "beats", beats.map(x => x.toFixed(2)).join(" "), "breaks", sim.events.filter(e => e.k === "break").map(e => e.t.toFixed(1)).join(" "), "sim", KIND);
 (async () => {
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
-  await pg.goto("file://" + D + "/render.html"); await pg.evaluate(([v, tm, T, seed]) => window.__init(v, tm, T, seed), [v, { beats, chunks }, T, seed]);
+  if (v.times) beats.splice(0, beats.length, ...v.times);
+  await pg.goto("file://" + D + "/" + (v.page || "render.html")); await pg.evaluate(([v, tm, T, seed]) => window.__init(v, tm, T, seed), [v, { beats, chunks }, T, seed]);
   if (stillArg > 0) { for (const t of process.argv[stillArg + 1].split(",")) { await pg.evaluate(t => window.__frame(t), +t); await pg.screenshot({ path: `${D}/tmp/${id}_${t}.png` }); } await br.close(); return; }
   const out = `${D}/out/DEAUTO_br_${OUT}.mp4`;
   const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", "" + FPS, "-c:v", "mjpeg", "-i", "-", "-itsoffset", "" + LEAD, "-i", fast, "-i", sfx,

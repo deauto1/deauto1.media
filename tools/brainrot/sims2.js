@@ -105,5 +105,6 @@
       const cols = [P.acc, P.fg, P.dim, P.acc]; for (const b of this.b) { c.beginPath(); c.arc(b.x, b.y, 30, 0, 7); c.fillStyle = cols[b.n]; c.fill(); c.lineWidth = 5; c.strokeStyle = b.n === 3 ? P.fg : P.bg; c.stroke(); c.fillStyle = b.n === 1 ? P.bg : (b.n === 2 ? P.bg : P.fg); if (b.n === 0 || b.n === 3) c.fillStyle = cols[b.n] === P.fg ? P.bg : "#ffffff"; c.font = "44px Bebas"; c.textAlign = "center"; c.fillText(b.n + 1, b.x, b.y + 16); }
       if (this.win >= 0) { c.font = "210px Bebas"; c.textAlign = "center"; c.lineWidth = 16; c.strokeStyle = P.bg; c.strokeText("#" + (this.win + 1) + " WINS", CX, 440); c.fillStyle = P.acc; c.fillText("#" + (this.win + 1) + " WINS", CX, 440); } }
   }
-  root.SIMS = { rings: Base, multiply: Multiply, grow: Grow, plinko: Plinko, bricks: Bricks, dvd: Dvd, wash: Wash, sand: Sand, race: Race };
+  class None { constructor() { this.events = []; } step() {} draw() {} }
+  root.SIMS = { none: None, rings: Base, multiply: Multiply, grow: Grow, plinko: Plinko, bricks: Bricks, dvd: Dvd, wash: Wash, sand: Sand, race: Race };
 })(typeof module !== "undefined" ? module.exports : window);

@@ -1,0 +1,25 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+body{background:#f4f4f2;color:#0b0b0b}#brand{color:#0b0b0b}#brand b{color:#777}#cap{top:1560px}#cap span{color:#0b0b0b;-webkit-text-stroke:16px #f4f4f2}
+#stamp{top:270px;left:50px;font-weight:900;font-size:84px;color:#e5322d;border:12px solid #e5322d;border-radius:22px;padding:0 34px 12px;transform:rotate(-10deg);background:#f4f4f2;z-index:9}
+#dev{top:420px;left:270px;width:540px;height:860px;background:#0b0b0b;border-radius:70px;box-shadow:0 40px 0 #cfcfcc;transform-origin:center}
+#ant{top:-90px;left:380px;width:22px;height:110px;background:#0b0b0b;border-radius:12px}#ant:after{content:"";position:absolute;top:-34px;left:-17px;width:56px;height:56px;border-radius:50%;background:#e5322d}
+#scrn{top:70px;left:40px;right:40px;height:520px;background:#1c1c1c;border-radius:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff;text-align:center;padding:20px}
+#scrn .a{font-weight:700;font-size:46px;color:#9a9a9a}#scrn .b{font-weight:900;font-size:86px;line-height:1.15;color:#fff}#scrn .arr{font-family:Bebas;font-size:70px;color:#e5322d}
+#bars{display:flex;gap:12px;align-items:center;height:200px}#bars i{display:block;width:22px;background:#e5322d;border-radius:11px}
+#lbl{bottom:60px;left:0;right:0;text-align:center;font-family:Bebas;font-size:74px;letter-spacing:6px;color:#fff;direction:ltr}#btn{bottom:170px;left:220px;width:100px;height:100px;border-radius:50%;background:#e5322d}
+#bub{top:560px;right:30px;background:#0b0b0b;color:#fff;font-weight:900;font-size:54px;padding:14px 30px 24px;border-radius:36px 36px 6px 36px;z-index:6}
+#no{top:760px;left:90px;right:90px;text-align:center;font-weight:900;font-size:150px;color:#e5322d;border:16px solid #e5322d;border-radius:30px;background:#f4f4f2ee;transform:rotate(-8deg);padding-bottom:20px;z-index:8}
+.cta{top:560px;box-shadow:0 30px 0 #cfcfcc}
+</style></head><body>
+<div id="head"><div id="tag"></div><div id="brand">DE.AUTO<b>دي اوتو</b></div></div><div id="stamp" class="abs">تخيّل</div>
+<div id="dev" class="abs"><div id="ant" class="abs"></div><div id="scrn" class="abs"></div><div id="btn" class="abs"></div><div id="lbl" class="abs">DE.AUTO</div></div>
+<div id="bub" class="abs" style="display:none">«الكلتش خالص»</div><div id="no" class="abs" style="display:none">غير موجود</div>
+<div class="cta" style="display:none"><div>بطاقات مصطلحات الورش</div><div class="p">10<small>ريال</small></div><div class="l">الرابط في البايو</div></div><div id="cap"></div>
+<script src="common.js"></script><script>
+window.__frame = t => { const [bi, age] = beatAt(t), dev = $("#dev"), s = $("#scrn");
+  const inn = bi === 0 ? 0.3 + 0.7 * pop(age / 0.35) : 1; dev.style.transform = `translateY(${Math.sin(t * 2.2) * 14}px) scale(${inn}) rotate(${Math.sin(t * 1.3) * 1.5}deg)`; dev.style.filter = bi === 3 ? "grayscale(1) opacity(.45)" : ""; dev.style.display = bi === 4 ? "none" : "";
+  if (bi <= 1) s.innerHTML = `<div id="bars">${Array.from({ length: 11 }, (_, i) => `<i style="height:${bi === 1 ? 30 + Math.abs(Math.sin(t * 9 + i * 1.7)) * 160 : 18}px"></i>`).join("")}</div><div class="a">${bi === 1 ? "يسمع…" : "مترجم الفني"}</div>`;
+  else s.innerHTML = `<div class="a">«الكلتش خالص»</div><div class="arr">=</div><div class="b">القابض انتهى</div>`;
+  const b = $("#bub"); show(b, bi === 1, age / 0.3); show($("#no"), bi === 3); if (bi === 3) $("#no").style.transform = `rotate(-8deg) scale(${3 - 2 * pop(age / 0.22)})`;
+  show($(".cta"), bi === 4, age / 0.3); caps(t, 92); };
+</script></body></html>

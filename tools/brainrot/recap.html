@@ -1,0 +1,32 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+#scr{position:absolute;top:330px;left:0}#cap{top:1470px}
+#big{top:1010px;left:0;right:0;text-align:center;font-weight:900;font-size:150px;color:#e5322d;z-index:6}
+#q{top:1000px;left:60px;right:60px;text-align:center;font-weight:900;font-size:92px;line-height:1.25;z-index:6}
+#q .pill{display:inline-block;margin-top:34px;background:#e5322d;border-radius:999px;font-size:60px;padding:4px 50px 16px}
+#km{top:380px;left:60px;font-family:Bebas;font-size:150px;direction:ltr;z-index:6}#km small{font-family:Cairo;font-weight:900;font-size:60px}
+.bar{position:absolute;left:0;right:0;height:120px;background:#000;z-index:5}
+</style></head><body>
+<div id="head"><div id="tag"></div><div id="brand">DE.AUTO<b>دي اوتو</b></div></div>
+<canvas id="scr" width="1080" height="1100"></canvas><div class="bar" style="top:330px"></div><div class="bar" style="top:1310px"></div>
+<div id="km" class="abs" style="display:none"></div><div id="big" class="abs" style="display:none">قف الآن</div>
+<div id="q" class="abs" style="display:none">هل كان يستطيع إنقاذ محركه؟<br><span class="pill">الجواب في أول تعليق</span></div><div id="cap"></div>
+<script src="common.js"></script><script>
+let c, off = 0, last = 0;
+function setup() { c = $("#scr").getContext("2d"); }
+function lamp(x, y, s, on) { c.save(); c.translate(x, y); c.scale(s, s); c.globalAlpha = on ? 1 : 0.18; c.fillStyle = "#e5322d"; c.strokeStyle = "#e5322d"; c.lineWidth = 14; c.lineCap = "round"; c.lineJoin = "round";
+  c.beginPath(); c.roundRect(-70, -20, 150, 70, 12); c.fill(); c.beginPath(); c.moveTo(80, 0); c.lineTo(150, -40); c.lineTo(175, -30); c.stroke(); c.beginPath(); c.moveTo(-70, 0); c.lineTo(-115, -35); c.lineTo(-115, 10); c.stroke();
+  c.beginPath(); c.roundRect(-30, -48, 60, 28, 6); c.fill(); c.beginPath(); c.arc(188, 12, 13, 0, 7); c.fill(); c.restore(); c.globalAlpha = 1; }
+window.__frame = t => { const [bi, age] = beatAt(t), dt = t - last; last = t; const speed = bi < 2 ? 1 : Math.max(0, 1 - age / 0.6); off += dt * 900 * speed;
+  const sh = bi === 1 ? 9 : 0, W = 1080, H = 1100; c.setTransform(1, 0, 0, 1, Math.sin(t * 61) * sh, Math.cos(t * 47) * sh); c.fillStyle = "#06070a"; c.fillRect(-20, -20, W + 40, H + 40);
+  const hz = 430, dark = bi >= 2 ? clamp(age / 0.5) : 0; if (bi >= 3) { c.setTransform(1, 0, 0, 1, 0, 0); c.fillStyle = "#000"; c.fillRect(0, 0, W, H); }
+  if (bi < 3) { const g = c.createLinearGradient(0, hz - 200, 0, hz); g.addColorStop(0, "#06070a"); g.addColorStop(1, "#1b2230"); c.fillStyle = g; c.fillRect(-20, hz - 200, W + 40, 200);
+    c.fillStyle = "#16181c"; c.beginPath(); c.moveTo(W / 2 - 40, hz); c.lineTo(W / 2 + 40, hz); c.lineTo(W + 260, H); c.lineTo(-260, H); c.fill();
+    c.fillStyle = "#f2f2f2"; for (let i = 0; i < 9; i++) { let z = ((i * 130 + off) % 1170) / 1170; const y = hz + z * z * (H - hz), w = 4 + z * z * 26, h = 10 + z * z * 120; c.fillRect(W / 2 - w / 2, y, w, h); }
+    c.fillStyle = "#e9e2c8"; c.globalAlpha = 0.10; c.beginPath(); c.moveTo(W / 2 - 300, H - 260); c.lineTo(W / 2 + 300, H - 260); c.lineTo(W / 2 + 90, hz + 20); c.lineTo(W / 2 - 90, hz + 20); c.fill(); c.globalAlpha = 1;
+    c.fillStyle = "#0e0f12"; c.beginPath(); c.roundRect(60, H - 330, W - 120, 190, 40); c.fill(); c.strokeStyle = "#2a2d33"; c.lineWidth = 6; c.stroke();
+    c.fillStyle = "#fff"; c.font = "120px Bebas"; c.textAlign = "left"; c.fillText(String(Math.round(120 * speed)), 130, H - 190); c.font = "44px Bebas"; c.fillStyle = "#8a8a8a"; c.fillText("KM/H", 300, H - 196);
+    lamp(820, H - 245, 0.95, bi === 0 ? Math.floor(t * 3.2) % 2 === 0 : true); c.fillStyle = "#000"; c.globalAlpha = dark; c.fillRect(-20, -20, W + 40, H + 40); c.globalAlpha = 1; }
+  if (bi === 3) { c.setTransform(1, 0, 0, 1, 0, 0); lamp(W / 2 - 60, 430, 2.6 * (0.7 + 0.3 * pop(age / 0.3)), true); }
+  const km = $("#km"); show(km, bi === 1); if (bi === 1) km.innerHTML = Math.min(20, Math.floor(age * 14) + 1) + " <small>كم</small>";
+  show($("#big"), bi === 3, age / 0.3); show($("#q"), bi === 4, age / 0.3); caps(t, 100); };
+</script></body></html>
