@@ -74,5 +74,36 @@
       c.fillStyle = this.flip ? P.acc : P.fg; c.beginPath(); c.roundRect(this.x, this.y, this.w, this.h, 26); c.fill(); c.fillStyle = this.flip ? P.fg : P.bg; c.font = "104px Bebas"; c.textAlign = "center"; c.fillText("DE.AUTO", this.x + this.w / 2, this.y + 112);
       c.font = "70px Bebas"; c.fillStyle = P.dim; c.textAlign = "left"; c.fillText("HITS " + this.n, 30, H - 60); }
   }
-  root.SIMS = { rings: Base, multiply: Multiply, grow: Grow, plinko: Plinko, bricks: Bricks, dvd: Dvd };
+
+  class Wash { // pressure-wash reveal: finishes exactly at the end of the video
+    constructor(seed, n, T) { this.r = rng(seed); this.t = 0; this.events = []; this.T = (T || 14) - 0.8; this.rows = 7; this.rh = H / 7; this.sp = []; this.dots = []; for (let i = 0; i < 520; i++) this.dots.push([this.r() * W, this.r() * H, 6 + this.r() * 26, this.r()]); this.lastRow = 0; }
+    step(dt) { this.t += dt; const p = Math.min(1, this.t / this.T) * this.rows, row = Math.min(this.rows - 1, Math.floor(p)); if (row !== this.lastRow) { this.lastRow = row; this.events.push({ t: this.t, k: "hit" }); } if (p >= this.rows && !this.done) { this.done = true; this.events.push({ t: this.t, k: "break" }); }
+      const [nx, ny] = this.noz(); if (!this.done) for (let i = 0; i < 3; i++) this.sp.push({ x: nx, y: ny, vx: (this.r() - 0.5) * 500, vy: (this.r() - 0.5) * 500, l: 0.3 }); for (const q of this.sp) { q.x += q.vx * dt; q.y += q.vy * dt; q.l -= dt; } this.sp = this.sp.filter(q => q.l > 0); }
+    noz() { const p = Math.min(0.9999, this.t / this.T) * this.rows, row = Math.floor(p), f = p - row; return [row % 2 ? W * (1 - f) : W * f, (row + 0.5) * this.rh]; }
+    draw(c, t, P) { c.fillStyle = P.fg; c.fillRect(0, 0, W, H); c.fillStyle = P.acc; c.font = "250px Bebas"; c.textAlign = "center"; c.fillText("DE.AUTO", CX, 330); c.font = "900 96px Cairo"; c.fillStyle = P.bg; c.fillText("دي اوتو", CX, 520);
+      const p = Math.min(1, this.t / this.T) * this.rows, row = Math.min(this.rows - 1, Math.floor(p)), f = Math.min(1, p - row); c.save(); c.beginPath();
+      for (let r = row; r < this.rows; r++) { if (r === row) { if (r % 2) c.rect(0, r * this.rh, W * (1 - f), this.rh + 1); else c.rect(W * f, r * this.rh, W * (1 - f), this.rh + 1); } else c.rect(0, r * this.rh, W, this.rh + 1); }
+      if (p >= this.rows) { c.restore(); return; } c.clip(); c.fillStyle = "#4a4338"; c.fillRect(0, 0, W, H); for (const d of this.dots) { c.fillStyle = d[3] > 0.5 ? "#2f2a22" : "#5d5446"; c.beginPath(); c.arc(d[0], d[1], d[2], 0, 7); c.fill(); } c.restore();
+      const [nx, ny] = this.noz(); for (const q of this.sp) { c.globalAlpha = q.l * 3; c.fillStyle = "#cfe9ff"; c.beginPath(); c.arc(q.x, q.y, 7, 0, 7); c.fill(); } c.globalAlpha = 1; c.fillStyle = "#0b0b0b"; c.beginPath(); c.arc(nx, ny, 26, 0, 7); c.fill(); c.fillStyle = "#cfe9ff"; c.beginPath(); c.arc(nx, ny, 12, 0, 7); c.fill(); }
+  }
+  class Sand { // falling coloured sand piling up
+    constructor(seed) { this.r = rng(seed); this.t = 0; this.events = []; this.cw = 135; this.ch = 102; this.g = new Uint8Array(this.cw * this.ch); this.k = 0; this.n = 0; }
+    step(dt) { this.t += dt; if (++this.k % 2) return; const { cw, ch, g } = this; const sx = Math.floor(cw / 2 + Math.sin(this.t * 1.7) * cw * 0.42), col = 1 + (Math.floor(this.t / 1.2) % 3);
+      for (let i = -3; i <= 3; i++) { const x = sx + i; if (x >= 0 && x < cw && !g[x] && this.r() < 0.8) { g[x] = col; this.n++; } }
+      for (let y = ch - 2; y >= 0; y--) for (let x0 = 0; x0 < cw; x0++) { const x = (y + this.k) % 2 ? x0 : cw - 1 - x0, i = y * cw + x, v = g[i]; if (!v) continue; const b = i + cw; if (!g[b]) { g[b] = v; g[i] = 0; } else { const d = this.r() < 0.5 ? -1 : 1; if (x + d >= 0 && x + d < cw && !g[b + d]) { g[b + d] = v; g[i] = 0; } else if (x - d >= 0 && x - d < cw && !g[b - d]) { g[b - d] = v; g[i] = 0; } } }
+      if (this.k % 60 === 0) this.events.push({ t: this.t, k: "hit" }); if (this.n > cw * ch * 0.62) { this.g.fill(0); this.n = 0; this.events.push({ t: this.t, k: "break" }); } }
+    draw(c, t, P) { const cols = [null, P.acc, P.fg, P.dim], { cw, ch, g } = this; for (let v = 1; v <= 3; v++) { c.fillStyle = cols[v]; c.beginPath(); for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) if (g[y * cw + x] === v) c.rect(x * 8, y * 8, 8, 8); c.fill(); } }
+  }
+  class Race { // four numbered balls race down a peg field
+    constructor(seed) { this.r = rng(seed); this.t = 0; this.events = []; this.pegs = []; for (let row = 0; row < 9; row++) for (let i = 0; i < 9; i++) this.pegs.push({ x: 70 + i * 118 + (row % 2 ? 59 : 0), y: 130 + row * 66 }); this.wins = [0, 0, 0, 0]; this.start(); }
+    start() { this.b = [0, 1, 2, 3].map(i => ({ n: i, x: 240 + i * 200 + (this.r() - 0.5) * 60, y: 30, vx: (this.r() - 0.5) * 80, vy: 0 })); this.win = -1; this.hold = 0; }
+    step(dt) { this.t += dt; if (this.win >= 0) { this.hold += dt; if (this.hold > 1.3) this.start(); return; }
+      for (const b of this.b) { b.vy += 620 * dt; b.vy = Math.min(b.vy, 430); b.x += b.vx * dt; b.y += b.vy * dt; if (b.x < 30) { b.x = 30; b.vx = Math.abs(b.vx); } if (b.x > W - 30) { b.x = W - 30; b.vx = -Math.abs(b.vx); }
+        for (const p of this.pegs) { const dx = b.x - p.x, dy = b.y - p.y, d = Math.hypot(dx, dy); if (d < 40) { const nx = dx / d, ny = dy / d, dot = b.vx * nx + b.vy * ny; if (dot < 0) { b.vx -= 1.5 * dot * nx; b.vy -= 1.5 * dot * ny; b.vx += (this.r() - 0.5) * 130; this.events.push({ t: this.t, k: "hit" }); } b.x = p.x + nx * 40; b.y = p.y + ny * 40; } }
+        if (b.y > 760 && this.win < 0) { this.win = b.n; this.wins[b.n]++; this.events.push({ t: this.t, k: "break" }); } } }
+    draw(c, t, P) { for (const p of this.pegs) { c.beginPath(); c.arc(p.x, p.y, 10, 0, 7); c.fillStyle = P.dim; c.fill(); } c.fillStyle = P.fg; for (let i = 0; i < 27; i++) if (i % 2) c.fillRect(i * 40, 770, 40, 14);
+      const cols = [P.acc, P.fg, P.dim, P.acc]; for (const b of this.b) { c.beginPath(); c.arc(b.x, b.y, 30, 0, 7); c.fillStyle = cols[b.n]; c.fill(); c.lineWidth = 5; c.strokeStyle = b.n === 3 ? P.fg : P.bg; c.stroke(); c.fillStyle = b.n === 1 ? P.bg : (b.n === 2 ? P.bg : P.fg); if (b.n === 0 || b.n === 3) c.fillStyle = cols[b.n] === P.fg ? P.bg : "#ffffff"; c.font = "44px Bebas"; c.textAlign = "center"; c.fillText(b.n + 1, b.x, b.y + 16); }
+      if (this.win >= 0) { c.font = "210px Bebas"; c.textAlign = "center"; c.lineWidth = 16; c.strokeStyle = P.bg; c.strokeText("#" + (this.win + 1) + " WINS", CX, 440); c.fillStyle = P.acc; c.fillText("#" + (this.win + 1) + " WINS", CX, 440); } }
+  }
+  root.SIMS = { rings: Base, multiply: Multiply, grow: Grow, plinko: Plinko, bricks: Bricks, dvd: Dvd, wash: Wash, sand: Sand, race: Race };
 })(typeof module !== "undefined" ? module.exports : window);

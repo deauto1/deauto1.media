@@ -64,7 +64,7 @@ const $ = s => document.querySelector(s);
 let V, TM, T, sim, simT = 0, cx;
 const pop = x => { x = Math.max(0, Math.min(1, x)); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
 window.__init = (v, tm, total, seed) => {
-  V = v; TM = tm; T = total; sim = new SIMS[v.sim || "rings"](seed, 8); document.body.className = "t-" + (v.theme2 || "dark"); cx = $("#cv").getContext("2d");
+  V = v; TM = tm; T = total; sim = new SIMS[v.sim || "rings"](seed, 8, total); document.body.className = "t-" + (v.theme2 || "dark"); cx = $("#cv").getContext("2d");
   $("#tag").textContent = v.tag; const h = v.hero, H = $("#hero");
   if (h.kind === "code") { const n = h.parts.join("").length; const fs = h.small ? 104 : n <= 5 ? 330 : n <= 7 ? 270 : 210;
     H.innerHTML = `<div class="sub">${h.sub || ""}</div><div class="code" style="font-size:${fs}px;${h.spaced ? "letter-spacing:26px" : ""}">` + h.parts.map((p, i) => `<span data-i="${i}">${p === " " ? "&nbsp;" : p}</span>`).join("") + "</div>"; }

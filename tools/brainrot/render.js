@@ -50,10 +50,11 @@ const chunks = []; let c = null; words.forEach((w, i) => { const len = c ? c.w.r
   if (!c || w.first || c.w.length >= 3 || len + w.t.length > 15 || words[i - 1].brk) { c = { w: [], s: w.s }; chunks.push(c); } c.w.push({ t: w.t, s: w.s }); c.e = w.e; });
 chunks.forEach((c, i) => { c.e = chunks[i + 1] ? Math.min(chunks[i + 1].s, c.e + 0.5) : c.e + 0.6; });
 const T = dur + LEAD + (ctaW.length ? 0.25 + ctaW.length * 0.2 + 0.9 : TAIL), N = Math.round(T * FPS); const seed0 = [...id].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7); let seed = seed0, best = 1e9;
+if (process.env.SIM) v.sim = process.env.SIM; if (process.env.THEME) v.theme2 = process.env.THEME; const OUT = process.env.OUT || id;
 const KIND = v.sim || "rings"; const Sim = SIMS[KIND];
 for (let k = 0; KIND === "rings" && k < 60; k++) { const s = new Sim(seed0 + k, 8); let t = 0; while (t < T) { s.step(1 / 120); t += 1 / 120; } const br = [0, ...s.events.filter(e => e.k === "break").map(e => e.t), T]; let g = 0; for (let i = 1; i < br.length; i++) g = Math.max(g, br[i] - br[i - 1]); if (g < best) { best = g; seed = seed0 + k; } }
 // SFX track from the same sim
-const sim = new Sim(seed, 8); let st = 0; while (st < T) { sim.step(1 / 120); st += 1 / 120; }
+const sim = new Sim(seed, 8, T); let st = 0; while (st < T) { sim.step(1 / 120); st += 1 / 120; }
 const SR = 44100, pcm = new Float32Array(Math.ceil(T * SR)); let rs = 12345; const rnd = () => ((rs = (rs * 1103515245 + 12345) >>> 0) / 4294967296) * 2 - 1;
 const add = (t0, len, fn) => { const s0 = Math.floor(t0 * SR); for (let i = 0; i < len * SR && s0 + i < pcm.length; i++) pcm[s0 + i] += fn(i / SR, i / (len * SR)); };
 let lastHit = -1; for (const e of sim.events) { if (e.k === "hit") { if (e.t - lastHit < 0.07) continue; lastHit = e.t; add(e.t, 0.035, (t, p) => (Math.sin(2 * Math.PI * 950 * t) * 0.5 + rnd() * 0.5) * Math.exp(-p * 7) * 0.085); }
@@ -68,7 +69,7 @@ console.log(id, "T", T.toFixed(2), "beats", beats.map(x => x.toFixed(2)).join(" 
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await pg.goto("file://" + D + "/render.html"); await pg.evaluate(([v, tm, T, seed]) => window.__init(v, tm, T, seed), [v, { beats, chunks }, T, seed]);
   if (stillArg > 0) { for (const t of process.argv[stillArg + 1].split(",")) { await pg.evaluate(t => window.__frame(t), +t); await pg.screenshot({ path: `${D}/tmp/${id}_${t}.png` }); } await br.close(); return; }
-  const out = `${D}/out/DEAUTO_br_${id}.mp4`;
+  const out = `${D}/out/DEAUTO_br_${OUT}.mp4`;
   const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", "" + FPS, "-c:v", "mjpeg", "-i", "-", "-itsoffset", "" + LEAD, "-i", fast, "-i", sfx,
     "-filter_complex", "[1:a]apad[a1];[a1][2:a]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.95[a]", "-map", "0:v", "-map", "[a]", "-t", T.toFixed(3),
     "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", "-r", "" + FPS, "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
