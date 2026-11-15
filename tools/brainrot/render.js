@@ -21,6 +21,8 @@ const words = []; v.beats.forEach((b, bi) => b.vo.split(/([.،؟:…!?])/).forEa
   seg.trim().split(/\s+/).filter(Boolean).forEach((w, wi) => words.push({ t: w, bi, first: false })); }));
 let lastBi = -1; words.forEach(w => { if (w.bi !== lastBi) { w.first = true; lastBi = w.bi; } });
 const wt = w => w.t.replace(/[ً-ْ]/g, "").length + 1.2; const totW = words.reduce((a, w) => a + wt(w), 0);
+const NOCTA = HAS && fs.existsSync(`${D}/audio/${id}.nocta`); const ctaBi = v.beats.findIndex(b => b.cta); let ctaW = [];
+if (NOCTA && ctaBi >= 0) { ctaW = words.filter(w => w.bi === ctaBi); for (let i = words.length - 1; i >= 0; i--) if (words[i].bi === ctaBi) words.splice(i, 1); }
 const dist = (ws, t0, t1) => { // spread words over voiced time inside [t0,t1]
   const iv = voiced.map(([a, b]) => [Math.max(a, t0), Math.min(b, t1)]).filter(x => x[1] > x[0] + 0.01); if (!iv.length) iv.push([t0, t1]);
   const tv = iv.reduce((a, x) => a + x[1] - x[0], 0), m = vt => { let c = 0; for (const [a, b] of iv) { if (vt <= c + (b - a) + 1e-9) return a + (vt - c); c += b - a; } return t1; };
@@ -41,12 +43,13 @@ for (let it = 0; HAS && it < 3; it++) {
   let w0 = 0, t0 = 0; for (const [wi, [a, b]] of anch) { dist(words.slice(w0, wi + 1), t0, a); w0 = wi + 1; t0 = b; } dist(words.slice(w0), t0, dur);
 }
 words.forEach(w => { w.s += LEAD; w.e += LEAD; });
+ctaW.forEach((w, i) => { w.s = dur + LEAD + 0.25 + i * 0.2; w.e = w.s + 0.2; words.push(w); });
 const beats = v.beats.map((b, bi) => bi === 0 ? 0 : words.find(x => x.bi === bi).s - 0.05);
 // chunks of <=3 words / <=15 chars, broken at punctuation and beat changes
 const chunks = []; let c = null; words.forEach((w, i) => { const len = c ? c.w.reduce((a, x) => a + x.t.length + 1, 0) : 0;
   if (!c || w.first || c.w.length >= 3 || len + w.t.length > 15 || words[i - 1].brk) { c = { w: [], s: w.s }; chunks.push(c); } c.w.push({ t: w.t, s: w.s }); c.e = w.e; });
 chunks.forEach((c, i) => { c.e = chunks[i + 1] ? Math.min(chunks[i + 1].s, c.e + 0.5) : c.e + 0.6; });
-const T = dur + LEAD + TAIL, N = Math.round(T * FPS); const seed0 = [...id].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7); let seed = seed0, best = 1e9;
+const T = dur + LEAD + (ctaW.length ? 0.25 + ctaW.length * 0.2 + 0.9 : TAIL), N = Math.round(T * FPS); const seed0 = [...id].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7); let seed = seed0, best = 1e9;
 const KIND = v.sim || "rings"; const Sim = SIMS[KIND];
 for (let k = 0; KIND === "rings" && k < 60; k++) { const s = new Sim(seed0 + k, 8); let t = 0; while (t < T) { s.step(1 / 120); t += 1 / 120; } const br = [0, ...s.events.filter(e => e.k === "break").map(e => e.t), T]; let g = 0; for (let i = 1; i < br.length; i++) g = Math.max(g, br[i] - br[i - 1]); if (g < best) { best = g; seed = seed0 + k; } }
 // SFX track from the same sim
