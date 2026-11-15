@@ -1,0 +1,20 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+#ttl{top:250px;left:40px;right:40px;text-align:center;font-weight:900;font-size:100px}
+#legend{top:400px;left:40px;right:40px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.chip{display:flex;align-items:center;gap:14px;background:#1b1b1b;border:5px solid #333;border-radius:999px;padding:8px 28px 14px 14px;font-weight:900;font-size:46px}
+.chip i{display:inline-flex;align-items:center;justify-content:center;width:62px;height:62px;border-radius:50%;font-family:Bebas;font-style:normal;font-size:44px}
+.chip .w{font-family:Bebas;font-size:48px;color:#e5322d;margin-right:6px}
+#cv{position:absolute;top:640px;left:0}
+#end{top:1500px;left:60px;right:60px;text-align:center;font-weight:900;font-size:80px;line-height:1.25;background:#0b0b0bee;border-radius:30px;padding:10px 0 24px;z-index:6}#end b{color:#e5322d}
+#mini{top:1760px;left:0;right:0;text-align:center;font-weight:900;font-size:40px}#mini b{color:#e5322d}
+</style></head><body>
+<div id="head"><div id="tag"></div><div id="brand">DE.AUTO<b>دي اوتو</b></div></div><div id="ttl" class="abs">اختار كورتك 👇</div><div id="legend" class="abs"></div>
+<canvas id="cv" width="1080" height="816"></canvas><div id="end" class="abs" style="display:none"></div><div id="mini" class="abs">بطاقات مصطلحات الورش من دي اوتو بـ <b>10 ريال</b></div>
+<script src="common.js"></script><script src="sim.js"></script><script src="sims2.js"></script><script>
+let c, sim, simT = 0, lw = 0; const P = { bg: "#141414", fg: "#ffffff", acc: "#e5322d", dim: "#5c5c5c" }; const CB = ["#e5322d", "#ffffff", "#5c5c5c", "#e5322d"], CF = ["#fff", "#0b0b0b", "#fff", "#fff"];
+function setup() { c = $("#cv").getContext("2d"); sim = new SIMS.race(window.SEED); $("#ttl").textContent = V.title;
+  $("#legend").innerHTML = V.labels.map((l, i) => `<div class="chip"><i style="background:${CB[i]};color:${CF[i]};${i === 3 ? "border:4px solid #fff" : ""}">${i + 1}</i>${l}<span class="w" id="w${i}"></span></div>`).join(""); }
+window.__frame = t => { const [bi, age] = beatAt(t); while (simT < t) { sim.step(1 / 120); simT += 1 / 120; } c.fillStyle = P.bg; c.fillRect(0, 0, 1080, 816); sim.draw(c, t, P);
+  if (sim.win >= 0) lw = sim.win; sim.wins.forEach((w, i) => { $("#w" + i).textContent = w ? "★".repeat(w) : ""; });
+  const e = $("#end"); if (bi === 1) { const mx = Math.max(...sim.wins); let best = sim.wins[lw] === mx ? lw : sim.wins.indexOf(mx); e.innerHTML = `فاز <b>${V.labels[best]}</b> 🏆<br>فريقك فاز؟ اكتب 👇`; } show(e, bi === 1, age / 0.3); };
+</script></body></html>

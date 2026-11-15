@@ -7,4 +7,4 @@ function caps(t, size) { const cap = $("#cap"); if (!cap) return; const ch = TM.
   if (!ch) { cap.innerHTML = ""; return; } cap.style.fontSize = size + "px"; cap.innerHTML = ch.w.map(w => `<span class="${t >= w.s ? "on" : ""}" style="transform:scale(${t >= w.s ? 1 + 0.12 * Math.max(0, 1 - (t - w.s) / 0.15) : 1})">${w.t}</span>`).join("");
   const tot = cap.scrollWidth; if (tot > 1040) cap.style.fontSize = Math.floor(size * 1040 / tot) + "px"; }
 function show(el, on, k) { el.style.display = on ? "" : "none"; if (on && k != null) el.style.transform = `scale(${0.6 + 0.4 * pop(k)})`; }
-window.__init = (v, tm, total) => { V = v; TM = tm; T = total; $("#tag").textContent = v.tag; if (window.setup) setup(); return document.fonts.ready.then(() => true); };
+window.__init = (v, tm, total, seed) => { V = v; TM = tm; T = total; window.SEED = seed; $("#tag").textContent = v.tag; if (window.setup) setup(); return document.fonts.ready.then(() => true); };
