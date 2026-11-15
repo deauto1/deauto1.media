@@ -40,17 +40,31 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0b0b;font-fam
 .opts{display:flex;gap:22px;width:100%}.opts .o{font-size:50px;padding:18px 12px 28px}
 #count{position:absolute;top:640px;left:0;right:0;text-align:center;font-family:Bebas;font-size:330px;line-height:1;color:#e5322d;direction:ltr}
 canvas{position:absolute;left:0;top:1104px}
+body.t-light{background:#f4f4f2;color:#0b0b0b}
+.t-light #brand{color:#0b0b0b}.t-light .code span{color:#0b0b0b}.t-light .code span.hi{color:#e5322d}
+.t-light #card{background:#0b0b0b;color:#fff}.t-light #card.strong{background:#e5322d}.t-light #card.cta{background:#0b0b0b;color:#fff}.t-light #card.cta .l{background:#fff;color:#0b0b0b}
+.t-light #cap span{color:#0b0b0b;-webkit-text-stroke:16px #f4f4f2}.t-light #cap span.on{color:#e5322d}
+.t-light #stamp{background:#f4f4f2ee}.t-light #barbg{background:#d0d0d0}
+.t-light .vs .o,.t-light .opts .o{background:#fff;border-color:#c9c9c9}.t-light .o.on{background:#e5322d;border-color:#e5322d;color:#fff}
+.t-light #hero .sub,.t-light .quote .who{color:#6b6b6b}
+body.t-red{background:#e5322d}
+.t-red #tag{background:#0b0b0b}.t-red #brand b{color:#ffd0ce}.t-red #hero .sub,.t-red .quote .who{color:#ffd0ce}
+.t-red .code span.hi{color:#0b0b0b}.t-red .quote .q{background:linear-gradient(transparent 62%,#0b0b0b 62%,#0b0b0b 92%,transparent 92%)}
+.t-red #card.strong{background:#0b0b0b}.t-red #cap span.on{color:#0b0b0b;-webkit-text-stroke:16px #fff}
+.t-red #stamp{color:#fff;border-color:#fff;background:#0b0b0bee}.t-red #bar{background:#0b0b0b}.t-red #barbg{background:#b01f1b}
+.t-red .vs .x,.t-red #count{color:#0b0b0b}.t-red .vs .o,.t-red .opts .o{background:#b01f1b;border-color:#f08a86}.t-red .o.on{background:#0b0b0b;border-color:#0b0b0b}
+.t-red .lamp{color:#fff;border-color:#fff}
 </style></head><body>
 <div id="top"><div id="head"><div id="tag"></div><div id="brand">DE.AUTO<b>دي اوتو</b></div></div>
 <div id="hero"></div><div id="stamp" style="display:none"></div><div id="card" style="display:none"></div><div id="count" style="display:none"></div><div id="cap"></div></div>
 <div id="barbg"></div><div id="bar"></div><canvas id="cv" width="1080" height="816"></canvas>
-<script src="sim.js"></script>
+<script src="sim.js"></script><script src="sims2.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 let V, TM, T, sim, simT = 0, cx;
 const pop = x => { x = Math.max(0, Math.min(1, x)); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
 window.__init = (v, tm, total, seed) => {
-  V = v; TM = tm; T = total; sim = new Sim(seed, 8); cx = $("#cv").getContext("2d");
+  V = v; TM = tm; T = total; sim = new SIMS[v.sim || "rings"](seed, 8); document.body.className = "t-" + (v.theme2 || "dark"); cx = $("#cv").getContext("2d");
   $("#tag").textContent = v.tag; const h = v.hero, H = $("#hero");
   if (h.kind === "code") { const n = h.parts.join("").length; const fs = h.small ? 104 : n <= 5 ? 330 : n <= 7 ? 270 : 210;
     H.innerHTML = `<div class="sub">${h.sub || ""}</div><div class="code" style="font-size:${fs}px;${h.spaced ? "letter-spacing:26px" : ""}">` + h.parts.map((p, i) => `<span data-i="${i}">${p === " " ? "&nbsp;" : p}</span>`).join("") + "</div>"; }
@@ -61,17 +75,8 @@ window.__init = (v, tm, total, seed) => {
   else if (h.kind === "text") H.innerHTML = `<div class="qt">${h.text}</div><div class="opts">${h.opts.map((o, i) => `<div class="o" data-o="${i}">${o}</div>`).join("")}</div>`;
   return document.fonts.ready.then(() => true);
 };
-function drawSim(t) {
-  while (simT < t) { sim.step(1 / 120); simT += 1 / 120; }
-  const c = cx, W = 1080, Hh = 816; c.fillStyle = "#141414"; c.fillRect(0, 0, W, Hh);
-  c.save(); const sh = sim.shake > 0 ? sim.shake * 90 : 0; c.translate(W / 2 + Math.sin(t * 90) * sh, 400 + Math.cos(t * 70) * sh);
-  for (const g of sim.rings) { if (!g.alive) continue; const first = g === sim.rings.find(x => x.alive);
-    c.beginPath(); c.arc(0, 0, g.R, g.a + g.gap / 2, g.a - g.gap / 2 + Math.PI * 2); c.lineWidth = first ? 13 : 9; c.strokeStyle = first ? "#ffffff" : "#5c5c5c"; c.lineCap = "round"; c.stroke(); }
-  for (const p of sim.parts) { c.save(); c.translate(p.x, p.y); c.rotate(p.rot + p.life * 9); c.globalAlpha = Math.min(1, p.life * 2); c.fillStyle = "#fff"; c.fillRect(-9, -5, 18, 10); c.restore(); }
-  sim.trail.forEach((p, i) => { c.globalAlpha = (i / sim.trail.length) * 0.5; c.beginPath(); c.arc(p.x, p.y, sim.ball.r * (0.35 + 0.65 * i / sim.trail.length), 0, 7); c.fillStyle = "#e5322d"; c.fill(); });
-  c.globalAlpha = 1; c.shadowColor = "#e5322d"; c.shadowBlur = 40; c.beginPath(); c.arc(sim.ball.x, sim.ball.y, sim.ball.r, 0, 7); c.fillStyle = "#e5322d"; c.fill(); c.shadowBlur = 0;
-  c.beginPath(); c.arc(sim.ball.x - 7, sim.ball.y - 7, 6, 0, 7); c.fillStyle = "#ffffffcc"; c.fill(); c.restore();
-}
+const PAL = { dark: { bg: "#141414", fg: "#ffffff", acc: "#e5322d", dim: "#5c5c5c" }, light: { bg: "#e9e9e6", fg: "#0b0b0b", acc: "#e5322d", dim: "#a9a9a9" }, red: { bg: "#c42622", fg: "#ffffff", acc: "#0b0b0b", dim: "#f08a86" } };
+function drawSim(t) { while (simT < t) { sim.step(1 / 120); simT += 1 / 120; } const P = PAL[V.theme2 || "dark"]; cx.fillStyle = P.bg; cx.fillRect(0, 0, 1080, 816); sim.draw(cx, t, P); }
 window.__frame = t => {
   drawSim(t);
   $("#bar").style.width = Math.min(100, (t / T) * 100) + "%";

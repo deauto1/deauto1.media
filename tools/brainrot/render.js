@@ -1,6 +1,6 @@
 // node render.js <id> [--still t1,t2]  -> out/DEAUTO_br_<id>.mp4
 const { chromium } = require("playwright"); const { execFileSync, spawn } = require("child_process");
-const fs = require("fs"), path = require("path"); const V = require("./data.js"); const { Sim } = require("./sim.js");
+const fs = require("fs"), path = require("path"); const V = require("./data.js").concat(require("./data2.js")); const { SIMS } = require("./sims2.js");
 const FPS = 30, TEMPO = 1.12, LEAD = 0.12, TAIL = 0.9;
 const id = process.argv[2]; const v = V.find(x => x.id === id); const stillArg = process.argv.indexOf("--still");
 const D = __dirname; fs.mkdirSync(D + "/out", { recursive: true }); fs.mkdirSync(D + "/tmp", { recursive: true });
@@ -47,7 +47,8 @@ const chunks = []; let c = null; words.forEach((w, i) => { const len = c ? c.w.r
   if (!c || w.first || c.w.length >= 3 || len + w.t.length > 15 || words[i - 1].brk) { c = { w: [], s: w.s }; chunks.push(c); } c.w.push({ t: w.t, s: w.s }); c.e = w.e; });
 chunks.forEach((c, i) => { c.e = chunks[i + 1] ? Math.min(chunks[i + 1].s, c.e + 0.5) : c.e + 0.6; });
 const T = dur + LEAD + TAIL, N = Math.round(T * FPS); const seed0 = [...id].reduce((a, ch) => a * 31 + ch.charCodeAt(0), 7); let seed = seed0, best = 1e9;
-for (let k = 0; k < 60; k++) { const s = new Sim(seed0 + k, 8); let t = 0; while (t < T) { s.step(1 / 120); t += 1 / 120; } const br = [0, ...s.events.filter(e => e.k === "break").map(e => e.t), T]; let g = 0; for (let i = 1; i < br.length; i++) g = Math.max(g, br[i] - br[i - 1]); if (g < best) { best = g; seed = seed0 + k; } }
+const KIND = v.sim || "rings"; const Sim = SIMS[KIND];
+for (let k = 0; KIND === "rings" && k < 60; k++) { const s = new Sim(seed0 + k, 8); let t = 0; while (t < T) { s.step(1 / 120); t += 1 / 120; } const br = [0, ...s.events.filter(e => e.k === "break").map(e => e.t), T]; let g = 0; for (let i = 1; i < br.length; i++) g = Math.max(g, br[i] - br[i - 1]); if (g < best) { best = g; seed = seed0 + k; } }
 // SFX track from the same sim
 const sim = new Sim(seed, 8); let st = 0; while (st < T) { sim.step(1 / 120); st += 1 / 120; }
 const SR = 44100, pcm = new Float32Array(Math.ceil(T * SR)); let rs = 12345; const rnd = () => ((rs = (rs * 1103515245 + 12345) >>> 0) / 4294967296) * 2 - 1;
@@ -59,7 +60,7 @@ beats.slice(1).forEach(bt => add(Math.max(0, bt - 0.09), 0.2, (t, p) => rnd() * 
 const buf = Buffer.alloc(44 + pcm.length * 2); buf.write("RIFF", 0); buf.writeUInt32LE(36 + pcm.length * 2, 4); buf.write("WAVEfmt ", 8); buf.writeUInt32LE(16, 16); buf.writeUInt16LE(1, 20); buf.writeUInt16LE(1, 22); buf.writeUInt32LE(SR, 24); buf.writeUInt32LE(SR * 2, 28); buf.writeUInt16LE(2, 32); buf.writeUInt16LE(16, 34); buf.write("data", 36); buf.writeUInt32LE(pcm.length * 2, 40);
 for (let i = 0; i < pcm.length; i++) buf.writeInt16LE(Math.max(-1, Math.min(1, pcm[i])) * 32767 | 0, 44 + i * 2);
 const sfx = `${D}/tmp/${id}_sfx.wav`; fs.writeFileSync(sfx, buf);
-console.log(id, "T", T.toFixed(2), "beats", beats.map(x => x.toFixed(2)).join(" "), "breaks", sim.events.filter(e => e.k === "break").map(e => e.t.toFixed(1)).join(" "), "left", sim.alive());
+console.log(id, "T", T.toFixed(2), "beats", beats.map(x => x.toFixed(2)).join(" "), "breaks", sim.events.filter(e => e.k === "break").map(e => e.t.toFixed(1)).join(" "), "sim", KIND);
 (async () => {
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await pg.goto("file://" + D + "/render.html"); await pg.evaluate(([v, tm, T, seed]) => window.__init(v, tm, T, seed), [v, { beats, chunks }, T, seed]);
