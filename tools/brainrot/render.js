@@ -1,6 +1,6 @@
 // node render.js <id> [--still t1,t2]  -> out/DEAUTO_br_<id>.mp4
 const { chromium } = require("playwright"); const { execFileSync, spawn } = require("child_process");
-const fs = require("fs"), path = require("path"); const V = require("./data.js").concat(require("./data2.js")).concat(require("./data3.js")).concat(require("./data4.js")).concat(require("./data5.js")).concat(require("./data6.js")).concat(require("./data7.js")); const { SIMS } = require("./sims2.js");
+const fs = require("fs"), path = require("path"); const V = require("./data.js").concat(require("./data2.js")).concat(require("./data3.js")).concat(require("./data4.js")).concat(require("./data5.js")).concat(require("./data6.js")).concat(require("./data7.js")).concat(require("./data8.js")); const { SIMS } = require("./sims2.js");
 const FPS = 30, TEMPO = 1.12, LEAD = 0.12, TAIL = 0.9;
 const id = process.argv[2]; const v = V.find(x => x.id === id); const stillArg = process.argv.indexOf("--still");
 const D = __dirname; fs.mkdirSync(D + "/out", { recursive: true }); fs.mkdirSync(D + "/tmp", { recursive: true });
