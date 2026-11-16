@@ -37,6 +37,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0b0b;font-fam
 #card.lock .l{font-size:46px}
 #card.lock .sg{font-size:38px;font-weight:700;opacity:.6;margin-top:10px}
 .t-red #card.lock .pn{color:#e5322d}
+.en #cap,.en #card,.en #hero,.en .opts,.en .vs,.en #tag{direction:ltr}.en #cap{font-size:80px}.en .qt{direction:ltr}
 #cap{position:absolute;top:928px;left:20px;right:20px;height:150px;display:flex;align-items:center;justify-content:center;gap:22px;font-weight:900;font-size:92px;white-space:nowrap}
 #cap span{color:#fff;-webkit-text-stroke:16px #0b0b0b;paint-order:stroke fill;display:inline-block}
 #cap span.on{color:#e5322d}
@@ -75,7 +76,7 @@ let V, TM, T, sim, simT = 0, cx;
 const pop = x => { x = Math.max(0, Math.min(1, x)); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
 window.__init = (v, tm, total, seed) => {
   V = v; TM = tm; T = total; sim = new SIMS[v.sim || "rings"](seed, 8, total); document.body.className = "t-" + (v.theme2 || "dark"); cx = $("#cv").getContext("2d");
-  $("#tag").textContent = v.tag; const h = v.hero, H = $("#hero");
+  $("#tag").textContent = v.tag; if (v.lang === "en") document.body.classList.add("en"); const h = v.hero, H = $("#hero");
   if (h.kind === "code") { const n = h.parts.join("").length; const fs = h.small ? 104 : n <= 5 ? 330 : n <= 7 ? 270 : 210;
     H.innerHTML = `<div class="sub">${h.sub || ""}</div><div class="code" style="font-size:${fs}px;${h.spaced ? "letter-spacing:26px" : ""}">` + h.parts.map((p, i) => `<span data-i="${i}">${p === " " ? "&nbsp;" : p}</span>`).join("") + "</div>"; }
   else if (h.kind === "quote") { const fs = h.text.length > 30 ? 82 : h.text.length > 20 ? 100 : 124;
@@ -96,7 +97,7 @@ window.__frame = t => {
   document.querySelectorAll(".code span").forEach(s => s.classList.toggle("hi", !!(b.hi && b.hi.includes(+s.dataset.i))));
   const lamp = $(".lamp"); if (lamp) lamp.style.opacity = b.blink ? (Math.floor(t * 5) % 2 ? 0.15 : 1) : 1;
   const k = pop(age / 0.28);
-  if (b.cta && V.part) { card.style.display = "flex"; card.className = "cta lock"; if (card.dataset.k !== "lock") { card.dataset.k = "lock"; card.innerHTML = `<div class="bars"><i></i><i></i><i></i><b>🔒</b></div><div class="rest">الباقي في</div><div class="pn">الجزء ${V.part[0]}</div><div class="nm" style="font-size:${V.part[1].length > 20 ? 46 : 58}px">${V.part[1]}</div><div class="l">دي اوتو · الرابط في البايو</div><div class="sg">ما نعلمك، إحنا نفهمك</div>`; } hero.style.opacity = 0; $("#stamp").style.display = "none"; card.style.transform = `scale(${0.5 + 0.5 * k})`; }
+  if (b.cta && V.part) { card.style.display = "flex"; card.className = "cta lock"; if (card.dataset.k !== "lock") { card.dataset.k = "lock"; card.innerHTML = V.lang === "en" ? `<div class="bars"><i></i><i></i><i></i><b>🔒</b></div><div class="rest">THE REST IS IN</div><div class="pn" style="font-family:Bebas;letter-spacing:4px">PART ${V.part[0]}</div><div class="nm">${V.part[1]}</div><div class="l">DE AUTO · link in bio</div><div class="sg">Because knowledge is power, and cars are passion</div>` : `<div class="bars"><i></i><i></i><i></i><b>🔒</b></div><div class="rest">الباقي في</div><div class="pn">الجزء ${V.part[0]}</div><div class="nm" style="font-size:${V.part[1].length > 20 ? 46 : 58}px">${V.part[1]}</div><div class="l">دي اوتو · الرابط في البايو</div><div class="sg">ما نعلمك، إحنا نفهمك</div>`; } hero.style.opacity = 0; $("#stamp").style.display = "none"; card.style.transform = `scale(${0.5 + 0.5 * k})`; }
   else if (b.cta) { card.style.display = "flex"; card.className = "cta"; card.innerHTML = `<div>بطاقات مصطلحات الورش</div><div class="p">10<small>ريال</small></div><div class="l">الرابط في البايو</div>`; hero.style.opacity = 0; $("#stamp").style.display = "none"; card.style.transform = `scale(${0.5 + 0.5 * k})`; }
   else { hero.style.opacity = 1; card.className = b.strong ? "strong" : "";
     if (b.show) { card.style.display = "flex"; card.textContent = b.show; card.style.transform = `scale(${0.55 + 0.45 * k}) rotate(${(1 - Math.min(1, age / 0.28)) * -3}deg)`; } else card.style.display = "none"; }
