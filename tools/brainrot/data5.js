@@ -1,5 +1,5 @@
 // Batch 5 (Nov 20): "نص المعلومة" — half the answer, the rest locked in a real part. No price anywhere.
-const L = (n, name) => ({ vo: `الباقي في الجزء ${n} من دي اوتو. الرابط في البايو.`, cta: true });
+const L = (n, name) => ({ vo: `الباقي في الجزء ${n} من دي اوتو.`, cta: true });
 const V5 = [
 { id:"n1", tag:"نص المعلومة", sim:"race", theme2:"dark", part:[5,"ناقل الحركة"], hero:{kind:"versus", a:"CVT", b:"قير عادي"}, beats:[
   {vo:"سي في تي، ولا قير عادي؟"},
