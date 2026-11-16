@@ -27,6 +27,16 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0b0b0b;font-fam
 #card.cta .p{font-family:Bebas;font-size:330px;line-height:.85;color:#e5322d;direction:ltr;margin-top:14px}
 #card.cta .p small{font-family:Cairo;font-weight:900;font-size:96px;margin-left:16px}
 #card.cta .l{font-size:58px;background:#0b0b0b;color:#fff;border-radius:999px;padding:2px 44px 12px;margin-top:6px}
+#card.lock{top:272px;min-height:640px;font-size:60px;gap:0;padding:26px 40px 28px}
+#card.lock .bars{position:relative;width:100%;display:flex;flex-direction:column;gap:16px;align-items:center;margin-bottom:10px}
+#card.lock .bars i{display:block;height:30px;border-radius:15px;background:currentColor;opacity:.16;width:88%}#card.lock .bars i:nth-child(2){width:74%}#card.lock .bars i:nth-child(3){width:56%}
+#card.lock .bars b{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:92px;line-height:1}
+#card.lock .rest{font-size:52px;font-weight:700;opacity:.7;margin-top:6px}
+#card.lock .pn{font-size:176px;font-weight:900;color:#e5322d;line-height:1.05}
+#card.lock .nm{font-size:58px;font-weight:900;line-height:1.2;margin-bottom:14px}
+#card.lock .l{font-size:46px}
+#card.lock .sg{font-size:38px;font-weight:700;opacity:.6;margin-top:10px}
+.t-red #card.lock .pn{color:#e5322d}
 #cap{position:absolute;top:928px;left:20px;right:20px;height:150px;display:flex;align-items:center;justify-content:center;gap:22px;font-weight:900;font-size:92px;white-space:nowrap}
 #cap span{color:#fff;-webkit-text-stroke:16px #0b0b0b;paint-order:stroke fill;display:inline-block}
 #cap span.on{color:#e5322d}
@@ -86,7 +96,8 @@ window.__frame = t => {
   document.querySelectorAll(".code span").forEach(s => s.classList.toggle("hi", !!(b.hi && b.hi.includes(+s.dataset.i))));
   const lamp = $(".lamp"); if (lamp) lamp.style.opacity = b.blink ? (Math.floor(t * 5) % 2 ? 0.15 : 1) : 1;
   const k = pop(age / 0.28);
-  if (b.cta) { card.style.display = "flex"; card.className = "cta"; card.innerHTML = `<div>بطاقات مصطلحات الورش</div><div class="p">10<small>ريال</small></div><div class="l">الرابط في البايو</div>`; hero.style.opacity = 0; $("#stamp").style.display = "none"; card.style.transform = `scale(${0.5 + 0.5 * k})`; }
+  if (b.cta && V.part) { card.style.display = "flex"; card.className = "cta lock"; if (card.dataset.k !== "lock") { card.dataset.k = "lock"; card.innerHTML = `<div class="bars"><i></i><i></i><i></i><b>🔒</b></div><div class="rest">الباقي في</div><div class="pn">الجزء ${V.part[0]}</div><div class="nm">${V.part[1]}</div><div class="l">دي اوتو · الرابط في البايو</div><div class="sg">ما نعلمك، إحنا نفهمك</div>`; } hero.style.opacity = 0; $("#stamp").style.display = "none"; card.style.transform = `scale(${0.5 + 0.5 * k})`; }
+  else if (b.cta) { card.style.display = "flex"; card.className = "cta"; card.innerHTML = `<div>بطاقات مصطلحات الورش</div><div class="p">10<small>ريال</small></div><div class="l">الرابط في البايو</div>`; hero.style.opacity = 0; $("#stamp").style.display = "none"; card.style.transform = `scale(${0.5 + 0.5 * k})`; }
   else { hero.style.opacity = 1; card.className = b.strong ? "strong" : "";
     if (b.show) { card.style.display = "flex"; card.textContent = b.show; card.style.transform = `scale(${0.55 + 0.45 * k}) rotate(${(1 - Math.min(1, age / 0.28)) * -3}deg)`; } else card.style.display = "none"; }
   // stamp stays once shown
