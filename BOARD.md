@@ -325,3 +325,15 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Owner asked for voice. Approved ~2,000 credits; actual spend 2,281 (11 clips, 1 take each, eleven_v4). Arabic voice Bandar, English voice Arthur. Still no music.
 - Voiced files `vo/DEAUTO_brandv_*` (commit 3604a75). Scene timing follows the voice (`tools/brand/align.py`).
 - All 15 brand posts (11 on Nov 18, 4 TikTok-only on Nov 19) switched to the voiced files. Same times and captions.
+
+## 2026-11-18 19:00 — Pronunciation fix «الكفر» (CMO)
+- TikTok comment on e14 («الكفر العريض دايم أحسن»): the AI voice said «الكُفر» instead of «الكَفَر». That clip is already live; the owner should delete it or reply to the comment.
+- Checked every future clip whose voiceover says the word. 6 swapped to silent versions with on-screen text, same times and captions:
+  - Nov 18 21:00 h2 → `vo/DEAUTO_fix_h2`
+  - Nov 19 13:00 k2 → `fix_k2`
+  - Nov 19 17:00 h4 → `fix_h4`
+  - Nov 20 14:00 b4 → `fix_b4`
+  - Nov 20 22:00 n10 → `half_n10`
+  - Nov 20 23:00 n4 → `half_n4`
+- New rule in `reports/algo.md`: never write «كفر» bare in a VO script. Use «التاير»/«الإطار» or the fully voweled «الكَفَر».
+- Optional: re-voice these 6 with the fixed wording, ~1,100 credits, needs approval.
