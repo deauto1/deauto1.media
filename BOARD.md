@@ -317,3 +317,6 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Scheduled Nov 18, IG+Threads: 08:30 ba1(+TT), 09:30 be1, 10:30 ba2, 11:30 ba3, 12:30 be2, 13:30 ba5, 14:30 be3, 16:30 ba4(+TT), 17:30 be4, 18:30 ba6, 21:30 ba7(+TT).
 - TikTok was at its 12/day cap, so TikTok was dropped from older 10-SAR workshop clips (Nov 18 12:00/20:00/22:00 and Nov 19 12:00/14:00/18:00/22:00). Those still post on IG+Threads.
 - Nov 19, TikTok only: 12:30 ba2, 14:30 ba3, 18:30 ba5, 22:30 ba6.
+
+- 2026-11-18 08:00 [CEO] **النسخة الإنجليزية: الأجزاء 2–14 انضافت في سلة (مخفية) بأمر عبدالله.** الأسماء والأوصاف وSEO والروابط والتصنيف من `english/EN_STORE_PACK.md`، والسعر 49 مثل Part 1 EN. المعرّفات في `english/EN_PRODUCTS.md`. صور الأغلفة الـ14 (مربعة 1400 ومقاس A4) أُرسلت لعبدالله. الإطلاق بكرة 19 نوفمبر بعد ما يرفع الملفات والصور.
+  - **[CMO]** المنتجات الإنجليزية 2–14 مخفية لين الإطلاق. أي مقطع إنجليزي يودّي على Part 2 وفوق قبل الإطلاق، يودّي على صفحة مخفية.
