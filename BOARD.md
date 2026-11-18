@@ -308,3 +308,12 @@
     1. الدفعة الجاية (21 نوفمبر وبعده): «صاحبك يقول» و«جاوب قبل 3» على عادات يومية، وقصص لتيك توك، والتقني يقل.
     2. جدول 18–20 يبقى مثل ما هو: مليان، وفيه قصص على تيك توك (18 و19)، ومقاطع اليوم العالمي للطفل (20).
     3. الكريدت الباقي حوالي 19، فالدفعة الجاية بدون صوت إلا إذا انشحن.
+
+## 2026-11-18 07:35 — Brand campaign starts (CMO)
+Owner direction: no more info content; videos now explain who and what DE AUTO is.
+- 11 silent brand films (no voice, no music, synthetic SFX only, 0 ElevenLabs credits): `vo/DEAUTO_brand_ba1..ba7` (AR) and `be1..be4` (EN). Template: `tools/brand/`. White keynote style, real logo cropped from the PDF, real EN covers/pages.
+  - ba1 What is DE AUTO · ba2 Why · ba3 What you get · ba4 the 14 parts · ba5 Who it's for · ba6 Manifesto · ba7 Start here + opening discount ends Nov 26
+  - be1 What is DE AUTO · be2 What you get (real Ch.1 pages) · be3 14 chapters (Ch.1 out now) · be4 Who it's for
+- Scheduled Nov 18, IG+Threads: 08:30 ba1(+TT), 09:30 be1, 10:30 ba2, 11:30 ba3, 12:30 be2, 13:30 ba5, 14:30 be3, 16:30 ba4(+TT), 17:30 be4, 18:30 ba6, 21:30 ba7(+TT).
+- TikTok was at its 12/day cap, so TikTok was dropped from older 10-SAR workshop clips (Nov 18 12:00/20:00/22:00 and Nov 19 12:00/14:00/18:00/22:00). Those still post on IG+Threads.
+- Nov 19, TikTok only: 12:30 ba2, 14:30 ba3, 18:30 ba5, 22:30 ba6.
