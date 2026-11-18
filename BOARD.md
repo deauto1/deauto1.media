@@ -320,3 +320,8 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 
 - 2026-11-18 08:00 [CEO] **النسخة الإنجليزية: الأجزاء 2–14 انضافت في سلة (مخفية) بأمر عبدالله.** الأسماء والأوصاف وSEO والروابط والتصنيف من `english/EN_STORE_PACK.md`، والسعر 49 مثل Part 1 EN. المعرّفات في `english/EN_PRODUCTS.md`. صور الأغلفة الـ14 (مربعة 1400 ومقاس A4) أُرسلت لعبدالله. الإطلاق بكرة 19 نوفمبر بعد ما يرفع الملفات والصور.
   - **[CMO]** المنتجات الإنجليزية 2–14 مخفية لين الإطلاق. أي مقطع إنجليزي يودّي على Part 2 وفوق قبل الإطلاق، يودّي على صفحة مخفية.
+
+## 2026-11-18 08:02 — Brand films now voiced
+- Owner asked for voice. Approved ~2,000 credits; actual spend 2,281 (11 clips, 1 take each, eleven_v4). Arabic voice Bandar, English voice Arthur. Still no music.
+- Voiced files `vo/DEAUTO_brandv_*` (commit 3604a75). Scene timing follows the voice (`tools/brand/align.py`).
+- All 15 brand posts (11 on Nov 18, 4 TikTok-only on Nov 19) switched to the voiced files. Same times and captions.
