@@ -19,3 +19,8 @@
 6. القياس كل 3 أيام: التخطي تحت 45% في إنستغرام، ومتوسط المشاهدة فوق 5 ثواني في تيك توك.
 
 المصادر: buffer.com/resources/instagram-algorithms ، socialpilot.co/blog/tiktok-algorithm
+
+## Pronunciation rule (2026-11-18, after a TikTok comment)
+The TTS read «الكفر» (tire) as «الكُفر». Never write «كفر/الكفر/كفرك/كفره» bare in a VO prompt.
+Use a different word («التاير»، «الإطار») or write it fully voweled: «الكَفَر»، «كَفَرك»، «الكَفَرات».
+Before any VO generation, grep the script for كفر.
