@@ -2,6 +2,9 @@
 const { chromium } = require("playwright"); const { spawn, execFileSync } = require("child_process"); const fs = require("fs");
 const V = require("./bdata.js"); const id = process.argv[2]; const v = V.find(x => x.id === id); const FPS = 30, D = __dirname;
 const stillArg = process.argv.indexOf("--still");
+const AJ = `${D}/baudio/${id}.json`, VOICED = fs.existsSync(AJ); let vgain = 0;
+if (VOICED) { const a = JSON.parse(fs.readFileSync(AJ)); v.scenes.forEach((s, i) => { s.d = i < v.scenes.length - 1 ? a.starts[i + 1] - a.starts[i] : a.tail - a.starts[i] + 1.4; if (s.k === "list") s.gap = Math.min(s.gap || .5, (s.d - 1.0) / s.items.length); });
+  const mv = +(/mean_volume: (-?[\d.]+)/.exec(require("child_process").spawnSync("ffmpeg", ["-hide_banner", "-i", `${D}/baudio/${id}.mp3`, "-af", "volumedetect", "-f", "null", "-"]).stderr.toString())[1]); vgain = Math.max(0, Math.min(12, -16 - mv)); }
 (async () => {
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await pg.goto("file://" + D + "/brand.html"); await pg.evaluate(() => document.fonts.ready);
@@ -22,7 +25,7 @@ const stillArg = process.argv.indexOf("--still");
   for (let i = 0; i < pcm.length; i++) buf.writeInt16LE(Math.max(-1, Math.min(1, pcm[i])) * 32767 | 0, 44 + i * 2);
   const sfx = `${D}/tmp/${id}_bsfx.wav`; fs.writeFileSync(sfx, buf);
   const out = `${D}/out/DEAUTO_brand_${id}.mp4`; const N = Math.round(T * FPS);
-  const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", "" + FPS, "-c:v", "mjpeg", "-i", "-", "-i", sfx, "-filter_complex", "[1:a]volume=1.6,alimiter=limit=0.9[a]", "-map", "0:v", "-map", "[a]", "-t", T.toFixed(3),
+  const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", "" + FPS, "-c:v", "mjpeg", "-i", "-", "-i", sfx, ...(VOICED ? ["-i", `${D}/baudio/${id}.mp3`] : []), "-filter_complex", VOICED ? `[1:a]volume=0.9[s];[2:a]volume=${vgain.toFixed(1)}dB,highpass=f=70,apad[vo];[vo][s]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.95[a]` : "[1:a]volume=1.6,alimiter=limit=0.9[a]", "-map", "0:v", "-map", "[a]", "-t", T.toFixed(3),
     "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", "-r", "" + FPS, "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
   for (let i = 0; i < N; i++) { await pg.evaluate(t => window.__frame(t), i / FPS); const im = await pg.screenshot({ type: "jpeg", quality: 93 }); if (!ff.stdin.write(im)) await new Promise(r => ff.stdin.once("drain", r)); }
   ff.stdin.end(); await new Promise(r => ff.on("close", r)); await br.close(); console.log("done", out, T.toFixed(1));
