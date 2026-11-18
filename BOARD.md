@@ -337,3 +337,5 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - Nov 20 23:00 n4 → `half_n4`
 - New rule in `reports/algo.md`: never write «كفر» bare in a VO script. Use «التاير»/«الإطار» or the fully voweled «الكَفَر».
 - Optional: re-voice these 6 with the fixed wording, ~1,100 credits, needs approval.
+
+- 2026-11-18 20:22 [CMO] Owner decision: existing scheduled voiced clips stay as they are, no re-voicing. Full tashkeel rule applies to all new voice from now on.
