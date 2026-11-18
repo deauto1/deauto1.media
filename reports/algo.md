@@ -24,3 +24,10 @@
 The TTS read «الكفر» (tire) as «الكُفر». Never write «كفر/الكفر/كفرك/كفره» bare in a VO prompt.
 Use a different word («التاير»، «الإطار») or write it fully voweled: «الكَفَر»، «كَفَرك»، «الكَفَرات».
 Before any VO generation, grep the script for كفر.
+
+## Full tashkeel rule (owner's order, 2026-11-18)
+Every Arabic voiceover script is written fully voweled, every word, before it goes to ElevenLabs. Not just «الكفر».
+- Write the dialect the way it is said: «وَشْ»، «يْصِيرْ»، «سَيَّارْتَكْ»، «الْكَفَرْ».
+- Before every generation run `python3 tools/tashkeel_check.py "<script>"`. If it prints UNVOWELED, nothing gets generated until it is fixed.
+- On-screen text and captions stay without tashkeel. The rule is for the voice only.
+- Before scheduling a voiced clip, check the transcript or listen to the clip.
