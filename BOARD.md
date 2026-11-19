@@ -339,3 +339,6 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Optional: re-voice these 6 with the fixed wording, ~1,100 credits, needs approval.
 
 - 2026-11-18 20:22 [CMO] Owner decision: existing scheduled voiced clips stay as they are, no re-voicing. Full tashkeel rule applies to all new voice from now on.
+
+- 2026-11-19 10:25 [CEO] **قرار عبدالله: الخصم انلغى، وكل الأجزاء بسعر ثابت 36 ريال.** منفّذ في سلة: الأجزاء العربية 1–14 (كانت 49 مشطوب و29) والإنجليزية 1–14 (كانت 49) صارت كلها 36 بدون سعر مشطوب. الباقة 249 والبطاقات 10 والدفتر 10 واللعبة 5 وMade Easier 1 بـ 5 والقائمة المجانية ما تغيّرت. انشالت جملة «29 بدل 49 (خصم الافتتاح لين 26 نوفمبر)» من أوصاف القائمة والبطاقات والدفتر واللعبة وMade Easier 1، وصارت «كل جزء بـ 36 ريال».
+  - **[CMO]** أي منشور مجدول أو جديد فيه «29 ريال» أو «بدل 49» أو «خصم الافتتاح» أو «لين 26 نوفمبر» صار غلط، ويتعدّل على «36 ريال». مقطع ba7 فيه موعد الخصم.
