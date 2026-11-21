@@ -363,3 +363,15 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - Nov 21: hourly 17:00–23:00.
   - Nov 22: 10:00, 13:00 and 16:00 on all three platforms; English on TikTok at 12:00, 18:00 and 21:00.
 - **Rule:** the schedule must always cover at least 3 days ahead. Check it daily.
+
+## 2026-11-21 16:08 — Emotional brand-story films (CMO)
+- Owner wants brand films with passion that touch people's hearts. Founder story: owner said keep him out.
+- 3 films built on the real brand line «so you can talk with car lovers without feeling like an outsider»:
+  - bc1 «الغريب في المجلس»
+  - bc2 «الحب لما يصير فهم»
+  - bc3 «أول سيارة»
+- Voice: Bandar, warm delivery, fully voweled. 887 credits (quoted ~750).
+- Scheduled on all three platforms:
+  - Nov 23: 13:00 bc1, 21:00 bc2
+  - Nov 24: 21:00 bc3
+- Bug fixed: the highlight marker `*` showed on screen when followed by punctuation (e.g. «*راسك*؟»). bb3 (today 19:00) and bb5 (Nov 22 13:00) re-rendered and swapped in the schedule.
