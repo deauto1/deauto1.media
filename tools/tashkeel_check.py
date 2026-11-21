@@ -12,7 +12,10 @@ for w in re.findall(f"[{LET}{H}ـ]+", txt):
     letters = re.findall(f"[{LET}]", w)
     if len(letters) < 2: continue
     # a letter is covered if it is followed by a mark, or it is a long vowel / hamza carrier / final letter
-    core = [c for i, c in enumerate(re.findall(f"[{LET}][{H}]*", w)) if c[0] not in LONG and i < len(letters) - 1]
+    units = re.findall(f"[{LET}][{H}]*", w)
+    # skip the lam of the definite article (silent before sun letters), incl. after و/ب/ف/ل prefixes
+    core = [c for i, c in enumerate(units) if c[0] not in LONG and i < len(units) - 1
+            and not (c[0] == "ل" and i >= 1 and units[i-1][0] == "ا" and i <= 2)]
     unmarked = [c for c in core if len(c) == 1]
     if unmarked: bad.append(w)
 if bad:
