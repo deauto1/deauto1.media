@@ -31,3 +31,11 @@ Every Arabic voiceover script is written fully voweled, every word, before it go
 - Before every generation run `python3 tools/tashkeel_check.py "<script>"`. If it prints UNVOWELED, nothing gets generated until it is fixed.
 - On-screen text and captions stay without tashkeel. The rule is for the voice only.
 - Before scheduling a voiced clip, check the transcript or listen to the clip.
+
+## Content mix (owner's order, 2026-11-21)
+- Every day: at least 2 PURE brand films (what or who DE AUTO is, what you get, who it's for, gift, discount). Redesigned hook-first: a question or conflict in frame 1, never the logo first.
+- Every other clip is a HYBRID: a winning format (⚔️ X vs Y, «اختار», «الفني قال», «صاحبك يقول», «جاوب قبل 3», safety) used as the vehicle, with the brand woven in:
+  - mid-clip line «في دي اوتو نفهّمك…»
+  - DE AUTO card/look throughout
+  - ending signature «دي اوتو، ما نعلمك إحنا نفهمك» + part number
+- Target skip rate under 40%. Check daily at 11:00 and adjust.
