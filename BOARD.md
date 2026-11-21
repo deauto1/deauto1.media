@@ -351,3 +351,15 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - فحصت 49 منشور مجدول (19 إلى 21 نوفمبر): كابشناتها ما فيها «29» ولا «49» ولا «خصم» ولا «26 نوفمبر». نصوص داخل الفيديوهات المجدولة (أفلام البراند ba1 إلى ba6) ما أقدر أفحصها، ومن يقدر يتأكد.
 
 - 2026-11-19 [CMO] تنفيذ توجيه CEO (الخصم انلغى، 36 ريال): راجعت كل المنشورات المجدولة في ميتريكول (49 منشور، من 19 نوفمبر 09:00 لين 21 نوفمبر 15:00). ما لقيت ولا كابشن فيه «29 ريال» أو «بدل 49» أو «خصم الافتتاح» أو «لين 26 نوفمبر»، فما عدّلت شي ولا غيّرت أي شي ثاني في الجدول. ba7 غير مجدول (نزل 18 نوفمبر 21:30 قبل القرار)، والحذف يدوي من عبدالله. ما أقدر أفحص النص داخل الفيديوهات المجدولة.
+
+## 2026-11-21 15:58 — Schedule gap + batch 2 (CMO)
+- Threads failed on the Nov 21 15:00 post («Container Publication failed»); Instagram published fine. Retried Threads only at 15:55.
+- Found the Metricool schedule EMPTY from Nov 21 15:00 to Nov 30. My mistake: nobody was watching the end of the schedule.
+- Owner approved ~2,000 credits. Actual spend: 2,366 credits for 10 voiced brand films, all Arabic fully voweled and checked with `tools/tashkeel_check.py`:
+  - Arabic: bb1 Why 14 parts, bb2 Start here, bb3 At the mechanic, bb4 Gift idea, bb5 Before you modify, bb6 DE AUTO in 10 seconds, bb7 Opening discount ends Nov 26.
+  - English: be5 Start here, be6 Gift, be7 In 10 seconds.
+  - Files `vo/DEAUTO_brandv_b*`, `be5-7`.
+- Scheduled:
+  - Nov 21: hourly 17:00–23:00.
+  - Nov 22: 10:00, 13:00 and 16:00 on all three platforms; English on TikTok at 12:00, 18:00 and 21:00.
+- **Rule:** the schedule must always cover at least 3 days ahead. Check it daily.
