@@ -12,7 +12,10 @@ S={
 "be3":["Fourteen chapters. One world.","The engine. The transmission. Turbos. Suspension. Brakes. Tires. Tuning. Racing. And more.","Start with Chapter One. Out now, in English.","Dee Auto. Link in bio."],
 "be4":["Who is Dee Auto for?","Car lovers. First-car owners. Future modders. Anyone who wants to really get it.","So... you.","Dee Auto. Because knowledge is power, and cars are passion."]}
 def w(s):  # weight: letters + punctuation pauses
+    s=re.sub(r"[\u064B-\u0652]","",s)
     return len(re.sub(r"[^\w]","",s))+3*len(re.findall(r"[.،,؟?:!]",s))
+import sys
+if len(sys.argv)>1: S=json.load(open(sys.argv[1]))
 for id,segs in S.items():
     f=f"baudio/{id}.mp3"
     dur=float(subprocess.check_output(["ffprobe","-v","error","-show_entries","format=duration","-of","csv=p=0",f]))
