@@ -375,3 +375,5 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - Nov 23: 13:00 bc1, 21:00 bc2
   - Nov 24: 21:00 bc3
 - Bug fixed: the highlight marker `*` showed on screen when followed by punctuation (e.g. «*راسك*؟»). bb3 (today 19:00) and bb5 (Nov 22 13:00) re-rendered and swapped in the schedule.
+
+- 2026-11-22 05:53 [CMO] Owner: the brand films had a sound like a hair clipper (the synthesized whoosh/tick SFX). Removed all SFX from brand films (voice only). Re-rendered and swapped the 9 upcoming posts: Nov 22 bb2, be5, bb5, bb6, be6, be7; Nov 23 bc1, bc2; Nov 24 bc3. bb7 (discount) stays in draft as the owner set it.
