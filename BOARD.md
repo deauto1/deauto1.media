@@ -424,3 +424,5 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Nov 21 brand films: IG 134–156 views (skip 40–46%), TikTok 36–105. EN on IG weak (be7 30 views, 86% skip) → EN moves to TikTok-only test.
 - Batch 5 prepared (not generated): hb13–hb24 hybrids + bd4–bd7 brand, 3,840 chars, tashkeel check OK, stills OK. Awaiting cost approval (~4,300 credits).
 - 11:40 Correction: schedule actually covered to Nov 29 (15 archive reposts by CMO weekly run). Told owner. Flagged price-in-caption («بـ 10 ريال») vs rule; kept 2 pure-brand/day per owner. Batch 5: hb13→91 vs 95, hb14→radiator (dupes of Nov 29 posts removed). Awaiting approval (~4,300 cr).
+- 11:26 [CMO] Owner: «كثر من مقاطع البراند». Batch 5 generated + scheduled: 22 voiced films (5,675 credits: 5,244 + 431 for bd12/bd13), all tashkeel-checked, voice only. 10 pure brand (bd4–bd13, IG+TikTok+Threads) + 12 hybrids (hb13–hb24, IG+TikTok). Media commit 58a52c8. Schedule Nov 24–29: pure brand/day → 24:2 (bd3,bc3) · 25:2 · 26:2 · 27:2 · 28:2 · 29:2. Schedule now runs to Nov 29 22:00.
+  - Open question to owner: «بـ 10 ريال» in archive captions (25–29) vs no-price rule.
