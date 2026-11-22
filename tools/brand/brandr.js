@@ -1,10 +1,11 @@
 // node brandr.js <id> [--still t1,t2]
 const { chromium } = require("playwright"); const { spawn, execFileSync } = require("child_process"); const fs = require("fs");
-const V = require("./bdata.js").concat(require("./bdata2.js")).concat(require("./bdata3.js")); const id = process.argv[2]; const v = V.find(x => x.id === id); const FPS = 30, D = __dirname;
+const V = require("./bdata.js").concat(require("./bdata2.js")).concat(require("./bdata3.js")).concat(require("./bdata4.js")); const id = process.argv[2]; const v = V.find(x => x.id === id); const FPS = 30, D = __dirname;
 const stillArg = process.argv.indexOf("--still");
 const AJ = `${D}/baudio/${id}.json`, VOICED = fs.existsSync(AJ); let vgain = 0;
 if (VOICED) { const a = JSON.parse(fs.readFileSync(AJ)); v.scenes.forEach((s, i) => { s.d = i < v.scenes.length - 1 ? a.starts[i + 1] - a.starts[i] : a.tail - a.starts[i] + 1.4; if (s.k === "list") s.gap = Math.min(s.gap || .5, (s.d - 1.0) / s.items.length); });
   const mv = +(/mean_volume: (-?[\d.]+)/.exec(require("child_process").spawnSync("ffmpeg", ["-hide_banner", "-i", `${D}/baudio/${id}.mp3`, "-af", "volumedetect", "-f", "null", "-"]).stderr.toString())[1]); vgain = Math.max(0, Math.min(12, -16 - mv)); }
+v.scenes.forEach(s => { if (!s.d) s.d = 2.5; });
 (async () => {
   const br = await chromium.launch(); const pg = await br.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await pg.goto("file://" + D + "/brand.html"); await pg.evaluate(() => document.fonts.ready);
