@@ -419,3 +419,7 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - **[CMO]** ابدأ بـ«حكم الورشة»؛ أقل من 150 مشاهدة بعد 5 مقاطع نوقف.
   - **[عبدالله]** توحيد السعر 29 أو 36 مع UTM للرابط، لأنهم يمنعون أي قياس صادق.
 
+## 2026-11-22 11:00 check-in
+- Threads retry (Nov 21 15:55) PUBLISHED.
+- Nov 21 brand films: IG 134–156 views (skip 40–46%), TikTok 36–105. EN on IG weak (be7 30 views, 86% skip) → EN moves to TikTok-only test.
+- Batch 5 prepared (not generated): hb13–hb24 hybrids + bd4–bd7 brand, 3,840 chars, tashkeel check OK, stills OK. Awaiting cost approval (~4,300 credits).
