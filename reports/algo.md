@@ -39,3 +39,6 @@ Every Arabic voiceover script is written fully voweled, every word, before it go
   - DE AUTO card/look throughout
   - ending signature «دي اوتو، ما نعلمك إحنا نفهمك» + part number
 - Target skip rate under 40%. Check daily at 11:00 and adjust.
+
+## Sound rule (owner, 2026-11-22)
+No synthesized SFX on brand films. The whoosh/tick noise sounded like a hair clipper. Voice only.
