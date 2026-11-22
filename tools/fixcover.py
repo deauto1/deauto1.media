@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Make sure a video's FIRST frame is a readable cover (TikTok/IG use frame 0 as the thumbnail).
-usage: fixcover.py <in.mp4|url> <out.mp4> [--force]
+usage: fixcover.py <in.mp4|url> <out.mp4> [--force] [--t seconds]  (--t = cover time; for brand films use end of scene 1)
 Prints: OK (frame 0 already has content, copied as-is) or FIXED t=<cover time>.
 Rule: every video we upload must pass this (see reports/algo.md)."""
 import sys, subprocess, json, os, tempfile, urllib.request
@@ -28,6 +28,7 @@ def main():
         subprocess.run(["cp",src,out],check=True); print(f"OK f0={f0:.3f} max={best:.3f}"); return
     # cover = last frame that is within 97% of the max ink in the window (fully revealed hook)
     i = max(k for k,v in enumerate(prof) if v >= 0.97*best); t = i/10
+    if "--t" in sys.argv: t = float(sys.argv[sys.argv.index("--t")+1])
     cover = os.path.join(tmp,"cover.png")
     run("ffmpeg","-v","error","-y","-ss",f"{t:.2f}","-i",src,"-frames:v","1",cover)
     info = json.loads(run("ffprobe","-v","error","-show_streams","-of","json",src).stdout)["streams"]
