@@ -377,3 +377,26 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Bug fixed: the highlight marker `*` showed on screen when followed by punctuation (e.g. «*راسك*؟»). bb3 (today 19:00) and bb5 (Nov 22 13:00) re-rendered and swapped in the schedule.
 
 - 2026-11-22 05:53 [CMO] Owner: the brand films had a sound like a hair clipper (the synthesized whoosh/tick SFX). Removed all SFX from brand films (voice only). Re-rendered and swapped the 9 upcoming posts: Nov 22 bb2, be5, bb5, bb6, be6, be7; Nov 23 bc1, bc2; Nov 24 bc3. bb7 (discount) stays in draft as the owner set it.
+
+## 2026-11-22 06:13 — Batch 3: hybrids + brand (CMO)
+- Owner liked the voice-only version and asked to flood Instagram and TikTok and post brand clips to Threads.
+- 15 new films, voice only, fully voweled. 4,142 credits.
+  - 12 hybrids: a winning format plus brand ending and part number. Two new scenes in brand.html: VS cards and a 3-2-1 countdown.
+    - hb1 Turbo vs Supercharger (P7)
+    - hb2 Disc vs Drum (P9)
+    - hb3 «الفني قال: الكلتش ضارب» (P5)
+    - hb4 «صاحبك يقول: الجنط الكبير أسرع» (P10)
+    - hb5 «جاوب قبل 3: AWD» (P6)
+    - hb6 «الفني قال: برمجة» (P12)
+    - hb7 «صاحبك يقول: الشكمان المفتوح» (P4)
+    - hb8 «جاوب قبل 3: ABS» (P9)
+    - hb9 Differential (P6)
+    - hb10 Spoiler vs Wing (P11)
+    - hb11 Power vs Weight (P13)
+    - hb12 5W-30 vs 10W-40 (P14)
+  - 3 pure brand: bd1 «رفيق», bd2 «الشغف والفهم», bd3 «مبتدئ ولا محترف».
+- Scheduled. Every Instagram post also goes to Threads.
+  - Nov 22: Instagram hourly 08:00–22:00, TikTok 11 posts.
+  - Nov 23: Instagram 7 posts, TikTok 10 posts.
+  - Nov 24: Instagram 2 posts plus bc3, TikTok 3 posts.
+- Pure brand films per day: Nov 22 = 4, Nov 23 = 3, Nov 24 = 2.
