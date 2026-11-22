@@ -42,3 +42,8 @@ Every Arabic voiceover script is written fully voweled, every word, before it go
 
 ## Sound rule (owner, 2026-11-22)
 No synthesized SFX on brand films. The whoosh/tick noise sounded like a hair clipper. Voice only.
+
+## Thumbnail / cover rule (owner, 2026-11-22 — repeated mistake, never again)
+- TikTok and Instagram take the cover from **frame 0**. Our keynote films animate words in, so frame 0 was blank white → blank grid.
+- Every video must have its hook fully visible on frame 0. `tools/fixcover.py <in> <out> [--t sec]` prepends a 0.1 s cover frame; `brandr.js` now runs it automatically (t = end of scene 1).
+- Before scheduling ANY video: check frame 0 (`ffmpeg -frames:v 1`) and look at it.

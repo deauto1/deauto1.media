@@ -1,6 +1,6 @@
 // node brandr.js <id> [--still t1,t2]
 const { chromium } = require("playwright"); const { spawn, execFileSync } = require("child_process"); const fs = require("fs");
-const V = require("./bdata.js").concat(require("./bdata2.js")).concat(require("./bdata3.js")).concat(require("./bdata4.js")); const id = process.argv[2]; const v = V.find(x => x.id === id); const FPS = 30, D = __dirname;
+const V = require("./bdata.js").concat(require("./bdata2.js")).concat(require("./bdata3.js")).concat(require("./bdata4.js")).concat(require("./bdata5.js")); const id = process.argv[2]; const v = V.find(x => x.id === id); const FPS = 30, D = __dirname;
 const stillArg = process.argv.indexOf("--still");
 const AJ = `${D}/baudio/${id}.json`, VOICED = fs.existsSync(AJ); let vgain = 0;
 if (VOICED) { const a = JSON.parse(fs.readFileSync(AJ)); v.scenes.forEach((s, i) => { s.d = i < v.scenes.length - 1 ? a.starts[i + 1] - a.starts[i] : a.tail - a.starts[i] + 1.4; if (s.k === "list") s.gap = Math.min(s.gap || .5, (s.d - 1.0) / s.items.length); });
@@ -29,5 +29,12 @@ v.scenes.forEach(s => { if (!s.d) s.d = 2.5; });
   const ff = spawn("ffmpeg", ["-y", "-v", "error", "-f", "image2pipe", "-framerate", "" + FPS, "-c:v", "mjpeg", "-i", "-", "-i", sfx, ...(VOICED ? ["-i", `${D}/baudio/${id}.mp3`] : []), "-filter_complex", VOICED ? `[1:a]volume=0[s];[2:a]volume=${vgain.toFixed(1)}dB,highpass=f=70,apad[vo];[vo][s]amix=inputs=2:duration=longest:normalize=0,alimiter=limit=0.95[a]` : "[1:a]volume=1.6,alimiter=limit=0.9[a]", "-map", "0:v", "-map", "[a]", "-t", T.toFixed(3),
     "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", "-r", "" + FPS, "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
   for (let i = 0; i < N; i++) { await pg.evaluate(t => window.__frame(t), i / FPS); const im = await pg.screenshot({ type: "jpeg", quality: 93 }); if (!ff.stdin.write(im)) await new Promise(r => ff.stdin.once("drain", r)); }
-  ff.stdin.end(); await new Promise(r => ff.on("close", r)); await br.close(); console.log("done", out, T.toFixed(1));
+  ff.stdin.end(); await new Promise(r => ff.on("close", r)); await br.close();
+  // RULE: frame 0 must be the cover (hook fully shown) — TikTok/IG thumbnails use frame 0.
+  { const fs=require("fs"), cp=require("child_process"); const aj=`${D}/baudio/${id}.json`;
+    let t = fs.existsSync(aj) ? Math.max(0.5, JSON.parse(fs.readFileSync(aj)).starts[1]-0.25) : null;
+    const tmpo = out.replace(".mp4","_cv.mp4");
+    cp.execFileSync("python3", ["/home/claude/deauto1.media/tools/fixcover.py", out, tmpo, "--force", ...(t?["--t", String(t)]:[])], {stdio:"inherit"});
+    fs.renameSync(tmpo, out); }
+  console.log("done", out, T.toFixed(1));
 })();
