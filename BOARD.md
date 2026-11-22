@@ -423,3 +423,4 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Threads retry (Nov 21 15:55) PUBLISHED.
 - Nov 21 brand films: IG 134–156 views (skip 40–46%), TikTok 36–105. EN on IG weak (be7 30 views, 86% skip) → EN moves to TikTok-only test.
 - Batch 5 prepared (not generated): hb13–hb24 hybrids + bd4–bd7 brand, 3,840 chars, tashkeel check OK, stills OK. Awaiting cost approval (~4,300 credits).
+- 11:40 Correction: schedule actually covered to Nov 29 (15 archive reposts by CMO weekly run). Told owner. Flagged price-in-caption («بـ 10 ريال») vs rule; kept 2 pure-brand/day per owner. Batch 5: hb13→91 vs 95, hb14→radiator (dupes of Nov 29 posts removed). Awaiting approval (~4,300 cr).
