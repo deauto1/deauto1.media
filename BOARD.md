@@ -435,3 +435,4 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - 14:45 [CMO] Owner worried «3 والرابع هدية» cheapens the brand → 4 of3 posts set to DRAFT. Proposed premium alternative: bonus gift (workshop cards + دفتر سيارتي) with any 3 parts, parts keep full value.
 - 17:15 [CMO] Owner target: ONE paid order before end of this week. Focus = make views reach a clickable Part 1 link: bio link, IG story link sticker (story image DEAUTO_story_part1.png sent), Threads links (scheduled). Sales films sl1–sl3 voiced (1,388 cr) not yet rendered — owner stopped render.
 - 17:20 [CMO] Owner set bio link → Part 1 page. Sales films sl1–sl3 rendered (cover-first) and scheduled.
+- 17:30 [CMO] Owner: «واضي لو عشرة ريال» + wants hope the brand can continue. Added Threads post tonight 21:15 → workshop cards (10 SAR item, link clickable). Signals of hope logged for owner.
