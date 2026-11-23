@@ -47,3 +47,6 @@ No synthesized SFX on brand films. The whoosh/tick noise sounded like a hair cli
 - TikTok and Instagram take the cover from **frame 0**. Our keynote films animate words in, so frame 0 was blank white → blank grid.
 - Every video must have its hook fully visible on frame 0. `tools/fixcover.py <in> <out> [--t sec]` prepends a 0.1 s cover frame; `brandr.js` now runs it automatically (t = end of scene 1).
 - Before scheduling ANY video: check frame 0 (`ffmpeg -frames:v 1`) and look at it.
+
+## No outreach (owner, 2026-11-23)
+- We never contact anyone first: no creators, no B2B, no DMs to strangers. Sales come from our own posts, our own accounts, and the store.
