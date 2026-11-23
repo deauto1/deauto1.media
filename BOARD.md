@@ -448,3 +448,11 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Abdullah: the flood's sales reels used the plain brand template, not the agreed brain-rot style. Rebuilt all 11 Part 1 sales clips in brain-rot format (`vo/zs/zs1..zs9, zo1, zo2`, commit 0feb250): split screen, varied bottom animation (plinko, race, wash, sand, bricks, multiply, grow, rings, dvd) and 3 themes, new sale end card (19 SAR, «إلى 30 نوفمبر»). Reused the paid sl/of voiceovers, 0 new credits.
 - Instagram rejected every TRIAL_REEL ("account does not meet the trial reel follower requirement"): 18:30 and 19:30 reached Threads only. All 33 remaining video slots (Nov 23 21:30 → Nov 25 21:30, incl. 3 older TikTok posts) now REEL with brain-rot media; captions say «إلى» instead of «لين».
 - Rule: no TRIAL_REEL until the account qualifies.
+
+## 2026-11-23 21:15 — English launch push
+- Abdullah: English edition officially launched; push English marketing hard ("نلعب على الحبلين").
+- Store banner for the EN launch: `english/banners/DEAUTO_EN_banner_*.png` (1108×428 @2x). Owner uploads it (or CMO adds to slider 1850581490 on request).
+- 14 English brain-rot "half the answer" clips, one per chapter (`vo/en/w1..w14`, commit 40af241), lock card now says CHAPTER N. Voices: Arthur, Carter, Jacob L., Michael (eleven_v4, 1 take). **ElevenLabs spend: 2,410 credits.**
+- Scheduled at Riyadh 02:00–07:00 (US evening) Nov 24 and Nov 25 on Instagram + TikTok (07:00 IG only, TikTok kept ≤12/day), plus Nov 25 19:00 and 23:00 on IG + Threads. Captions: no price, "Link in bio · deauto1.com/en".
+- All 14 EN parts are on sale at 36 SAR (checked in Salla).
+- Open issue: IG bio link goes to the Arabic Part 1 page; English viewers need an English landing.
