@@ -443,3 +443,8 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - 01:30–07:30 = Threads-only card posts (IG stays under the 50/24h cap).
 - New reels sl4–sl9 rendered (frame 0 = hook, checked) → vo/cv @ 71c6f6d. ElevenLabs ≈2,529 credits (Bandar, eleven_v4).
 - Captions carry no prices. Part 1 promo "سعر الإطلاق لين 30 نوفمبر" on all Part 1 reels.
+
+## 2026-11-23 20:45 — Flood fix: brain-rot sales clips + trial reels
+- Abdullah: the flood's sales reels used the plain brand template, not the agreed brain-rot style. Rebuilt all 11 Part 1 sales clips in brain-rot format (`vo/zs/zs1..zs9, zo1, zo2`, commit 0feb250): split screen, varied bottom animation (plinko, race, wash, sand, bricks, multiply, grow, rings, dvd) and 3 themes, new sale end card (19 SAR, «إلى 30 نوفمبر»). Reused the paid sl/of voiceovers, 0 new credits.
+- Instagram rejected every TRIAL_REEL ("account does not meet the trial reel follower requirement"): 18:30 and 19:30 reached Threads only. All 33 remaining video slots (Nov 23 21:30 → Nov 25 21:30, incl. 3 older TikTok posts) now REEL with brain-rot media; captions say «إلى» instead of «لين».
+- Rule: no TRIAL_REEL until the account qualifies.
