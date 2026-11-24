@@ -476,3 +476,4 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Flow: hook → who we are (14 covers) → 6 steps (link in bio · sign in with phone/OTP · pick part · add to cart/checkout · pay mada/Apple Pay/Visa · download + read PDF) → end card.
 - Blurred: phone number, OTP code (notification + keyboard), customer name, coupon code + "free" total, order number, PDF download URL. Verified frame-by-frame.
 - Bandar VO (tashkeel OK, ~1.2k credits), no music. File: vo/explainer/DEAUTO_how_to_buy_ar.mp4. Waiting on Abdullah's OK before posting/pinning.
+- 2026-11-25 01:10 — v2: Abdullah said Bandar sounds AI → approved Mansour (5HAezIQAaoSgJypcI0NP, preferred) + Fahad (YCN2uLvOoKxKJtRmeub3). Explainer re-voiced with Mansour; status bar + browser toolbar cropped out. RULE: no ElevenLabs generation (incl. samples) without Abdullah's OK.
