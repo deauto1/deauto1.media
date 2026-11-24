@@ -459,3 +459,8 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 
 ## 2026-11-24 04:45 — Motion graphics ad
 - Owner picked «Engine to page», AR + EN. `vo/motion/DEAUTO_motion_ar.mp4` (21s, Bandar, Part 1 19 SAR «إلى 30 نوفمبر») and `_en.mp4` (22s, Arthur, English edition). Template `tools/motion/`. ElevenLabs: 735 credits. No music.
+
+## 2026-11-24 07:00 — Instagram passed 1,000 followers, trial reels unlocked
+- Friend's story (owner's own decision) took IG from 601 to 1,000+ overnight. Test TRIAL_REEL (motion ad, 06:58) published OK.
+- Switched 15 upcoming IG video slots to TRIAL_REEL (every other Arabic sales clip Nov 24–25 + English w9/w11 at night); the rest stay REEL so followers still see them.
+- TikTok hit the OpenAPI 24h post cap at 04:55 (motion ad blocked). Owner posts that one manually; removed TikTok from EN 05:00/06:00 clips.
