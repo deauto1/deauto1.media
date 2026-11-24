@@ -464,3 +464,9 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Friend's story (owner's own decision) took IG from 601 to 1,000+ overnight. Test TRIAL_REEL (motion ad, 06:58) published OK.
 - Switched 15 upcoming IG video slots to TRIAL_REEL (every other Arabic sales clip Nov 24–25 + English w9/w11 at night); the rest stay REEL so followers still see them.
 - TikTok hit the OpenAPI 24h post cap at 04:55 (motion ad blocked). Owner posts that one manually; removed TikTok from EN 05:00/06:00 clips.
+
+## 2026-11-24 12:45 — «مين دي اوتو؟» batch (u1–u8)
+- Reason: Abdullah found people don't know who DE AUTO is → every new clip explains the brand.
+- 8 brain-rot clips, Bandar VO (tashkeel OK), new "who" end card (نشرح لك السيارات بالعربي البسيط · 14 جزء · PDF · عربي و English). Files: vo/who/ @ ce8feb0.
+- Scheduled (Metricool): u1 24/11 13:45 IG+TT+Threads · u2 16:45 IG+Threads · u3 19:45 IG-trial+TT+Threads · u4 22:45 IG+Threads · u5 25/11 10:45 IG+TT+Threads · u6 13:45 IG-trial+Threads · u7 16:45 IG+TT+Threads · u8 19:45 IG+Threads. No prices in captions.
+- Pending: pinned full-journey explainer — waiting on Abdullah's purchase screenshots.
