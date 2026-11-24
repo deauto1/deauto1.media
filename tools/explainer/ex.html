@@ -1,0 +1,120 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2)}
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-latin-900-normal.woff2)}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{background:#f4f3ef;font-family:CairoL,Cairo,sans-serif;color:#111;position:relative;direction:rtl}
+#brand{position:absolute;top:58px;left:0;width:100%;display:flex;justify-content:center;align-items:center;gap:18px}
+#brand img{height:66px}#brand span{font-family:Cairo;font-weight:900;font-size:44px}
+#prog{position:absolute;top:168px;left:140px;right:140px;display:flex;gap:12px;direction:rtl}
+#prog i{flex:1;height:10px;border-radius:5px;background:#dcdad3}
+#prog i.on{background:#e5322d}#prog i.done{background:#111}
+#pill{position:absolute;top:212px;left:0;width:100%;text-align:center}
+#pill span{display:inline-block;background:#e5322d;color:#fff;font-family:Cairo;font-weight:900;font-size:38px;padding:4px 30px 8px;border-radius:40px}
+#title{position:absolute;top:290px;left:50px;right:50px;text-align:center;font-family:CairoL,Cairo;font-weight:900;font-size:74px;line-height:1.25}
+#en{position:absolute;top:400px;left:50px;right:50px;text-align:center;font-family:Bebas;font-size:40px;letter-spacing:4px;color:#7a7870;direction:ltr}
+#win{position:absolute;top:478px;left:60px;width:960px;height:1200px;border-radius:44px;overflow:hidden;background:#fff;box-shadow:0 40px 80px -30px rgba(0,0,0,.35),0 0 0 3px #111}
+#cam{position:absolute;left:0;top:0;width:430px;height:932px;transform-origin:0 0}
+.layer{position:absolute;left:0;top:0;width:430px;height:932px}
+.layer img{width:430px;height:932px;display:block}
+.m{position:absolute;border-radius:6px;background:rgba(236,236,236,.9);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.m.dk{background:rgba(28,28,28,.92)}
+.hl{position:absolute;border:3px solid #e5322d;border-radius:9px;box-shadow:0 0 0 4px rgba(229,50,45,.18)}
+.lab{position:absolute;background:#e5322d;color:#fff;font-family:Cairo;font-weight:900;font-size:13px;padding:1px 9px 3px;border-radius:12px;white-space:nowrap;transform:translate(50%,-50%)}
+.lab.k{background:#111}
+#covers{position:absolute;inset:0;background:#141414;display:none}
+#cg{position:absolute;left:36px;right:36px;top:0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+#cg img{width:100%;border-radius:8px;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+#chips{position:absolute;left:0;right:0;bottom:44px;display:flex;justify-content:center;gap:18px}
+#chips b{background:#fff;color:#111;font-family:CairoL,Cairo;font-weight:900;font-size:44px;padding:6px 30px 10px;border-radius:44px;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0}
+#sub{position:absolute;top:1712px;left:0;width:100%;text-align:center}
+#sub span{display:inline-block;background:#111;color:#fff;font-family:CairoL,Cairo;font-weight:700;font-size:46px;padding:10px 34px 16px;border-radius:22px;max-width:960px}
+#end{position:absolute;inset:0;background:#0e0e0e;display:none;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center}
+#end img{height:230px;margin-bottom:30px}
+#end .n{font-family:Cairo;font-weight:900;font-size:130px;line-height:1.1}
+#end .s{font-family:Cairo;font-weight:700;font-size:56px;color:#d8d6cf;margin-top:10px}
+#end .l{margin-top:60px;background:#e5322d;font-family:Cairo;font-weight:900;font-size:50px;padding:8px 44px 14px;border-radius:50px}
+#end .u{margin-top:26px;font-family:Bebas;font-size:58px;letter-spacing:6px;color:#9a988f}
+</style></head><body>
+<div id="brand"><img src="assets/logo_k.png"><span>دي اوتو</span></div>
+<div id="prog"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div id="pill"><span></span></div>
+<div id="title"></div><div id="en"></div>
+<div id="win"><div id="cam"><div class="layer" id="L0"><img><div class="ms"></div></div><div class="layer" id="L1"><img><div class="ms"></div></div><div id="hls"></div></div>
+<div id="covers"><div id="cg"></div><div id="chips"></div></div></div>
+<div id="sub"><span></span></div>
+<div id="end"><img src="assets/logo_w.png"><div class="n">دي اوتو</div><div class="s">ما نعلمك، إحنا نفهمك</div><div class="l">الرابط في البايو</div><div class="u">DEAUTO1.COM</div></div>
+<script>
+const Q=new URLSearchParams(location.search);const DUR=JSON.parse(Q.get("d"));const GAP=0.3;
+const S=[
+{pill:"شرح كامل",title:"كيف تشتري من دي اوتو؟",en:"HOW TO BUY & DOWNLOAD · STEP BY STEP",kf:[[0,6.3]],cam:[[0,560,2.0],[7,520,2.2]],sub:[[0,"تبي تشتري من دي اوتو؟"],[1.62,"وما تدري كيف؟"],[2.9,"هذا المقطع يشرح لك كل شي"],[5.35,"خطوة بخطوة"]]},
+{pill:"مين دي اوتو؟",title:"نشرح لك السيارات بالعربي البسيط",en:"14 PARTS · PDF · ARABIC & ENGLISH",covers:1,chips:[[4.45,"14 جزء"],[5.8,"PDF"],[7.65,"عربي · English"]],sub:[[0,"دي اوتو متجر سعودي"],[2.0,"يشرح لك السيارات بالعربي البسيط"],[4.45,"14 جزء"],[5.8,"كل جزء ملف PDF"],[7.65,"بالعربي… وبالإنجليزي"]]},
+{step:1,title:"ادخل الرابط اللي في البايو",en:"DEAUTO1.COM",kf:[[0,5.5],[5.45,6.62]],cam:[[0,300,2.2]],sub:[[0,"أول خطوة"],[1.15,"ادخل الرابط اللي في البايو"],[3.1,"deauto1.com"]]},
+{step:2,title:"سجّل دخولك برقم جوالك",en:"SIGN IN · VERIFICATION CODE (OTP)",kf:[[0,8.9],[1.3,9.1],[1.3,10.95],[3.9,11.55],[3.9,12.15],[6.35,12.95],[6.35,14.6],[8.58,15.6]],cam:[[0,400,2.2]],sub:[[0,"ثاني خطوة"],[1.3,"سجّل دخولك برقم جوالك"],[3.9,"يوصلك كود تحقق برسالة"],[6.35,"تكتبه… وتدخل"]]},
+{step:3,title:"اختار الجزء اللي يهمك",en:"NEW HERE? START WITH PART 1",kf:[[0,19.3],[3.2,20.5],[4.0,21.1],[6.6,22.0],[8.8,22.65]],cam:[[0,470,2.2],[3.6,470,2.2],[4.4,500,2.2]],sub:[[0,"ثالث خطوة"],[1.25,"اختار الجزء اللي يهمك"],[3.5,"وإذا أول مرة… ابدأ بالجزء الأول"],[6.8,"«كيف تشتغل السيارة؟»"]]},
+{step:4,title:"أضف للسلة… وأتمم الطلب",en:"ADD TO CART · CHECKOUT",kf:[[0,35.0],[1.5,36.9],[2.2,37.6],[3.0,38.6],[3.8,40.2],[4.6,41.3],[6.4,42.15]],cam:[[0,640,2.2],[2.5,640,2.2],[3.0,340,2.2],[4.2,340,2.2],[4.7,560,2.2]],sub:[[0,"رابع خطوة"],[1.45,"اضغط «أضف للسلة»"],[3.75,"وبعدها «إتمام الطلب»"]]},
+{step:5,title:"اختار طريقة الدفع… وأكّد",en:"MADA · APPLE PAY · VISA",kf:[[0,44.25],[5.4,44.7],[5.4,49.2],[7.1,50.6],[8.2,51.3],[9.0,51.6]],cam:[[0,450,2.2],[5.4,450,2.2],[5.9,500,2.2]],sub:[[0,"خامس خطوة"],[1.3,"اختار طريقة الدفع"],[3.0,"مدى · Apple Pay · Visa"],[5.9,"وافق على الشروط"],[7.25,"واضغط «تأكيد الدفع»"]]},
+{step:6,title:"حمّل ملفك",en:"DOWNLOAD YOUR PDF",kf:[[0,53.55],[0.8,54.35],[9.6,55.9]],cam:[[0,500,2.0],[3.0,500,2.0],[5.0,600,2.2]],labs:[[6.95,248,604,"ملخص هدية"],[7.4,248,697,"الجزء كامل",1]],sub:[[0,"وآخر خطوة"],[1.35,"بعد الدفع على طول"],[3.2,"تطلع لك صفحة الطلب"],[5.15,"اضغط «تحميل الملف»"],[6.95,"ومع الجزء… ملخص هدية"]]},
+{step:6,title:"اقرأه من جوالك… ويبقى معك",en:"READ ANYTIME · IT'S YOURS",kf:[[0,57.25],[2.45,59.3],[2.45,61.7],[3.6,62.4],[5.75,63.6]],cam:[[0,466,2.0]],sub:[[0,"ويفتح الملف على جوالك"],[2.45,"تقراه وقت ما تبي"],[4.3,"ويبقى معك"]]},
+{end:1}];
+// masks / highlights in SOURCE time, coords in pt (430 x 932)
+const M=[[10.85,11.65,0,420,430,60],[12.05,13.05,0,466,430,106],
+[14.5,15.7,0,250,430,110],[14.5,15.7,0,580,430,64],[13.3,21.0,0,48,430,100],
+[43.5,45.4,0,336,430,48],[45.4,48.3,0,260,430,52],[45.4,48.3,0,400,430,50],[45.4,48.3,0,588,430,50],
+[48.2,53.7,0,183,160,52],[48.2,53.7,165,236,170,38],[48.2,53.7,0,358,430,52],
+[53.7,56.45,140,268,160,40],[53.7,56.45,0,830,430,45],[56.2,64.1,0,50,430,62,1]];
+const H=[[5.45,6.65,12,58,310,46],[10.85,11.6,15,480,398,45],[19.3,20.55,215,290,210,365],[35.0,37.5,285,785,135,47],
+[38.55,40.25,218,312,196,46],[41.25,42.2,12,776,406,47],[43.9,44.97,8,478,414,128],[49.15,50.55,15,522,400,66],[50.55,51.65,12,628,406,52],[54.5,55.95,45,575,380,152]];
+const st=[];let acc=0;S.forEach((s,i)=>{s.D=DUR[i]+GAP+(i==S.length-1?0.9:0);s.t0=acc;acc+=s.D;});
+window.TOTAL=acc;
+const $=q=>document.querySelector(q);
+const W=960,WH=1200;
+const ss=x=>x*x*(3-2*x);
+function srcAt(kf,t){ if(kf.length==1) return kf[0][1];
+  if(t<=kf[0][0]) return kf[0][1];
+  for(let i=0;i<kf.length-1;i++){const a=kf[i],b=kf[i+1]; if(a[0]==b[0]) continue; if(t>=a[0]&&t<b[0]) return a[1]+(b[1]-a[1])*(t-a[0])/(b[0]-a[0]);}
+  return kf[kf.length-1][1];}
+function cutInfo(kf,t){let r=null;for(let i=0;i<kf.length-1;i++){if(kf[i][0]==kf[i+1][0]&&t>=kf[i][0]&&t-kf[i][0]<0.22) r={prev:kf[i][1],a:1-(t-kf[i][0])/0.22};}return r;}
+function camAt(c,t){if(t<=c[0][0])return c[0];for(let i=0;i<c.length-1;i++){const a=c[i],b=c[i+1];if(t>=a[0]&&t<b[0]){const k=ss((t-a[0])/(b[0]-a[0]));return [t,a[1]+(b[1]-a[1])*k,a[2]+(b[2]-a[2])*k];}}return c[c.length-1];}
+const fr=s=>{let n=Math.round(s*30);n=Math.max(132,Math.min(1919,n));return "src/"+String(n).padStart(5,"0")+".jpg";};
+function masks(el,s){el.innerHTML=M.filter(m=>s>=m[0]-0.06&&s<=m[1]+0.06).map(m=>`<div class="m${m[6]?" dk":""}" style="left:${m[2]}px;top:${m[3]}px;width:${m[4]}px;height:${m[5]}px"></div>`).join("");}
+async function setLayer(id,s,op){const L=$(id);const img=L.querySelector("img");L.style.opacity=op;if(op<=0)return;const f=fr(s);if(img.dataset.f!==f){img.dataset.f=f;img.src=f;await img.decode();}masks(L.querySelector(".ms"),s);}
+// covers
+const cg=$("#cg");const ord=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,1,2,3,4];cg.innerHTML=ord.map(n=>`<img src="assets/cov${String(n).padStart(2,"0")}-01.png">`).join("");
+$("#chips").innerHTML=S[1].chips.map(c=>`<b>${c[1]}</b>`).join("");
+let cur=-1;
+window.seek=async function(T){
+  let i=S.findIndex(s=>T>=s.t0&&T<s.t0+s.D);if(i<0)i=S.length-1;const s=S[i];const t=T-s.t0;
+  if(i!==cur){cur=i;
+    $("#end").style.display=s.end?"flex":"none";
+    if(!s.end){const te=$("#title");te.textContent=s.title;let fs=74;te.style.fontSize=fs+"px";te.style.whiteSpace="nowrap";while(te.scrollWidth>te.clientWidth&&fs>44){fs-=2;te.style.fontSize=fs+"px";}$("#en").textContent=s.en;
+      $("#pill span").textContent=s.step?("الخطوة "+s.step+" من 6"):s.pill;
+      document.querySelectorAll("#prog i").forEach((e,k)=>{e.className=s.step?(k+1<s.step?"done":k+1==s.step?"on":""):"";});
+      $("#prog").style.visibility=s.step?"visible":"hidden";
+      $("#covers").style.display=s.covers?"block":"none";$("#cam").style.display=s.covers?"none":"block";}}
+  if(s.end){const k=Math.min(1,t/0.45);const e=$("#end");e.style.opacity=k;e.firstElementChild.style.transform=`scale(${0.85+0.15*ss(k)})`;return;}
+  // text anim (scene 0 static at frame 0)
+  const k=i==0?1:ss(Math.min(1,t/0.35));
+  for(const q of ["#title","#en","#pill"]){const e=$(q);e.style.opacity=k;e.style.transform=`translateY(${(1-k)*28}px)`;}
+  // subtitle
+  let sb="";for(const x of s.sub) if(t>=x[0]) sb=x[1];const se=$("#sub span");if(se.textContent!==sb)se.textContent=sb;
+  let lastStart=0;for(const x of s.sub) if(t>=x[0]) lastStart=x[0];const sk=i==0&&lastStart==0?1:ss(Math.min(1,(t-lastStart)/0.18));
+  se.style.transform=`scale(${0.92+0.08*sk})`;se.style.opacity=sk;
+  if(s.covers){$("#cg").style.transform=`translateY(${-40-t*48}px)`;
+    $("#chips").querySelectorAll("b").forEach((b,j)=>{const c=s.chips[j];const kk=ss(Math.max(0,Math.min(1,(t-c[0])/0.25)));b.style.opacity=kk;b.style.transform=`translateY(${(1-kk)*30}px) scale(${0.8+0.2*kk})`;});return;}
+  // camera
+  const c=camAt(s.cam,t);const sc=c[2];let top=WH/2-c[1]*sc;top=Math.min(0,Math.max(WH-932*sc,top));const left=(W-430*sc)/2;
+  $("#cam").style.transform=`translate(${left}px,${top}px) scale(${sc})`;
+  const src=srcAt(s.kf,t);const cu=cutInfo(s.kf,t);
+  await setLayer("#L0",src,1);
+  if(cu) await setLayer("#L1",cu.prev,cu.a); else $("#L1").style.opacity=0;
+  // highlights (only if src moving inside scene and not the hook)
+  const pulse=0.5+0.5*Math.sin(t*7);
+  $("#hls").innerHTML=(i==0?[]:H.filter(h=>src>=h[0]&&src<=h[1])).map(h=>`<div class="hl" style="left:${h[2]}px;top:${h[3]}px;width:${h[4]}px;height:${h[5]}px;box-shadow:0 0 0 ${3+5*pulse}px rgba(229,50,45,${0.28-0.18*pulse})"></div>`).join("")
+   +(s.labs||[]).filter(l=>t>=l[0]).map(l=>`<div class="lab${l[4]?" k":""}" style="right:${430-l[1]}px;top:${l[2]}px">${l[3]}</div>`).join("");
+};
+document.fonts.ready.then(async()=>{await Promise.all([...document.images].map(im=>im.decode().catch(()=>{})));window.READY=1;});
+</script></body></html>

@@ -470,3 +470,9 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - 8 brain-rot clips, Bandar VO (tashkeel OK), new "who" end card (نشرح لك السيارات بالعربي البسيط · 14 جزء · PDF · عربي و English). Files: vo/who/ @ ce8feb0.
 - Scheduled (Metricool): u1 24/11 13:45 IG+TT+Threads · u2 16:45 IG+Threads · u3 19:45 IG-trial+TT+Threads · u4 22:45 IG+Threads · u5 25/11 10:45 IG+TT+Threads · u6 13:45 IG-trial+Threads · u7 16:45 IG+TT+Threads · u8 19:45 IG+Threads. No prices in captions.
 - Pending: pinned full-journey explainer — waiting on Abdullah's purchase screenshots.
+
+## 2026-11-24 13:30 — Pinned explainer «كيف تشتري من دي اوتو؟» (76s)
+- Built from Abdullah's screen recording of a real test purchase. Cut out: Google search, loading screens, coupon typing, back-navigation.
+- Flow: hook → who we are (14 covers) → 6 steps (link in bio · sign in with phone/OTP · pick part · add to cart/checkout · pay mada/Apple Pay/Visa · download + read PDF) → end card.
+- Blurred: phone number, OTP code (notification + keyboard), customer name, coupon code + "free" total, order number, PDF download URL. Verified frame-by-frame.
+- Bandar VO (tashkeel OK, ~1.2k credits), no music. File: vo/explainer/DEAUTO_how_to_buy_ar.mp4. Waiting on Abdullah's OK before posting/pinning.
