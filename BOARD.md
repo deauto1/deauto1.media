@@ -456,3 +456,6 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Scheduled at Riyadh 02:00–07:00 (US evening) Nov 24 and Nov 25 on Instagram + TikTok (07:00 IG only, TikTok kept ≤12/day), plus Nov 25 19:00 and 23:00 on IG + Threads. Captions: no price, "Link in bio · deauto1.com/en".
 - All 14 EN parts are on sale at 36 SAR (checked in Salla).
 - Open issue: IG bio link goes to the Arabic Part 1 page; English viewers need an English landing.
+
+## 2026-11-24 04:45 — Motion graphics ad
+- Owner picked «Engine to page», AR + EN. `vo/motion/DEAUTO_motion_ar.mp4` (21s, Bandar, Part 1 19 SAR «إلى 30 نوفمبر») and `_en.mp4` (22s, Arthur, English edition). Template `tools/motion/`. ElevenLabs: 735 credits. No music.
