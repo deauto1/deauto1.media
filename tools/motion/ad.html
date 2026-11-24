@@ -1,0 +1,121 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2)}
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2)}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{background:radial-gradient(ellipse 80% 60% at 50% 50%,#fff 0%,#f7f7f5 60%,#eeede9 100%);font-family:CairoL,Cairo,sans-serif;color:#111;position:relative}
+.top{position:absolute;top:70px;left:0;width:100%;display:flex;justify-content:center;align-items:center;gap:16px}
+.top img{height:64px}.top span{font-family:Bebas;font-size:34px;letter-spacing:8px}
+.bar{position:absolute;top:0;left:0;height:8px;background:#e5322d}
+#head{position:absolute;top:220px;left:60px;right:60px;text-align:center;font-weight:900;font-size:96px;line-height:1.25}
+.ar #head{font-family:Cairo;direction:rtl}.en #head{font-family:Bebas;font-weight:400;font-size:120px;line-height:1;letter-spacing:1px}
+#head b{color:#e5322d;font-weight:inherit}
+#sub{position:absolute;top:470px;left:60px;right:60px;text-align:center;font-size:40px;color:#6b6b6b;font-weight:700}
+.ar #sub{font-family:Cairo;direction:rtl}
+svg{position:absolute;overflow:visible}
+.ln{fill:none;stroke:#111;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.part{position:absolute;width:220px;height:220px;margin:-110px 0 0 -110px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.part .lab{margin-top:6px;text-align:center;line-height:1.1}
+.part .lab .a{font-family:Cairo;font-weight:900;font-size:34px}.part .lab .e{font-family:Bebas;font-size:32px;letter-spacing:2px;color:#e5322d}
+.en .part .lab .a{font-family:Bebas;font-weight:400;font-size:44px;letter-spacing:2px}
+#book{position:absolute;left:50%;top:1080px;width:560px;height:792px;margin:-396px 0 0 -280px;border-radius:10px;overflow:hidden;box-shadow:0 50px 70px -20px rgba(0,0,0,.45),0 10px 20px rgba(0,0,0,.2)}
+#book img.cv{width:100%;height:100%}
+.arcv{width:100%;height:100%;background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(255,255,255,.035) 22px 24px),radial-gradient(ellipse at 60% 25%,#3a3a3a,#141414 70%);color:#fff;display:flex;flex-direction:column;align-items:center;padding-top:70px}
+.arcv img{height:220px;filter:invert(1)}.arcv .p{font-family:Bebas;font-size:30px;letter-spacing:3px;color:#bbb;margin-top:40px}
+.arcv .t{font-family:Cairo;font-weight:900;font-size:46px;white-space:nowrap;direction:rtl;margin-top:4px}.arcv .s{font-family:Bebas;font-size:34px;letter-spacing:3px;color:#ddd}
+.arcv .tag{margin-top:auto;margin-bottom:60px;background:rgba(255,255,255,.12);border-radius:8px;padding:14px 26px;text-align:center;font-family:Bebas;font-size:26px;letter-spacing:2px}
+.ribbon{position:absolute;top:26px;right:0;background:#e5322d;color:#fff;font-family:Cairo;font-weight:900;font-size:26px;padding:6px 20px;direction:rtl;border-radius:8px 0 0 8px}
+.pages{position:absolute;left:50%;top:1080px;width:560px;height:792px;margin:-396px 0 0 -280px}
+.pg{position:absolute;inset:0;background:#fff;border-radius:10px;border:2px solid #e2e2e2}
+#card{position:absolute;left:90px;right:90px;top:1440px;background:#111;color:#fff;border-radius:28px;padding:30px 40px;display:flex;align-items:center;justify-content:space-between}
+.ar #card{direction:rtl}
+#card .pr{font-family:Bebas;font-size:150px;line-height:.9}#card .pr small{font-family:Cairo;font-weight:900;font-size:46px;margin:0 10px}
+.en #card .pr small{font-family:Bebas;font-weight:400;font-size:56px}
+#card .rt{text-align:center}#card .old{font-family:Cairo;font-weight:700;font-size:34px;color:#aaa}
+.en #card .old{font-family:Bebas;font-size:40px;letter-spacing:2px;color:#ccc}
+#card .dl{background:#e5322d;color:#fff;border-radius:12px;padding:6px 18px;font-family:Cairo;font-weight:900;font-size:32px;margin-top:8px}
+.en #card .dl{font-family:Bebas;font-weight:400;font-size:40px;letter-spacing:2px}
+#cta{position:absolute;left:50%;top:1720px;transform:translateX(-50%);background:#e5322d;color:#fff;border-radius:999px;padding:18px 60px;font-family:Cairo;font-weight:900;font-size:52px;white-space:nowrap}
+.en #cta{font-family:Bebas;font-weight:400;font-size:64px;letter-spacing:3px}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fcfcfc}
+#end img{height:300px}#end .n{font-family:Bebas;font-size:54px;letter-spacing:14px;margin-top:26px}
+#end .sg{font-family:Cairo;font-weight:900;font-size:70px;margin-top:40px;direction:rtl}
+.en #end .sg{font-family:CairoL;font-weight:700;font-size:44px;color:#444;direction:ltr;text-align:center;padding:0 80px}
+#end .u{margin-top:30px;font-family:Bebas;font-size:46px;letter-spacing:4px;color:#e5322d}
+</style></head><body>
+<div class="bar" id="bar"></div>
+<div class="top" id="top"><img src="logo_k.png"><span>DE AUTO</span></div>
+<div id="head"></div><div id="sub"></div>
+<svg id="car" width="940" height="382" viewBox="0 0 640 260" style="left:70px;top:860px">
+ <path class="ln" id="body" d="M40,180 L40,152 Q44,132 92,126 L172,118 Q222,70 300,62 L402,62 Q452,66 502,116 L560,122 Q590,128 592,152 L592,180 L530,180 M430,180 L200,180 M100,180 L40,180"/>
+ <path class="ln" id="win" d="M206,118 Q246,82 302,77 L398,77 Q430,80 466,116 Z M330,77 L330,116"/>
+ <circle class="ln" cx="150" cy="182" r="44"/><circle class="ln" cx="150" cy="182" r="16"/>
+ <circle class="ln" cx="480" cy="182" r="44"/><circle class="ln" cx="480" cy="182" r="16"/>
+</svg>
+<div id="parts"></div>
+<div class="pages" id="pages"><div class="pg" style="transform:rotate(-6deg)"></div><div class="pg" style="transform:rotate(4deg)"></div></div>
+<div id="book"></div>
+<div id="card"></div>
+<div id="cta"></div>
+<div id="end"></div>
+<script>
+const P=new URLSearchParams(location.search); const L=P.get('lang')||'ar'; document.body.className=L;
+let ST=JSON.parse(P.get('st')||'[0,3,6,9,13,15]'); const DUR=+P.get('dur')||17;
+const T={ar:{h:["سيارتك… <b>آلاف القطع</b>","كلها <b>تشتغل مع بعض</b>","كلها في <b>13 صفحة</b>","الجزء 1 · <b>كيف تشتغل السيارة؟</b>","<b>اطلبه الحين</b>"],s:["","","بالعربي البسيط","",""],
+ parts:[["المحرك","ENGINE"],["القير","GEARBOX"],["الدفرنس","DIFFERENTIAL"],["الإطار","TIRE"]],
+ cover:`<div class="arcv"><div class="ribbon">سعر الإطلاق إلى 30 نوفمبر</div><img src="logo_k.png"><div class="p">PART 01</div><div class="t">كيف تشتغل السيارة؟</div><div class="s">HOW A CAR WORKS</div><div class="tag">THE WORLD OF CAR MODIFICATIONS MADE SIMPLE</div></div>`,
+ card:`<div class="pr">19<small>ريال</small></div><div class="rt"><div class="old">بدل <s>36</s></div><div class="dl">إلى 30 نوفمبر</div></div>`,
+ cta:"اطلبه الحين · الرابط في البايو", end:`<img src="logo_k.png"><div class="n">DE AUTO</div><div class="sg">ما نعلمك، إحنا نفهمك</div><div class="u">deauto1.com</div>`},
+ en:{h:["THOUSANDS OF PARTS. <b>ONE CAR.</b>","ALL <b>WORKING TOGETHER</b>","ALL IN <b>PLAIN ENGLISH</b>","NOW IN <b>ENGLISH</b>","<b>LINK IN BIO</b>"],s:["","","","14 chapters · starting with Chapter 1",""],
+ parts:[["ENGINE",""],["GEARBOX",""],["DIFFERENTIAL",""],["TIRE",""]],
+ cover:`<img class="cv" src="cover_en.png">`,
+ card:`<div class="pr">14<small>CHAPTERS</small></div><div class="rt"><div class="old">PDF · ENGLISH EDITION</div><div class="dl">OUT NOW</div></div>`,
+ cta:"LINK IN BIO · DEAUTO1.COM/EN", end:`<img src="logo_k.png"><div class="n">DE AUTO</div><div class="sg">Because knowledge is power, and cars are passion</div><div class="u">deauto1.com/en</div>`}}[L];
+const ICON=[
+ `<svg width="150" height="120" viewBox="0 0 150 120" style="position:static"><rect class="ln" x="20" y="40" width="100" height="62" rx="6"/><rect class="ln" x="34" y="18" width="20" height="22"/><rect class="ln" x="64" y="18" width="20" height="22"/><rect class="ln" x="94" y="18" width="20" height="22"/><circle class="ln" cx="134" cy="72" r="12"/></svg>`,
+ `<svg width="150" height="120" viewBox="0 0 150 120" style="position:static"><circle class="ln" cx="52" cy="62" r="34" stroke-dasharray="9 7"/><circle class="ln" cx="52" cy="62" r="12"/><circle class="ln" cx="108" cy="50" r="24" stroke-dasharray="8 6"/><circle class="ln" cx="108" cy="50" r="8"/></svg>`,
+ `<svg width="150" height="120" viewBox="0 0 150 120" style="position:static"><path class="ln" d="M8,60 L142,60"/><circle class="ln" cx="75" cy="60" r="36" stroke-dasharray="10 6"/><circle class="ln" cx="75" cy="60" r="16" fill="#fff"/></svg>`,
+ `<svg width="150" height="130" viewBox="0 0 150 130" style="position:static"><circle class="ln" cx="75" cy="65" r="56" stroke-width="16"/><circle class="ln" cx="75" cy="65" r="26"/><path class="ln" d="M75,39 L75,91 M49,65 L101,65"/></svg>`];
+const parts=document.getElementById('parts');
+T.parts.forEach((p,i)=>{const d=document.createElement('div');d.className='part';d.innerHTML=ICON[i]+`<div class="lab"><div class="a">${p[0]}</div>${p[1]?`<div class="e">${p[1]}</div>`:''}</div>`;parts.appendChild(d);});
+const $=id=>document.getElementById(id);$('book').innerHTML=T.cover;$('card').innerHTML=T.card;$('cta').textContent=T.cta;$('end').innerHTML=T.end;
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), E=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}, O=x=>1-Math.pow(1-cl(x),3);
+const lerp=(a,b,k)=>a+(b-a)*k;
+const HOME=[[540,1080],[540,1080],[540,1080],[540,1080]], OUT=[[280,780],[800,780],[280,1400],[800,1400]];
+let lastH=-1;
+window.seek=function(t){
+ const s=ST; let seg=0; for(let i=0;i<s.length;i++) if(t>=s[i]-0.15) seg=i;
+ $('bar').style.width=(cl(t/DUR)*1080)+'px';
+ // headline per segment (5 headlines for seg 0..4)
+ const hi=Math.min(seg,4); if(hi!==lastH){$('head').innerHTML=T.h[hi];$('sub').textContent=T.s[hi];lastH=hi;}
+ const segStart=s[hi]||0, hk=hi===0?1:O((t-segStart+0.15)/0.35);
+ $('head').style.opacity=hk; $('head').style.transform=`translateY(${(1-hk)*40}px)`; $('sub').style.opacity=hk;
+ // car: visible seg0, fades during explode
+ const t1=s[1], t2=s[2], t3=s[3], t5=s[5];
+ const boom=E((t-t1+0.1)/0.9);  // parts out
+ $('car').style.opacity=1-boom*0.85; $('car').style.transform=`scale(${1-boom*0.15})`;
+ const draw=t<t1? 1 : 1; // car fully drawn at frame 0 (cover rule)
+ const into=E((t-t2)/0.9);      // parts into book
+ const kids=[...parts.children];
+ kids.forEach((d,i)=>{const [hx,hy]=HOME[i],[ox,oy]=OUT[i];
+   const st=E((t-t1-0.12*i+0.1)/0.8);
+   let x=lerp(hx,ox,st), y=lerp(hy,oy,st), sc=lerp(0.4,1.6,st), op=st;
+   if(t>=t2){x=lerp(ox,540,into);y=lerp(oy,1080,into);sc=lerp(1.6,0.3,into);op=1-into;}
+   d.style.left=x+'px';d.style.top=y+'px';d.style.transform=`scale(${sc})`;d.style.opacity=op;});
+ // book
+ const bk=O((t-t2-0.5)/0.7);
+ $('book').style.opacity=bk; $('pages').style.opacity=bk*0.9;
+ const bs=lerp(0.4,1,bk); const lift=E((t-t3+0.1)/0.6);
+ const by=lerp(0,-210,lift), sc2=bs*lerp(1,0.78,lift);
+ $('book').style.transform=`translateY(${by}px) scale(${sc2}) rotate(${lerp(-8,0,bk)}deg)`;
+ $('pages').style.transform=`translateY(${by}px) scale(${sc2})`;
+ $('car').style.display=bk>0.95?'none':'block';
+ // price card
+ const ck=O((t-t3-0.1)/0.5); $('card').style.opacity=ck; $('card').style.transform=`translateY(${(1-ck)*80}px)`;
+ const ct=O((t-s[4])/0.4); $('cta').style.opacity=ct; $('cta').style.transform=`translateX(-50%) scale(${lerp(0.7,1,ct)+0.03*Math.sin((t-s[4])*8)*ct})`;
+ const en=O((t-t5+0.1)/0.5); $('end').style.opacity=en; $('end').style.transform=`scale(${lerp(1.06,1,en)})`;
+};
+document.fonts.ready.then(()=>{window.READY=1});
+</script></body></html>
