@@ -477,3 +477,5 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - Blurred: phone number, OTP code (notification + keyboard), customer name, coupon code + "free" total, order number, PDF download URL. Verified frame-by-frame.
 - Bandar VO (tashkeel OK, ~1.2k credits), no music. File: vo/explainer/DEAUTO_how_to_buy_ar.mp4. Waiting on Abdullah's OK before posting/pinning.
 - 2026-11-25 01:10 — v2: Abdullah said Bandar sounds AI → approved Mansour (5HAezIQAaoSgJypcI0NP, preferred) + Fahad (YCN2uLvOoKxKJtRmeub3). Explainer re-voiced with Mansour; status bar + browser toolbar cropped out. RULE: no ElevenLabs generation (incl. samples) without Abdullah's OK.
+- 2026-11-25 06:13 — Explainer (Mansour v2) posted on IG Reel + TikTok + Threads. Per Abdullah: repeat daily at 10:00 and 19:00 — scheduled 25 Nov 19:00 → 1 Dec 19:00 (13 posts, 3 rotating captions, no prices). Reminder set 1 Dec 12:00 to extend 2–8 Dec.
+- 2026-11-25 06:05 — Instagram growth strategy doc: https://claude.ai/artifact/6ortPi1i5wQq6qHWsUbWo4
