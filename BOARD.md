@@ -486,3 +486,4 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - Recycled winner bc2 («من وأنت صغير…», 30.8k views) with new hook for 7 Dec 18:00.
   - ElevenLabs: 76.8k credits left (resets ~16 Dec). Reel queue runs to 29 Nov; asked Abdullah for a credit allowance for the next batch.
 - 2026-11-25 06:18 — Per Abdullah: «تحدي الشلة» game (Salla 399023423) price 5 → 0 SAR (free).
+- 2026-11-25 — Sales scoreboard: since 23 Nov 0 paid orders / 0 SAR (2 free 0-SAR Part 1 orders, same customer). Funnel 150 visits→2 ATC→3 checkouts→2 orders; yesterday 64 visits→1 order (free). Part 1 = 19 SAR (reg 36) but sale_end not set. Best offer video: TikTok «بسعر وجبة» 5,349 views.
