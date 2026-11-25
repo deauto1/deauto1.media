@@ -479,3 +479,9 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - 2026-11-25 01:10 — v2: Abdullah said Bandar sounds AI → approved Mansour (5HAezIQAaoSgJypcI0NP, preferred) + Fahad (YCN2uLvOoKxKJtRmeub3). Explainer re-voiced with Mansour; status bar + browser toolbar cropped out. RULE: no ElevenLabs generation (incl. samples) without Abdullah's OK.
 - 2026-11-25 06:13 — Explainer (Mansour v2) posted on IG Reel + TikTok + Threads. Per Abdullah: repeat daily at 10:00 and 19:00 — scheduled 25 Nov 19:00 → 1 Dec 19:00 (13 posts, 3 rotating captions, no prices). Reminder set 1 Dec 12:00 to extend 2–8 Dec.
 - 2026-11-25 06:05 — Instagram growth strategy doc: https://claude.ai/artifact/6ortPi1i5wQq6qHWsUbWo4
+- 2026-11-25 06:20 — STRATEGY EXECUTION day 1 (doc: https://claude.ai/artifact/6ortPi1i5wQq6qHWsUbWo4)
+  - Today's IG grid cut to 8 feed reels (09:00 bd4, 10:45 u5, 12:00 hb15, 16:45 u7, 18:00 oil, 19:00 explainer, 20:00 bd5, 21:30 invoice); 11 other reels switched to TRIAL_REEL; 7 single-image IG posts moved to Threads-only.
+  - Removed «بطاقات مصطلحات الورش بـ10 ريال» from 18:00 and 22:00 captions → point to parts 14 / 1.
+  - New daily carousel series «5 كلمات تكفيك» from the Made Easier files: P1 25 Nov 13:00, P14 26 Nov 12:00, P10 27 Nov 12:00 (IG + Threads). Files: carousels/, template tools/carousel/.
+  - Recycled winner bc2 («من وأنت صغير…», 30.8k views) with new hook for 7 Dec 18:00.
+  - ElevenLabs: 76.8k credits left (resets ~16 Dec). Reel queue runs to 29 Nov; asked Abdullah for a credit allowance for the next batch.
