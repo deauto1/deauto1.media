@@ -485,3 +485,4 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - New daily carousel series «5 كلمات تكفيك» from the Made Easier files: P1 25 Nov 13:00, P14 26 Nov 12:00, P10 27 Nov 12:00 (IG + Threads). Files: carousels/, template tools/carousel/.
   - Recycled winner bc2 («من وأنت صغير…», 30.8k views) with new hook for 7 Dec 18:00.
   - ElevenLabs: 76.8k credits left (resets ~16 Dec). Reel queue runs to 29 Nov; asked Abdullah for a credit allowance for the next batch.
+- 2026-11-25 06:18 — Per Abdullah: «تحدي الشلة» game (Salla 399023423) price 5 → 0 SAR (free).
