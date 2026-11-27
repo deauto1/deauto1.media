@@ -1,0 +1,111 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2)}
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-latin-900-normal.woff2)}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}
+</style></head><body><canvas id="c" width="1080" height="1920"></canvas>
+<img id="logo" src="assets/logo_k.png" style="display:none">
+<script>
+const W=1080,H=1920,FPS=30,RED='#e5322d',GREEN='#1fb15a';
+const cv=document.getElementById('c'),g=cv.getContext('2d');
+const F="CairoL,Cairo,'Noto Color Emoji',sans-serif";
+// passes: [startSec, durSec]
+const PASSES=[[0,3.0],[3.4,2.2],[6.0,1.6]];
+const BOX={cx:540,cy:980,w:640,h:310};
+const CAR={w:520,h:236};
+const X0=-420,X1=1500;
+const TOTAL=8.6; // end card from 7.6
+function carX(fi){const t=fi/FPS;for(const [s,d] of PASSES){if(t>=s&&t<s+d){const u=(t-s)/d;return X0+(X1-X0)*u;}}return null;}
+// classify frames: per pass, the 2 frames nearest center = perfect, next 6 each side = close
+const N=Math.round(TOTAL*FPS),cls=new Array(N).fill(0);
+for(const [s,d] of PASSES){const a=Math.round(s*FPS),b=Math.round((s+d)*FPS);let arr=[];for(let f=a;f<b;f++){const x=carX(f);if(x!==null)arr.push([Math.abs(x-BOX.cx),f]);}
+ arr.sort((p,q)=>p[0]-q[0]);arr.slice(0,2).forEach(p=>cls[p[1]]=2);
+ arr.slice(2).forEach(p=>{if(p[0]<CAR.w*0.42)cls[p[1]]=1;});}
+window.CLS=cls;window.N=N;
+function rr(x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function txt(s,x,y,size,col,wt=900,al='center'){g.font=`${wt} ${size}px ${F}`;g.fillStyle=col;g.textAlign=al;g.textBaseline='middle';g.direction='rtl';g.fillText(s,x,y);}
+function ground(){
+ g.fillStyle='#2a2b2e';g.fillRect(0,0,W,H);
+ // subtle asphalt grain (deterministic)
+ let s=7;for(let i=0;i<2600;i++){s=(s*9301+49297)%233280;const x=s/233280*W;s=(s*9301+49297)%233280;const y=560+s/233280*1000;g.fillStyle=i%2?'rgba(255,255,255,0.035)':'rgba(0,0,0,0.12)';g.fillRect(x,y,3,3);}
+ // lane edges
+ g.fillStyle='#e9e7e1';g.fillRect(0,BOX.cy-260,W,10);g.fillRect(0,BOX.cy+250,W,10);
+ // dashed centre markers far left/right
+ g.fillStyle='rgba(233,231,225,0.55)';for(let x=-40;x<W;x+=180){if(Math.abs(x+50-BOX.cx)<BOX.w/2+60)continue;g.fillRect(x,BOX.cy-6,100,12);}
+}
+function box(state){
+ const {cx,cy,w,h}=BOX;g.save();g.lineWidth=12;g.setLineDash(state===2?[]:[34,20]);
+ g.strokeStyle=state===2?GREEN:RED;rr(cx-w/2,cy-h/2,w,h,26);g.stroke();
+ g.fillStyle=state===2?'rgba(31,177,90,0.16)':'rgba(229,50,45,0.10)';g.fill();g.restore();
+}
+function car(x,y,speed){
+ const w=CAR.w,h=CAR.h,l=x-w/2,t=y-h/2;
+ // motion streaks
+ if(speed>0){g.fillStyle='rgba(255,255,255,0.10)';for(let i=0;i<4;i++){const yy=t+30+i*55;g.fillRect(l-140-speed*6,yy,120+speed*6,8);}}
+ // shadow
+ g.fillStyle='rgba(0,0,0,0.45)';rr(l+10,t+16,w,h,60);g.fill();
+ // wheels
+ g.fillStyle='#111';[[l+70,t-14],[l+w-170,t-14],[l+70,t+h-16],[l+w-170,t+h-16]].forEach(([a,b])=>{rr(a,b,100,30,10);g.fill();});
+ // body
+ const gr=g.createLinearGradient(0,t,0,t+h);gr.addColorStop(0,'#f04a44');gr.addColorStop(0.5,RED);gr.addColorStop(1,'#b8221e');
+ g.fillStyle=gr;rr(l,t,w,h,64);g.fill();
+ // hood line + front (right side = front, moving right)
+ g.fillStyle='rgba(0,0,0,0.12)';rr(l+w-150,t+22,120,h-44,40);g.fill();
+ // cabin
+ g.fillStyle='#1b1d22';rr(l+150,t+26,250,h-52,44);g.fill();
+ // windshield
+ g.fillStyle='#8fb6cf';rr(l+330,t+36,62,h-72,22);g.fill();
+ // rear window
+ g.fillStyle='#6f93aa';rr(l+160,t+40,46,h-80,18);g.fill();
+ // roof
+ g.fillStyle='#c92b27';rr(l+214,t+40,110,h-80,22);g.fill();
+ // headlights / tail lights
+ g.fillStyle='#fff6c8';rr(l+w-22,t+26,16,50,6);g.fill();rr(l+w-22,t+h-76,16,50,6);g.fill();
+ g.fillStyle='#7a0f0c';rr(l+6,t+28,14,46,6);g.fill();rr(l+6,t+h-74,14,46,6);g.fill();
+ // mirrors
+ g.fillStyle='#b8221e';rr(l+318,t-18,34,22,8);g.fill();rr(l+318,t+h-4,34,22,8);g.fill();
+}
+function header(){
+ g.fillStyle='#FCFCFC';g.fillRect(0,0,W,560);
+ g.fillStyle=RED;g.fillRect(0,556,W,8);
+ const lg=document.getElementById('logo');g.drawImage(lg,W-72-64,70,64,64*lg.naturalHeight/lg.naturalWidth);
+ txt('دي اوتو',W-72-84,104,38,'#111',900,'right');
+ g.font=`400 40px Bebas`;g.fillStyle='#9a988f';g.textAlign='left';g.direction='ltr';g.fillText('PAUSE CHALLENGE',72,108);
+ txt('1% بس يقدرون',540,250,104,'#111');
+ txt('يوقفون السيارة داخل المربع',540,372,70,RED);
+ txt('اضغط مطوّل لما تدخل السيارة الخط الأحمر',540,476,42,'#55534c',700);
+}
+function footer(){g.fillStyle='rgba(255,255,255,0.55)';g.font=`400 40px Bebas`;g.textAlign='center';g.direction='ltr';g.fillText('DE AUTO',540,1840);}
+function pill(s,y,bg,fg,size=56){g.font=`900 ${size}px ${F}`;g.direction='rtl';const m=g.measureText(s).width;rr(540-m/2-46,y-size*0.85,m+92,size*1.7,size*0.85);g.fillStyle=bg;g.fill();txt(s,540,y,size,fg);}
+function reward(){
+ // card under the lane
+ const y0=1240;g.save();g.shadowColor='rgba(0,0,0,0.4)';g.shadowBlur=30;rr(70,y0,940,400,40);g.fillStyle='#FCFCFC';g.fill();g.restore();
+ g.fillStyle=GREEN;rr(70,y0,940,20,10);g.fill();
+ txt('وقفتها صح! أنت من الـ\u20661%\u2069',540,y0+92,64,'#111');
+ txt('صوّر الشاشة وأرسلها لنا DM',540,y0+196,58,RED);
+ txt('وخذ كود خصم على أي جزء',540,y0+290,52,'#111',700);
+ g.font=`400 36px Bebas`;g.fillStyle='#9a988f';g.textAlign='center';g.direction='ltr';g.fillText('DE AUTO · DEAUTO1.COM',540,y0+362);
+}
+function endcard(u){
+ ground();box(0);header();
+ g.fillStyle=`rgba(0,0,0,${0.35*Math.min(1,u*4)})`;g.fillRect(0,564,W,H-564);
+ pill('فاتتك؟ عيد المقطع وجرّب',BOX.cy,'#FCFCFC','#111',62);
+ txt('ما نعلمك، إحنا نفهمك',540,BOX.cy+190,44,'rgba(255,255,255,0.85)',700);
+ footer();
+}
+window.draw=function(fi){
+ const t=fi/FPS;
+ if(t>=7.6){endcard((t-7.6));return cv.toDataURL('image/jpeg',0.93);}
+ ground();const c=cls[fi]||0;box(c);
+ const x=carX(fi);
+ if(x!==null){let sp=0;for(const [s,d] of PASSES)if(t>=s&&t<s+d)sp=(X1-X0)/d/FPS;car(x,BOX.cy,sp);}
+ header();footer();
+ {let k=0;PASSES.forEach(([s,d],j)=>{if(t>=s-0.4)k=j+1});txt(`المحاولة ${Math.max(1,k)} من 3`,540,1500,40,'rgba(255,255,255,0.6)',700);}
+ if(c===1)pill('قريب مرة! جرّب مرة ثانية',1330,RED,'#fff',54);
+ if(c===2)reward();
+ return cv.toDataURL('image/jpeg',0.93);
+};
+document.fonts.load('900 60px Cairo').then(()=>document.fonts.load('900 60px CairoL')).then(()=>document.fonts.load('400 40px Bebas')).then(()=>document.fonts.load('700 40px Cairo')).then(()=>document.fonts.load('700 40px CairoL')).then(()=>document.fonts.ready).then(()=>{document.title='ready'});
+</script></body></html>
