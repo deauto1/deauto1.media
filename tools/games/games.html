@@ -1,0 +1,141 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2)}
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-latin-900-normal.woff2)}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}
+</style></head><body><canvas id="c" width="1080" height="1920"></canvas>
+<img id="logo" src="assets/logo_k.png" style="display:none">
+<script>
+const W=1080,H=1920,FPS=30,RED='#e5322d',GREEN='#1fb15a',INK='#111';
+const MODE=new URLSearchParams(location.search).get('m');
+const cv=document.getElementById('c'),g=cv.getContext('2d');
+const F="CairoL,Cairo,sans-serif";
+function rr(x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+function txt(s,x,y,size,col,wt=900,al='center'){g.font=`${wt} ${size}px ${F}`;g.fillStyle=col;g.textAlign=al;g.textBaseline='middle';g.direction='rtl';g.fillText(s,x,y);}
+function bebas(s,x,y,size,col,al='center'){g.font=`400 ${size}px Bebas`;g.fillStyle=col;g.textAlign=al;g.textBaseline='middle';g.direction='ltr';g.fillText(s,x,y);}
+const ease=u=>u<0?0:u>1?1:u*u*(3-2*u);
+// top-down car, nose pointing right, 520x236 at scale 1. opts.noWheel = index of missing wheel
+function car(cx,cy,s,rot=0,opts={}){
+ g.save();g.translate(cx,cy);g.rotate(rot);g.scale(s,s);
+ const w=520,h=236,l=-w/2,t=-h/2;
+ g.fillStyle='rgba(0,0,0,0.25)';rr(l+8,t+14,w,h,60);g.fill();
+ g.fillStyle='#111';[[l+70,t-14],[l+w-170,t-14],[l+70,t+h-16],[l+w-170,t+h-16]].forEach(([a,b],i)=>{if(opts.noWheel===i)return;rr(a,b,100,30,10);g.fill();});
+ const gr=g.createLinearGradient(0,t,0,t+h);gr.addColorStop(0,'#f04a44');gr.addColorStop(0.5,RED);gr.addColorStop(1,'#b8221e');
+ g.fillStyle=gr;rr(l,t,w,h,64);g.fill();
+ g.fillStyle='rgba(0,0,0,0.12)';rr(l+w-150,t+22,120,h-44,40);g.fill();
+ g.fillStyle='#1b1d22';rr(l+150,t+26,250,h-52,44);g.fill();
+ g.fillStyle='#8fb6cf';rr(l+330,t+36,62,h-72,22);g.fill();
+ g.fillStyle='#6f93aa';rr(l+160,t+40,46,h-80,18);g.fill();
+ g.fillStyle=opts.roof||'#c92b27';rr(l+214,t+40,110,h-80,22);g.fill();
+ g.fillStyle='#fff6c8';rr(l+w-22,t+26,16,50,6);g.fill();rr(l+w-22,t+h-76,16,50,6);g.fill();
+ g.fillStyle='#7a0f0c';rr(l+6,t+28,14,46,6);g.fill();rr(l+6,t+h-74,14,46,6);g.fill();
+ g.fillStyle='#b8221e';rr(l+318,t-18,34,22,8);g.fill();rr(l+318,t+h-4,34,22,8);g.fill();
+ g.restore();
+}
+function brandTop(dark){
+ const lg=document.getElementById('logo');g.save();if(dark)g.filter='invert(1)';g.drawImage(lg,W-72-64,70,64,64*lg.naturalHeight/lg.naturalWidth);g.restore();
+ txt('دي اوتو',W-72-84,104,38,dark?'#fff':INK,900,'right');
+}
+function header(tag,l1,l2,l3){
+ g.fillStyle='#FCFCFC';g.fillRect(0,0,W,560);g.fillStyle=RED;g.fillRect(0,556,W,8);
+ brandTop(false);bebas(tag,72,108,40,'#9a988f','left');
+ txt(l1,540,250,104,INK);txt(l2,540,372,70,RED);if(l3)txt(l3,540,476,42,'#55534c',700);
+}
+function footer(col){bebas('DE AUTO',540,1840,40,col||'rgba(255,255,255,0.55)');}
+function pill(s,y,bg,fg,size=56){g.font=`900 ${size}px ${F}`;g.direction='rtl';const m=g.measureText(s).width;rr(540-m/2-46,y-size*0.85,m+92,size*1.7,size*0.85);g.fillStyle=bg;g.fill();txt(s,540,y,size,fg);}
+function rewardCard(y0){
+ g.save();g.shadowColor='rgba(0,0,0,0.4)';g.shadowBlur=30;rr(70,y0,940,400,40);g.fillStyle='#FCFCFC';g.fill();g.restore();
+ g.fillStyle=GREEN;rr(70,y0,940,20,10);g.fill();
+ txt('وقفتها صح! أنت من الـ⁦1%⁩',540,y0+92,64,INK);
+ txt('كودك: ⁦STOP⁩',540,y0+196,76,RED);
+ txt('خصم ⁦20%⁩ على أي جزء في deauto1.com',540,y0+290,46,INK,700);
+ bebas('SCREENSHOT IT · DE AUTO',540,y0+362,36,'#9a988f');
+}
+function dark(){g.fillStyle='#1d1e21';g.fillRect(0,0,W,H);}
+let N=0,CLS=[];
+
+/* ---------- MODE rpm: stop the needle exactly on 7 ---------- */
+const RP={cx:540,cy:1010,r:360,target:7,sweeps:[[0.15,2.4],[3.0,1.8],[5.3,1.3]],drop:0.35,END:7.0};
+function rpmVal(t){for(const [s,d] of RP.sweeps){if(t>=s&&t<s+d)return 8*(t-s)/d;if(t>=s+d&&t<s+d+RP.drop)return 8*(1-ease((t-s-d)/RP.drop));}return 0;}
+const ang=v=>Math.PI*0.75+v/8*Math.PI*1.5;
+function gauge(v,state){
+ const {cx,cy,r}=RP;
+ g.fillStyle='#0f1012';g.beginPath();g.arc(cx,cy,r+40,0,Math.PI*2);g.fill();
+ g.strokeStyle='#2c2d31';g.lineWidth=6;g.beginPath();g.arc(cx,cy,r+40,0,Math.PI*2);g.stroke();
+ // red zone 6.5-8
+ g.strokeStyle='rgba(229,50,45,0.35)';g.lineWidth=34;g.beginPath();g.arc(cx,cy,r-20,ang(6.5),ang(8));g.stroke();
+ // target band at 7
+ g.strokeStyle=state===2?GREEN:RED;g.lineWidth=60;g.beginPath();g.arc(cx,cy,r-20,ang(6.93),ang(7.07));g.stroke();
+ for(let i=0;i<=80;i++){const a=ang(i/10),big=i%10===0,mid=i%5===0;const r1=r-(big?70:mid?50:36);
+  g.strokeStyle=i/10>=6.5?RED:'#e9e7e1';g.lineWidth=big?8:mid?5:3;g.beginPath();g.moveTo(cx+Math.cos(a)*r1,cy+Math.sin(a)*r1);g.lineTo(cx+Math.cos(a)*(r-4),cy+Math.sin(a)*(r-4));g.stroke();
+  if(big){bebas(String(i/10),cx+Math.cos(a)*(r-120),cy+Math.sin(a)*(r-120)+4,70,i/10>=7?RED:'#e9e7e1');}}
+ bebas('x1000 RPM',cx,cy+150,46,'#8b8a85');
+ const a=ang(v);g.strokeStyle='#ff5a3c';g.lineWidth=14;g.lineCap='round';g.shadowColor='rgba(255,80,50,0.8)';g.shadowBlur=24;
+ g.beginPath();g.moveTo(cx-Math.cos(a)*40,cy-Math.sin(a)*40);g.lineTo(cx+Math.cos(a)*(r-40),cy+Math.sin(a)*(r-40));g.stroke();g.shadowBlur=0;
+ g.fillStyle='#222';g.beginPath();g.arc(cx,cy,46,0,Math.PI*2);g.fill();g.fillStyle=RED;g.beginPath();g.arc(cx,cy,18,0,Math.PI*2);g.fill();
+}
+function setupRpm(){N=Math.round(RP.END*FPS)+30;CLS=new Array(N).fill(0);
+ for(const [s,d] of RP.sweeps){const a=Math.round(s*FPS),b=Math.round((s+d)*FPS);const arr=[];for(let f=a;f<b;f++)arr.push([Math.abs(rpmVal(f/FPS)-RP.target),f]);
+  arr.sort((p,q)=>p[0]-q[0]);arr.slice(0,2).forEach(p=>CLS[p[1]]=2);arr.slice(2).forEach(p=>{if(p[0]<0.45)CLS[p[1]]=1;});}}
+function drawRpm(fi){const t=fi/FPS;dark();
+ if(t>=RP.END){gauge(0,0);header('PAUSE CHALLENGE 2','1% بس يقدرون','يوقفون العداد على 7 بالضبط','اضغط مطوّل لما توصل الإبرة الخط الأحمر');g.fillStyle='rgba(0,0,0,0.78)';g.fillRect(0,564,W,H-564);pill('فاتتك؟ عيد المقطع وجرّب',RP.cy,'#FCFCFC',INK,62);txt('ما نعلمك، إحنا نفهمك',540,RP.cy+190,44,'rgba(255,255,255,0.85)',700);footer();return;}
+ const c=CLS[fi]||0;gauge(rpmVal(t),c);
+ header('PAUSE CHALLENGE 2','1% بس يقدرون','يوقفون العداد على 7 بالضبط','اضغط مطوّل لما توصل الإبرة الخط الأحمر');
+ let k=1;RP.sweeps.forEach(([s],j)=>{if(t>=s-0.3)k=j+1});txt(`المحاولة ${k} من 3`,540,1500,40,'rgba(255,255,255,0.6)',700);
+ footer();if(c===1)pill('قريب مرة! جرّب مرة ثانية',1460,RED,'#fff',54);if(c===2)rewardCard(1240);}
+
+/* ---------- MODE illusion: which car is bigger? (Ponzo) ---------- */
+const IL={reveal:4.6,END:9.6};
+function road(alpha){g.save();g.globalAlpha=alpha;
+ // perspective road on white
+ g.fillStyle='#ececea';g.beginPath();g.moveTo(140,1880);g.lineTo(940,1880);g.lineTo(600,640);g.lineTo(480,640);g.closePath();g.fill();
+ g.strokeStyle=INK;g.lineWidth=14;g.beginPath();g.moveTo(140,1880);g.lineTo(480,640);g.moveTo(940,1880);g.lineTo(600,640);g.stroke();
+ g.fillStyle='#bdbbb4';for(let i=0;i<9;i++){const y=700+i*i*15+i*40;const w=6+i*3,h=20+i*9;g.fillRect(540-w/2,y,w,h);}
+ g.restore();}
+function drawIll(fi){const t=fi/FPS;g.fillStyle='#FCFCFC';g.fillRect(0,0,W,H);
+ const u=ease((t-IL.reveal)/0.9);
+ road(1-u);
+ const s=0.62; // identical size
+ const ay=930+u*(1440-930), ax=540-u*0;// A moves down
+ const bx=540, by=1440;
+ // A slides left, B slides right during reveal so they sit side by side
+ const AX=540-u*260, BX=540+u*260;
+ car(AX,ay,s,-Math.PI/2);car(BX,by,s,-Math.PI/2);
+ const lab=(x,y,L)=>{g.fillStyle=INK;g.beginPath();g.arc(x+120,y-120,40,0,Math.PI*2);g.fill();bebas(L,x+120,y-116,56,'#fff');};
+ lab(AX,ay,'A');lab(BX,by,'B');
+ // header
+ brandTop(false);bebas('EYE TEST',72,108,40,'#9a988f','left');
+ txt('أي سيارة أكبر؟',540,250,108,INK);txt('A ولا B؟ قرر قبل الجواب',540,372,62,RED);
+ if(t<IL.reveal){const k=Math.max(0,Math.ceil(IL.reveal-0.6-t));if(k>0){g.fillStyle=RED;g.beginPath();g.arc(540,500,46,0,Math.PI*2);g.fill();bebas(String(k),540,504,64,'#fff');}}
+ if(t>=IL.reveal+0.9){ // equal-size brackets
+  const w=236*s,top=by-260*s,bot=by+260*s;g.strokeStyle=GREEN;g.lineWidth=8;g.setLineDash([18,12]);
+  g.beginPath();g.moveTo(AX-w/2-40,top);g.lineTo(BX+w/2+40,top);g.moveTo(AX-w/2-40,bot);g.lineTo(BX+w/2+40,bot);g.stroke();g.setLineDash([]);
+  pill('نفس الحجم بالضبط',1720,GREEN,'#fff',58);}
+ if(t>=7.4){g.fillStyle='rgba(252,252,252,0.94)';g.fillRect(0,600,W,1320);
+  txt('عيونك صدّقت؟',540,900,96,INK);txt('أرسلها لصاحبك',540,1040,80,RED);txt('وشوف وش يختار',540,1150,64,INK,700);
+  txt('دي اوتو · ما نعلمك، إحنا نفهمك',540,1400,44,'#55534c',700);}
+ footer('#b9b7b0');}
+
+/* ---------- MODE odd: find the car with a missing wheel ---------- */
+const OD={cols:6,rows:8,odd:[4,5],timer:[0.4,5.4],END:9.0};
+function drawOdd(fi){const t=fi/FPS;g.fillStyle='#FCFCFC';g.fillRect(0,0,W,H);
+ brandTop(false);bebas('FIND IT',72,108,40,'#9a988f','left');
+ txt('سيارة وحدة مختلفة',540,240,90,INK);txt('1% يلقونها قبل 5 ثواني',540,350,62,RED);
+ const x0=110,y0=520,dx=172,dy=150,s=0.26;
+ for(let r=0;r<OD.rows;r++)for(let c=0;c<OD.cols;c++){const odd=(c===OD.odd[0]&&r===OD.odd[1]);car(x0+c*dx,y0+r*dy,s,0,odd?{roof:'#1b1d22'}:{});}
+ const [a,b]=OD.timer;const u=Math.min(1,Math.max(0,(t-a)/(b-a)));
+ g.fillStyle='#e6e4de';rr(90,1760,900,26,13);g.fill();g.fillStyle=u<1?RED:GREEN;rr(90,1760,900*(1-u),26,13);g.fill();
+ if(t<b){bebas(String(Math.max(0,Math.ceil(b-t))),540,450,70,INK);}
+ if(t>=b){const cx=x0+OD.odd[0]*dx,cy=y0+OD.odd[1]*dy;const p=ease((t-b)/0.4);
+  g.strokeStyle=GREEN;g.lineWidth=10;g.beginPath();g.arc(cx,cy,95*p+20,0,Math.PI*2);g.stroke();
+  pill('لقيتها؟ اكتب كم ثانية أخذت',1660,INK,'#fff',52);}
+ if(t>=7.6){g.fillStyle='rgba(252,252,252,0.95)';g.fillRect(0,420,W,1480);txt('عيونك حادة؟',540,900,96,INK);txt('منشن صاحبك وتحدّاه',540,1040,72,RED);txt('دي اوتو · ما نعلمك، إحنا نفهمك',540,1300,44,'#55534c',700);}
+ footer('#b9b7b0');}
+
+const M={rpm:[setupRpm,drawRpm],ill:[()=>{N=Math.round(IL.END*FPS);},drawIll],odd:[()=>{N=Math.round(OD.END*FPS);},drawOdd]};
+M[MODE][0]();window.N=N;window.CLS=CLS;
+window.draw=function(fi){M[MODE][1](fi);return cv.toDataURL('image/jpeg',0.93);};
+Promise.all(['900 60px Cairo','900 60px CairoL','700 40px Cairo','700 40px CairoL','400 40px Bebas'].map(f=>document.fonts.load(f))).then(()=>document.fonts.ready).then(()=>{document.title='ready'});
+</script></body></html>

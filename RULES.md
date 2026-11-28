@@ -24,6 +24,15 @@ Every agent and every scheduled task reads this file **before doing anything**, 
 19. **Reposting a clip that already went out on that platform** («مقاطع تتكرر نفس الشي… غير مقبول نهائيا», 28 Nov). Not after 14 days, not with a new caption. Before scheduling, search the published posts (Metricool analytics, last 60 days) for the clip's hook. If it ran there, it doesn't go out again. The only exception is the pinned «كيف تشتري» explainer, which runs by his order. Never schedule the same clip twice on one day.
 20. **Fake numbers.** Report honestly and don't polish.
 
+## 0. NEW START (owner, 28 Nov 16:01)
+- Every old clip (made before 28 Nov) is **retired**: all of v/, v1080/, w/, vo/ except vo/v2/. Old scheduled posts are now drafts. **Never schedule an old clip again.**
+- New content lives only in **vo/v2/** (queue: vo/v2/QUEUE.md). It is built on the owner's reference videos (refs/LESSONS.md):
+  - Interactive "1% can…" pause challenges with a hidden reward frame.
+  - Visual tricks and illusions that make people rewatch and share.
+  - Find-it games.
+  - Subject centred, no dead frames, a series format.
+- Apply every lesson he sends («أتعلم») the same day.
+
 ## 2. Brand
 - Name: **«دي اوتو»** with no dot and no hamza in Arabic, **«DE AUTO»** with no dot in English. Mention it in everything.
 - Slogan: **«ما نعلمك، إحنا نفهمك»**.
