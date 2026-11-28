@@ -11,8 +11,16 @@ bad = []
 # ⛔ Owner rule 2026-11-28: «كفر» in any form is banned in voiceovers. Even voweled, the voice can say «كُفر» (disbelief).
 # Use الإطار / الإطارات instead.
 _plain = re.sub(f"[{H}ـ]", "", txt)
-if re.search("كفر", _plain):
-    print("BANNED WORD «كفر» (sounds like كُفر). Replace with الإطار / الإطارات."); sys.exit(2)
+# Owner rule 2026-11-28: no word the voice could misread. Each entry is pattern → plain replacement.
+RISKY = {
+    "كفر": "الإطار / الإطارات",                      # read as كُفر
+    "إل إس دي|ال اس دي|LSD": "الدفرنس المقفول",      # drug association
+    "[A-Za-z]{2,}": "write it in Arabic letters, or show it on screen only",  # the voice reads English oddly
+    "[0-9]": "write the number out in Arabic words",
+}
+hits = [f"«{m.group(0)}» → {rep}" for pat, rep in RISKY.items() for m in [re.search(pat, _plain)] if m]
+if hits:
+    print("RISKY WORDS (the voice may misread them):\n  " + "\n  ".join(hits)); sys.exit(2)
 for w in re.findall(f"[{LET}{H}ـ]+", txt):
     letters = re.findall(f"[{LET}]", w)
     if len(letters) < 2: continue

@@ -5,6 +5,7 @@
 ## ⛔ HARD RULE (owner, 2026-11-28, after the 10th repeat): NEVER use the word «كفر» in any form
 - Root cause: the voiceover. «كفر» went to ElevenLabs without tashkeel and the voice read it «كُفر» (disbelief). tools/tashkeel_check.py now hard-fails (exit 2) on any «كفر», even voweled.
 - Banned everywhere (captions, on-screen text, voiceover, replies, carousels): كفر · الكفر · كفرك · كفرات · الكفرات · كفراتك · الكفرين. Read aloud or out of context, it sounds like «كُفر». A viewer commented «قل كفر مو كفرك» on the DOT clip.
+- Owner, 15:51: «أي كلمة تحس إن الفويس أوفر ما راح يقولها صح، لا تستخدمها». So in every voiceover, if a word could be misread or sounds like something else, swap it for a plain synonym. No English acronyms or digits in the voice script: spell them in Arabic or show them on screen only. tashkeel_check.py now blocks كفر, «إل إس دي», Latin letters and digits (exit 2).
 - Use instead: **الإطار / الإطارات / إطار سيارتك (Tire)**. For the rim: الجنط.
 - Before scheduling ANY clip: check its caption and its source text (tools/**/data*.js) for «كفر». If found → don't post it.
 - Never re-post these published clips (the word is in the voice or on screen): br_a2 (DOT «كفرك له تاريخ ميلاد»), br_a3 («الأرقام اللي على كفرك»), br_c2 (نيتروجين في الكفرات), br_c5, br_e14 («الكفر العريض»), the ترصيص clip (file-13464852845206641270, now draft), brand ba1/ba4 («لين الكفرات»).
