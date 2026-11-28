@@ -517,3 +517,24 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - 2026-11-28 10:48 [CMO] Sales scoreboard: 0 paid orders / 0 SAR since 23 Nov (2 free Part 1 orders, same customer). Funnel 23-28 Nov: 175 visits, 2 ATC, 3 checkouts, 2 orders; yesterday 10 visits, 0 ATC. Part 1 still 19 (regular 36) until 30 Nov. Best offer video: TikTok 'بسعر وجبة' 23 Nov, 5,363 views. Action: last-2-days push of that video.
 
 - 2026-11-28 15:55 [CMO] «كفر» banned (hard rule at top). Drafted the 29/11 22:00 ترصيص reel (voice + on-screen «الكفر»). Replaced كفر→إطار in all source data. Owner should delete live clips a2/a3/c2/c5/e14 himself. Updated the daily-director/watcher/CMO task prompts.
+
+## 2026-11-28 16:05 [CMO] Full rules review and schedule audit (owner: «حدث كل شيء… أي غلط ثاني غير مقبول»)
+- RULES.md created: every owner rule from day one in one place (memory, BOARD, chats). Added tools/caption_check.py. All 6 content and report tasks now read RULES.md first: director, watcher, CMO weekly, scoreboard, explainer extension (IG + Threads only, never TikTok), initiatives.
+- Schedule audit to 31 Dec:
+  - Drafted 28/11 17:00 «أي لون في الطبلون» (source clip unverifiable, possibly a cards end card).
+  - Drafted 29/11 13:00 «البواجي» (voice says «بطاقات دي اوتو بعشرة ريال»).
+  - Drafted 29/11 22:00 ترصيص (voice «الكفر»).
+  - Fixed «لين» in the 29/11 18:00 caption.
+  - Removed the cards line from 28/11 12:00 & 17:00 and 29/11 10:00 & 13:00.
+  - Every other caption passes the checks.
+- Store text breaks rules (needs owner OK, since Salla apply requires it):
+  - Part 1 name «DE.AUTO —», description «لين الأرض» and the old slogan «لأن المعرفة قوة».
+  - Brand description «دي أوتو … لين الكفرات» plus the old slogan.
+  - Probably the same pattern across all parts.
+- Funnel 21–28 Nov: 182 visits (prev week 6) → 2 add-to-cart (1.1%) → 2 orders (both 0 SAR). Traffic is coming; the product page/bio path loses it.
+- Sales plan for the next days:
+  - (1) STOP pause challenge tonight 18:00.
+  - (2) Last 2 days of Part 1 at 19 (+STOP 20%).
+  - (3) Owner sets the bio link straight to the Part 1 product page.
+  - (4) Fix store text after owner OK.
+  - (5) Fewer, clean posts.
