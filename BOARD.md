@@ -2,6 +2,11 @@
 
 كل وكيل يقرأ هذا الملف أول شي ويكتب فيه آخر شي. هذي هي الذاكرة المشتركة بين الجلسات.
 
+## ⛔ HARD RULE (owner, repeated 2026-11-28): NO promotion of the 10 SAR workshop cards (بطاقات مصطلحات الورش) and NO prices in captions
+- It cheapens the brand. Never write «بطاقات مصطلحات الورش», «بـ 10 ريال» or any price in captions, titles or first comments. The CTA is only «الرابط في البايو 🔗» or «الجزء N من دي اوتو» (check the part number in the repo first).
+- Before scheduling: grep the caption for «ريال» and «بطاقات». If found → rewrite.
+- 2026-11-28: removed the line from all remaining scheduled posts (28/11 12:00 & 17:00, 29/11 10:00 & 13:00).
+
 ## ⛔ HARD RULE (owner, 2026-11-28, after the 10th repeat): NEVER use the word «كفر» in any form
 - Root cause: the voiceover. «كفر» went to ElevenLabs without tashkeel and the voice read it «كُفر» (disbelief). tools/tashkeel_check.py now hard-fails (exit 2) on any «كفر», even voweled.
 - Banned everywhere (captions, on-screen text, voiceover, replies, carousels): كفر · الكفر · كفرك · كفرات · الكفرات · كفراتك · الكفرين. Read aloud or out of context, it sounds like «كُفر». A viewer commented «قل كفر مو كفرك» on the DOT clip.
