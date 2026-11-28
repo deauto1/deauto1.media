@@ -540,3 +540,4 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - (5) Fewer, clean posts.
 
 - 2026-11-28 16:10 [CMO] Owner: repeated clips are «غير مقبول نهائيا». RULES.md rule 19: never repost a published clip on the same platform (old 14-day rule removed). Drafted 29/11 10:00 «قير عادي ولا أوتوماتيك» (already ran 8 & 15 Nov). Repeats found in analytics: «النيتروجين» IG ×3 (9–11 Nov), «السهم جنب المضخة» TT ×2 in 2 minutes (18 Nov), «بسعر وجبة», «الفني يشرح» and «تطلع من الورشة بفاتورة» TT ×2. The rest of the schedule is checked: no repeats except the explainer (owner's order).
+- 2026-11-28 16:10 [CMO] NEW START (owner order): all old scheduled videos set to draft (16:00 was already publishing). Live now: pause1 tonight 18:00, the explainer (owner's order) and the Threads launch-price texts. New vo/v2: illusion 29/11 12:00, RPM pause 17:00, find-it 21:00 (IG+TT+Threads). Director and CMO tasks may only schedule from vo/v2/QUEUE.md.
