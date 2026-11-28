@@ -8,6 +8,11 @@ LET = "ء-غف-يٱ-ۓ"
 LONG = set("اويىآءأإؤئة")             # letters that often need no mark
 txt = open(sys.argv[1]).read() if os.path.isfile(sys.argv[1]) else " ".join(sys.argv[1:])
 bad = []
+# ⛔ Owner rule 2026-11-28: «كفر» in any form is banned in voiceovers. Even voweled, the voice can say «كُفر» (disbelief).
+# Use الإطار / الإطارات instead.
+_plain = re.sub(f"[{H}ـ]", "", txt)
+if re.search("كفر", _plain):
+    print("BANNED WORD «كفر» (sounds like كُفر). Replace with الإطار / الإطارات."); sys.exit(2)
 for w in re.findall(f"[{LET}{H}ـ]+", txt):
     letters = re.findall(f"[{LET}]", w)
     if len(letters) < 2: continue
