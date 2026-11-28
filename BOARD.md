@@ -538,3 +538,5 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
   - (3) Owner sets the bio link straight to the Part 1 product page.
   - (4) Fix store text after owner OK.
   - (5) Fewer, clean posts.
+
+- 2026-11-28 16:10 [CMO] Owner: repeated clips are «غير مقبول نهائيا». RULES.md rule 19: never repost a published clip on the same platform (old 14-day rule removed). Drafted 29/11 10:00 «قير عادي ولا أوتوماتيك» (already ran 8 & 15 Nov). Repeats found in analytics: «النيتروجين» IG ×3 (9–11 Nov), «السهم جنب المضخة» TT ×2 in 2 minutes (18 Nov), «بسعر وجبة», «الفني يشرح» and «تطلع من الورشة بفاتورة» TT ×2. The rest of the schedule is checked: no repeats except the explainer (owner's order).

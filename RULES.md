@@ -21,7 +21,8 @@ Every agent and every scheduled task reads this file **before doing anything**, 
 16. **Showing the 14-part bundle** in the store.
 17. **The same brain-rot visual in every clip** (e.g. a circle and a ball). Vary the technique.
 18. **Silent or text-only clips** for the new content model. They need a voiceover, but only with credits he approved.
-19. **Fake numbers.** Report honestly and don't polish.
+19. **Reposting a clip that already went out on that platform** («مقاطع تتكرر نفس الشي… غير مقبول نهائيا», 28 Nov). Not after 14 days, not with a new caption. Before scheduling, search the published posts (Metricool analytics, last 60 days) for the clip's hook. If it ran there, it doesn't go out again. The only exception is the pinned «كيف تشتري» explainer, which runs by his order. Never schedule the same clip twice on one day.
+20. **Fake numbers.** Report honestly and don't polish.
 
 ## 2. Brand
 - Name: **«دي اوتو»** with no dot and no hamza in Arabic, **«DE AUTO»** with no dot in English. Mention it in everything.
@@ -62,6 +63,7 @@ Every agent and every scheduled task reads this file **before doing anything**, 
 - Read BOARD.md for history. **This file overrides anything older.**
 
 ## 6. Before you schedule ANY post: checklist
+0. The clip has never been published on this platform (rule 19).
 1. Caption has no «كفر», «ريال», «بطاقات», «لين», price or digit-price. «دي اوتو» has no dot.
 2. The video's source text (tools/**/data*.js) and voice have no «كفر» or risky words. The clip is not on the do-not-repost list in BOARD.md.
 3. Frame 0 is the hook, there's no music, and no private data shows.
