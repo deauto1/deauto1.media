@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2)}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2)}
+html,body{margin:0}
+.b{width:2216px;height:856px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,#2e2e2e 0%,#151515 55%,#0b0b0b 100%)}
+.b:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.04) 0 3px,transparent 3px 90px)}
+.streak{position:absolute;left:1150px;top:-200px;width:14px;height:1400px;transform:rotate(35deg);background:linear-gradient(#fff0,#fff3,#fff0)}
+.streak.r{left:1240px;background:linear-gradient(#e5322d00,#e5322d88,#e5322d00)}
+.logo{position:absolute;left:150px;top:200px;height:330px;filter:brightness(0) invert(1)}
+.sl{position:absolute;left:340px;top:330px;font-family:Cairo;font-weight:900;font-size:76px;color:#fff;direction:rtl}
+.dm{position:absolute;left:340px;top:450px;font-family:Bebas;font-size:54px;letter-spacing:8px;color:#8d8d8d}
+.bar{position:absolute;left:340px;top:490px;width:110px;height:8px;background:#e5322d;border-radius:4px}
+</style></head><body><div class="b" id="b"><div class="streak"></div><div class="streak r"></div>
+<img class="logo" src="logo_k.png"><div class="sl">ما نعلمك، إحنا نفهمك</div><div class="bar"></div><div class="dm" style="top:515px">DE AUTO · DEAUTO1.COM</div></div>
+<script>document.fonts.load('900 60px Cairo').then(()=>document.fonts.load('400 40px Bebas')).then(()=>{document.title='ready'})</script></body></html>
