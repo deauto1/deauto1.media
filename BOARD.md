@@ -2,6 +2,13 @@
 
 كل وكيل يقرأ هذا الملف أول شي ويكتب فيه آخر شي. هذي هي الذاكرة المشتركة بين الجلسات.
 
+## ⛔ HARD RULE (owner, 2026-11-28, after the 10th repeat): NEVER use the word «كفر» in any form
+- Banned everywhere (captions, on-screen text, voiceover, replies, carousels): كفر · الكفر · كفرك · كفرات · الكفرات · كفراتك · الكفرين. Read aloud or out of context, it sounds like «كُفر». A viewer commented «قل كفر مو كفرك» on the DOT clip.
+- Use instead: **الإطار / الإطارات / إطار سيارتك (Tire)**. For the rim: الجنط.
+- Before scheduling ANY clip: check its caption and its source text (tools/**/data*.js) for «كفر». If found → don't post it.
+- Never re-post these published clips (the word is in the voice or on screen): br_a2 (DOT «كفرك له تاريخ ميلاد»), br_a3 («الأرقام اللي على كفرك»), br_c2 (نيتروجين في الكفرات), br_c5, br_e14 («الكفر العريض»), the ترصيص clip (file-13464852845206641270, now draft), brand ba1/ba4 («لين الكفرات»).
+- Source data fixed on 2026-11-28 (كفر → إطار) in tools/brainrot, tools/carousel, tools/brand.
+
 ## الأدوار
 - CEO (جلسة الملفات): يحدد الأولويات ويقرر. يقرأ تقارير الكل.
 - CMO: المحتوى والنشر والتحليلات (ميتريكول). يكتب في reports/cmo.md
@@ -499,3 +506,5 @@ Owner direction: no more info content; videos now explain who and what DE AUTO i
 - 2026-11-28 02:10 [CMO] Owner: coupon STOP created. Owner gave CMO the call on timing → pause reel set to 18:00 (Sat evening peak; 10:00 is the explainer). Quiz reel moved 18:00→17:00. Removed the '10 SAR cards' line (price + card push) from the captions of today's 12:00 and 17:00 reels; 12:00 now points to Part 9 (brakes). Deleted the 17:00 coupon check (owner confirmed; Salla reports lag would have drafted it wrongly). Note: coupon STOP not yet visible in reports_coupons_list (reports lag).
 - 2026-11-28 06:30 [المدير التنفيذي] Added 6 TikTok-only clips never posted there (u8 11:00, zs6 13:00, u6 15:00, zo2 19:00, zs2 21:00, u2 23:00). TikTok today 14, do not add more (≤15/24h). IG 11/13/15/21/23 empty: no confirmed unpublished clip. Left for TikTok: who/u4. Queue nearly empty from 30 Nov; asking owner for ≈8,000 ElevenLabs credits (≈30 clips), nothing spent. Sales Nov: 0 SAR paid.
 - 2026-11-28 10:48 [CMO] Sales scoreboard: 0 paid orders / 0 SAR since 23 Nov (2 free Part 1 orders, same customer). Funnel 23-28 Nov: 175 visits, 2 ATC, 3 checkouts, 2 orders; yesterday 10 visits, 0 ATC. Part 1 still 19 (regular 36) until 30 Nov. Best offer video: TikTok 'بسعر وجبة' 23 Nov, 5,363 views. Action: last-2-days push of that video.
+
+- 2026-11-28 15:55 [CMO] «كفر» banned (hard rule at top). Drafted the 29/11 22:00 ترصيص reel (voice + on-screen «الكفر»). Replaced كفر→إطار in all source data. Owner should delete live clips a2/a3/c2/c5/e14 himself. Updated the daily-director/watcher/CMO task prompts.
