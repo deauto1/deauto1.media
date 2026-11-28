@@ -1,0 +1,42 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Cairo;font-weight:900;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-900-normal.woff2)}
+@font-face{font-family:Cairo;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2)}
+@font-face{font-family:CairoL;font-weight:700;src:url(node_modules/@fontsource/cairo/files/cairo-latin-700-normal.woff2)}
+@font-face{font-family:Bebas;src:url(node_modules/@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2)}
+html,body{margin:0}
+.c{width:1240px;height:1754px;position:relative;overflow:hidden;color:#fff;
+ background:radial-gradient(ellipse at 50% 22%,#3a3a3a 0%,#1d1d1d 45%,#0e0e0e 100%);}
+.c:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.045) 0 2px,transparent 2px 64px)}
+.logo{position:absolute;left:50%;top:150px;transform:translateX(-50%);height:460px;filter:invert(1)}
+.part{position:absolute;top:690px;width:100%;text-align:center;font-family:Bebas;font-size:62px;letter-spacing:6px;color:#9a9a9a}
+.part b{color:#e5322d;font-weight:400}
+.ar{position:absolute;top:770px;width:100%;text-align:center;font-family:Cairo;font-weight:900;font-size:108px;line-height:1.15;direction:rtl;padding:0 70px;box-sizing:border-box}
+.en{position:absolute;width:100%;text-align:center;font-family:Bebas;font-size:72px;letter-spacing:4px;color:#d6d6d6}
+.box{position:absolute;left:84px;right:84px;top:1330px;height:180px;border-radius:22px;background:#463f3c;text-align:center}
+.box .t{font-family:Bebas;font-size:54px;letter-spacing:2px;margin-top:30px}
+.box .s{font-family:Cairo,CairoL;font-weight:700;font-size:38px;color:#e7e2df;direction:rtl;margin-top:4px}
+.foot{position:absolute;bottom:80px;left:84px;right:84px;display:flex;justify-content:space-between;align-items:center}
+.foot .l{font-family:Bebas;font-size:44px;letter-spacing:3px;color:#cfcfcf}
+.foot .r{font-family:Cairo,CairoL;font-weight:700;font-size:36px;direction:rtl;color:#cfcfcf}
+.bar{position:absolute;bottom:160px;left:84px;width:120px;height:8px;background:#e5322d;border-radius:4px}
+</style></head><body><div class="c" id="c">
+<img class="logo" src="logo_k.png">
+<div class="part" id="part"></div>
+<div class="ar" id="ar"></div>
+<div class="en" id="en"></div>
+<div class="box"><div class="t" id="bt"></div><div class="s" id="bs"></div></div>
+<div class="bar"></div>
+<div class="foot"><div class="l">DE AUTO</div><div class="r" id="sl"></div></div>
+</div>
+<script>
+window.setCover=(d)=>{const L=d.lang;document.getElementById('part').innerHTML=(L==='ar'?'PART ':'CHAPTER ')+'<b>'+d.n+'</b>';
+const ar=document.getElementById('ar'),en=document.getElementById('en');
+if(L==='ar'){en.style.fontSize='72px';en.style.color='#d6d6d6';en.style.padding='0 70px';en.style.boxSizing='border-box';en.style.lineHeight='1.1';ar.textContent=d.ar;ar.style.display='block';const h=ar.getBoundingClientRect().height;en.style.top=(770+h+20)+'px';en.textContent=d.en;}
+else{ar.style.display='none';en.style.top='780px';en.style.fontSize='120px';en.style.color='#fff';en.style.padding='0 70px';en.style.boxSizing='border-box';en.style.lineHeight='1.05';en.textContent=d.en;}
+document.getElementById('bt').textContent='THE WORLD OF CAR MODIFICATIONS MADE SIMPLE';
+document.getElementById('bs').textContent=L==='ar'?'عالم تعديل السيارات بطريقة سهلة ومفهومة':'Cars explained in plain, friendly English';
+document.getElementById('bs').style.direction=L==='ar'?'rtl':'ltr';
+const sl=document.getElementById('sl');sl.textContent=L==='ar'?'ما نعلمك، إحنا نفهمك':"We don't teach you. We make it make sense.";sl.style.direction=L==='ar'?'rtl':'ltr';
+return document.fonts.ready.then(()=>1)};
+document.fonts.load('900 60px Cairo').then(()=>document.fonts.load('400 40px Bebas')).then(()=>document.fonts.load('700 40px Cairo')).then(()=>document.fonts.load('700 40px CairoL')).then(()=>{document.title='ready'});
+</script></body></html>
