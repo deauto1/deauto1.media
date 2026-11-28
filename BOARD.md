@@ -2,6 +2,8 @@
 
 كل وكيل يقرأ هذا الملف أول شي ويكتب فيه آخر شي. هذي هي الذاكرة المشتركة بين الجلسات.
 
+## 📌 READ RULES.md FIRST: all owner rules from day one, in one place. It overrides anything older here. Run `tools/caption_check.py` on every caption and `tools/tashkeel_check.py` on every voice script.
+
 ## ⛔ HARD RULE (owner, repeated 2026-11-28): NO promotion of the 10 SAR workshop cards (بطاقات مصطلحات الورش) and NO prices in captions
 - It cheapens the brand. Never write «بطاقات مصطلحات الورش», «بـ 10 ريال» or any price in captions, titles or first comments. The CTA is only «الرابط في البايو 🔗» or «الجزء N من دي اوتو» (check the part number in the repo first).
 - Before scheduling: grep the caption for «ريال» and «بطاقات». If found → rewrite.
