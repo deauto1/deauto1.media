@@ -13,3 +13,9 @@
 - Formula: (1) a shocking, relatable premise as on-screen text, (2) a visual trick that makes people rewatch to spot it, (3) a reveal people send to friends («ABSOLUTE CINEMA»), (4) repeat the formula as a series.
 - His three top videos are all "trick" formats: the pause challenge, the illusion, and the toy car.
 - DE AUTO version: a toy-car forced-perspective POV with hook «واحد صدم سيارتي 😱» and a toy reveal. Generic toy, no real brand. The owner films about 10s on his phone with no voice; we add text only.
+
+## 2026-11-28 · Ref 4: our own TikTok milestone recap (100K total views)
+- Best ever: «تحدي. 2,710 تعليق = نكشف كل شي» with 22.4K views. A comment goal plus a mystery reward.
+- «لاحظت؟» (dark mystery teaser, the two light bars) "pulled people in".
+- «قلّب معي الجزء 1» (flip through the real product) is what people "kept coming back" to.
+- Action: repeat the comment-goal challenge (300 comments = STOP code), and make a new «قلّب معي» flip-through of Part 1 / Chapter 1.

@@ -8,12 +8,13 @@ html,body{margin:0;background:#000}
 </style></head><body><canvas id="c" width="1080" height="1920"></canvas>
 <img id="logo" src="assets/logo_k.png" style="display:none">
 <script>
+const EN=new URLSearchParams(location.search).get('lang')==='en';const T=(a,e)=>EN?e:a;
 const W=1080,H=1920,FPS=30,RED='#e5322d',GREEN='#1fb15a',INK='#111';
 const MODE=new URLSearchParams(location.search).get('m');
 const cv=document.getElementById('c'),g=cv.getContext('2d');
 const F="CairoL,Cairo,sans-serif";
 function rr(x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
-function txt(s,x,y,size,col,wt=900,al='center'){g.font=`${wt} ${size}px ${F}`;g.fillStyle=col;g.textAlign=al;g.textBaseline='middle';g.direction='rtl';g.fillText(s,x,y);}
+function txt(s,x,y,size,col,wt=900,al='center'){g.font=`${wt} ${size}px ${F}`;g.fillStyle=col;g.textAlign=al;g.textBaseline='middle';g.direction=EN?'ltr':'rtl';g.fillText(s,x,y);}
 function bebas(s,x,y,size,col,al='center'){g.font=`400 ${size}px Bebas`;g.fillStyle=col;g.textAlign=al;g.textBaseline='middle';g.direction='ltr';g.fillText(s,x,y);}
 const ease=u=>u<0?0:u>1?1:u*u*(3-2*u);
 // top-down car, nose pointing right, 520x236 at scale 1. opts.noWheel = index of missing wheel
@@ -36,7 +37,7 @@ function car(cx,cy,s,rot=0,opts={}){
 }
 function brandTop(dark){
  const lg=document.getElementById('logo');g.save();if(dark)g.filter='invert(1)';g.drawImage(lg,W-72-64,70,64,64*lg.naturalHeight/lg.naturalWidth);g.restore();
- txt('دي اوتو',W-72-84,104,38,dark?'#fff':INK,900,'right');
+ txt(T('دي اوتو','DE AUTO'),W-72-84,104,38,dark?'#fff':INK,900,'right');
 }
 function header(tag,l1,l2,l3){
  g.fillStyle='#FCFCFC';g.fillRect(0,0,W,560);g.fillStyle=RED;g.fillRect(0,556,W,8);
@@ -44,13 +45,13 @@ function header(tag,l1,l2,l3){
  txt(l1,540,250,104,INK);txt(l2,540,372,70,RED);if(l3)txt(l3,540,476,42,'#55534c',700);
 }
 function footer(col){bebas('DE AUTO',540,1840,40,col||'rgba(255,255,255,0.55)');}
-function pill(s,y,bg,fg,size=56){g.font=`900 ${size}px ${F}`;g.direction='rtl';const m=g.measureText(s).width;rr(540-m/2-46,y-size*0.85,m+92,size*1.7,size*0.85);g.fillStyle=bg;g.fill();txt(s,540,y,size,fg);}
+function pill(s,y,bg,fg,size=56){g.font=`900 ${size}px ${F}`;g.direction=EN?'ltr':'rtl';const m=g.measureText(s).width;rr(540-m/2-46,y-size*0.85,m+92,size*1.7,size*0.85);g.fillStyle=bg;g.fill();txt(s,540,y,size,fg);}
 function rewardCard(y0){
  g.save();g.shadowColor='rgba(0,0,0,0.4)';g.shadowBlur=30;rr(70,y0,940,400,40);g.fillStyle='#FCFCFC';g.fill();g.restore();
  g.fillStyle=GREEN;rr(70,y0,940,20,10);g.fill();
- txt('وقفتها صح! أنت من الـ⁦1%⁩',540,y0+92,64,INK);
- txt('كودك: ⁦STOP⁩',540,y0+196,76,RED);
- txt('خصم ⁦20%⁩ على أي جزء في deauto1.com',540,y0+290,46,INK,700);
+ txt(T('وقفتها صح! أنت من الـ⁦1%⁩',"Nailed it! You're the 1%"),540,y0+92,64,INK);
+ txt(T('كودك: ⁦STOP⁩','Your code: STOP'),540,y0+196,76,RED);
+ txt(T('خصم ⁦20%⁩ على أي جزء في deauto1.com','20% off any chapter · deauto1.com/en'),540,y0+290,46,INK,700);
  bebas('SCREENSHOT IT · DE AUTO',540,y0+362,36,'#9a988f');
 }
 function dark(){g.fillStyle='#1d1e21';g.fillRect(0,0,W,H);}
@@ -80,11 +81,11 @@ function setupRpm(){N=Math.round(RP.END*FPS)+30;CLS=new Array(N).fill(0);
  for(const [s,d] of RP.sweeps){const a=Math.round(s*FPS),b=Math.round((s+d)*FPS);const arr=[];for(let f=a;f<b;f++)arr.push([Math.abs(rpmVal(f/FPS)-RP.target),f]);
   arr.sort((p,q)=>p[0]-q[0]);arr.slice(0,2).forEach(p=>CLS[p[1]]=2);arr.slice(2).forEach(p=>{if(p[0]<0.45)CLS[p[1]]=1;});}}
 function drawRpm(fi){const t=fi/FPS;dark();
- if(t>=RP.END){gauge(0,0);header('PAUSE CHALLENGE 2','1% بس يقدرون','يوقفون العداد على 7 بالضبط','اضغط مطوّل لما توصل الإبرة الخط الأحمر');g.fillStyle='rgba(0,0,0,0.78)';g.fillRect(0,564,W,H-564);pill('فاتتك؟ عيد المقطع وجرّب',RP.cy,'#FCFCFC',INK,62);txt('ما نعلمك، إحنا نفهمك',540,RP.cy+190,44,'rgba(255,255,255,0.85)',700);footer();return;}
+ if(t>=RP.END){gauge(0,0);header('PAUSE CHALLENGE 2',T('1% بس يقدرون','Only 1% can'),T('يوقفون العداد على 7 بالضبط','stop the needle exactly on 7'),T('اضغط مطوّل لما توصل الإبرة الخط الأحمر','Hold to pause when it hits the red line'));g.fillStyle='rgba(0,0,0,0.78)';g.fillRect(0,564,W,H-564);pill(T('فاتتك؟ عيد المقطع وجرّب','Missed it? Replay and try again'),RP.cy,'#FCFCFC',INK,62);txt(T('ما نعلمك، إحنا نفهمك',"We don't teach you. We make it make sense."),540,RP.cy+190,44,'rgba(255,255,255,0.85)',700);footer();return;}
  const c=CLS[fi]||0;gauge(rpmVal(t),c);
- header('PAUSE CHALLENGE 2','1% بس يقدرون','يوقفون العداد على 7 بالضبط','اضغط مطوّل لما توصل الإبرة الخط الأحمر');
- let k=1;RP.sweeps.forEach(([s],j)=>{if(t>=s-0.3)k=j+1});txt(`المحاولة ${k} من 3`,540,1500,40,'rgba(255,255,255,0.6)',700);
- footer();if(c===1)pill('قريب مرة! جرّب مرة ثانية',1460,RED,'#fff',54);if(c===2)rewardCard(1240);}
+ header('PAUSE CHALLENGE 2',T('1% بس يقدرون','Only 1% can'),T('يوقفون العداد على 7 بالضبط','stop the needle exactly on 7'),T('اضغط مطوّل لما توصل الإبرة الخط الأحمر','Hold to pause when it hits the red line'));
+ let k=1;RP.sweeps.forEach(([s],j)=>{if(t>=s-0.3)k=j+1});txt(EN?`Try ${k} of 3`:`المحاولة ${k} من 3`,540,1500,40,'rgba(255,255,255,0.6)',700);
+ footer();if(c===1)pill(T('قريب مرة! جرّب مرة ثانية','So close! Try again'),1460,RED,'#fff',54);if(c===2)rewardCard(1240);}
 
 /* ---------- MODE illusion: which car is bigger? (Ponzo) ---------- */
 const IL={reveal:4.6,END:9.6};
@@ -107,22 +108,22 @@ function drawIll(fi){const t=fi/FPS;g.fillStyle='#FCFCFC';g.fillRect(0,0,W,H);
  lab(AX,ay,'A');lab(BX,by,'B');
  // header
  brandTop(false);bebas('EYE TEST',72,108,40,'#9a988f','left');
- txt('أي سيارة أكبر؟',540,250,108,INK);txt('A ولا B؟ قرر قبل الجواب',540,372,62,RED);
+ txt(T('أي سيارة أكبر؟','Which car is bigger?'),540,250,108,INK);txt(T('A ولا B؟ قرر قبل الجواب','A or B? Decide before the answer'),540,372,62,RED);
  if(t<IL.reveal){const k=Math.max(0,Math.ceil(IL.reveal-0.6-t));if(k>0){g.fillStyle=RED;g.beginPath();g.arc(540,500,46,0,Math.PI*2);g.fill();bebas(String(k),540,504,64,'#fff');}}
  if(t>=IL.reveal+0.9){ // equal-size brackets
   const w=236*s,top=by-260*s,bot=by+260*s;g.strokeStyle=GREEN;g.lineWidth=8;g.setLineDash([18,12]);
   g.beginPath();g.moveTo(AX-w/2-40,top);g.lineTo(BX+w/2+40,top);g.moveTo(AX-w/2-40,bot);g.lineTo(BX+w/2+40,bot);g.stroke();g.setLineDash([]);
-  pill('نفس الحجم بالضبط',1720,GREEN,'#fff',58);}
+  pill(T('نفس الحجم بالضبط','Exactly the same size'),1720,GREEN,'#fff',58);}
  if(t>=7.4){g.fillStyle='rgba(252,252,252,0.94)';g.fillRect(0,600,W,1320);
-  txt('عيونك صدّقت؟',540,900,96,INK);txt('أرسلها لصاحبك',540,1040,80,RED);txt('وشوف وش يختار',540,1150,64,INK,700);
-  txt('دي اوتو · ما نعلمك، إحنا نفهمك',540,1400,44,'#55534c',700);}
+  txt(T('عيونك صدّقت؟','Did your eyes buy it?'),540,900,96,INK);txt(T('أرسلها لصاحبك','Send it to a friend'),540,1040,80,RED);txt(T('وشوف وش يختار','and see what they pick'),540,1150,64,INK,700);
+  txt(T('دي اوتو · ما نعلمك، إحنا نفهمك','DE AUTO · cars, made simple'),540,1400,44,'#55534c',700);}
  footer('#b9b7b0');}
 
 /* ---------- MODE odd: find the car with a missing wheel ---------- */
 const OD={cols:6,rows:8,odd:[4,5],timer:[0.4,5.4],END:9.0};
 function drawOdd(fi){const t=fi/FPS;g.fillStyle='#FCFCFC';g.fillRect(0,0,W,H);
  brandTop(false);bebas('FIND IT',72,108,40,'#9a988f','left');
- txt('سيارة وحدة مختلفة',540,240,90,INK);txt('1% يلقونها قبل 5 ثواني',540,350,62,RED);
+ txt(T('سيارة وحدة مختلفة','One car is different'),540,240,90,INK);txt(T('1% يلقونها قبل 5 ثواني','Only 1% find it in 5 seconds'),540,350,62,RED);
  const x0=110,y0=520,dx=172,dy=150,s=0.26;
  for(let r=0;r<OD.rows;r++)for(let c=0;c<OD.cols;c++){const odd=(c===OD.odd[0]&&r===OD.odd[1]);car(x0+c*dx,y0+r*dy,s,0,odd?{roof:'#1b1d22'}:{});}
  const [a,b]=OD.timer;const u=Math.min(1,Math.max(0,(t-a)/(b-a)));
@@ -130,11 +131,31 @@ function drawOdd(fi){const t=fi/FPS;g.fillStyle='#FCFCFC';g.fillRect(0,0,W,H);
  if(t<b){bebas(String(Math.max(0,Math.ceil(b-t))),540,450,70,INK);}
  if(t>=b){const cx=x0+OD.odd[0]*dx,cy=y0+OD.odd[1]*dy;const p=ease((t-b)/0.4);
   g.strokeStyle=GREEN;g.lineWidth=10;g.beginPath();g.arc(cx,cy,95*p+20,0,Math.PI*2);g.stroke();
-  pill('لقيتها؟ اكتب كم ثانية أخذت',1660,INK,'#fff',52);}
- if(t>=7.6){g.fillStyle='rgba(252,252,252,0.95)';g.fillRect(0,420,W,1480);txt('عيونك حادة؟',540,900,96,INK);txt('منشن صاحبك وتحدّاه',540,1040,72,RED);txt('دي اوتو · ما نعلمك، إحنا نفهمك',540,1300,44,'#55534c',700);}
+  pill(T('لقيتها؟ اكتب كم ثانية أخذت','Found it? Comment your time'),1660,INK,'#fff',52);}
+ if(t>=7.6){g.fillStyle='rgba(252,252,252,0.95)';g.fillRect(0,420,W,1480);txt(T('عيونك حادة؟','Sharp eyes?'),540,900,96,INK);txt(T('منشن صاحبك وتحدّاه','Tag a friend and challenge them'),540,1040,72,RED);txt(T('دي اوتو · ما نعلمك، إحنا نفهمك','DE AUTO · cars, made simple'),540,1300,44,'#55534c',700);}
  footer('#b9b7b0');}
 
-const M={rpm:[setupRpm,drawRpm],ill:[()=>{N=Math.round(IL.END*FPS);},drawIll],odd:[()=>{N=Math.round(OD.END*FPS);},drawOdd]};
+
+/* ---------- MODE goal: comment-goal challenge (repeat of our best TikTok) ---------- */
+const GO={END:7.0,target:300};
+function drawGoal(fi){const t=fi/FPS;g.fillStyle='#050506';g.fillRect(0,0,W,H);
+ // two glowing bars (brand mark), pulsing
+ const pulse=0.75+0.25*Math.sin(t*Math.PI*1.2);
+ for(const x of [430,650]){const gr=g.createLinearGradient(x-60,0,x+60,0);gr.addColorStop(0,'rgba(255,255,255,0)');gr.addColorStop(0.5,`rgba(255,255,255,${0.9*pulse})`);gr.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=gr;g.shadowColor='rgba(255,255,255,0.9)';g.shadowBlur=60*pulse;rr(x-34,520,68,620,34);g.fill();g.shadowBlur=0;}
+ g.fillStyle=RED;g.fillRect(538,500,4,660);
+ // counter + progress
+ const shown=Math.min(GO.target,Math.floor(ease(t/5)*0)+0);
+ bebas(`0 / ${GO.target}`,540,1260,110,'#fff');
+ g.fillStyle='#222';rr(140,1340,800,22,11);g.fill();g.fillStyle=RED;rr(140,1340,Math.max(22,800*Math.min(1,t/7)*0.08),22,11);g.fill();
+ txt(T('تحدي','CHALLENGE'),540,180,EN?120:150,'#fff');
+ txt(T(`${GO.target} تعليق = نكشف كود خصم`,`${GO.target} comments = we drop a code`),540,330,EN?62:70,RED);
+ txt(T('على كل الأجزاء','on every chapter'),540,420,EN?52:56,'#fff',700);
+ txt(T('كل تعليق يقرّبنا… علّق الحين','Every comment counts. Comment now'),540,1470,EN?48:54,'#fff',700);
+ txt(T('ننزل الكود هنا أول ما نوصل','The code drops here the moment we hit it'),540,1560,40,'#9a988f',700);
+ const lg=document.getElementById('logo');g.save();g.filter='invert(1)';g.drawImage(lg,540-30,1660,60,60*lg.naturalHeight/lg.naturalWidth);g.restore();
+ bebas('DE AUTO',540,1840,40,'rgba(255,255,255,0.55)');}
+const M={goal:[()=>{N=Math.round(GO.END*FPS);},drawGoal],rpm:[setupRpm,drawRpm],ill:[()=>{N=Math.round(IL.END*FPS);},drawIll],odd:[()=>{N=Math.round(OD.END*FPS);},drawOdd]};
 M[MODE][0]();window.N=N;window.CLS=CLS;
 window.draw=function(fi){M[MODE][1](fi);return cv.toDataURL('image/jpeg',0.93);};
 Promise.all(['900 60px Cairo','900 60px CairoL','700 40px Cairo','700 40px CairoL','400 40px Bebas'].map(f=>document.fonts.load(f))).then(()=>document.fonts.ready).then(()=>{document.title='ready'});
